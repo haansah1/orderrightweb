@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight - Shopping Cart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-surface-variant": "#444748",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-container": "#5979ff",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface-container-low": "#f3f3f3",
+                        "background": "#f9f9f9",
+                        "secondary": "#ab3600",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-container": "#001356",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-container": "#858383",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-container": "#551600",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "secondary-container": "#fe5e1e",
+                        "on-secondary-fixed": "#390c00",
+                        "surface-container": "#eeeeee",
+                        "surface-tint": "#5f5e5e",
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed": "#ffdbcf",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "outline": "#747878",
+                        "on-tertiary-fixed": "#001356",
+                        "on-tertiary-fixed-variant": "#0035be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "64px",
+                        "sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased pt-20">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-surface-container-highest dark:border-outline-variant shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<a class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed hover:opacity-70 transition-opacity" href="#">
+                OrderRight
+            </a>
+<nav class="hidden md:flex gap-lg items-center">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70" href="#">Home</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70" href="#">Shop</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70" href="#">Categories</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70" href="#">About Us</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-md">
+<button aria-label="person" class="text-primary dark:text-on-primary-fixed hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</button>
+<button aria-label="favorite" class="text-primary dark:text-on-primary-fixed hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+</button>
+<button aria-label="shopping_bag" class="text-primary dark:text-on-primary-fixed hover:opacity-70 transition-opacity relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold">2</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-desktop py-xl">
+<h1 class="font-display-lg text-display-lg mb-xl text-primary">Your Cart</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl relative">
+<!-- Cart Items (Left Column) -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Cart Item 1 -->
+<div class="flex flex-col sm:flex-row gap-lg p-lg bg-surface-container-lowest border border-surface-container-highest rounded-lg relative group transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+<div class="w-full sm:w-48 h-48 sm:h-auto flex-shrink-0 rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product Image" class="w-full h-full object-cover" data-alt="A minimalist flat lay photograph of a high-end, structured white canvas tote bag with subtle leather accents, set against a pristine, soft white background. The lighting is diffused and bright, creating a clean, modern aesthetic with soft, natural shadows that emphasize the bag's premium texture and craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh8-f6ezM9I205HS6NmCvSikDH1j4yDDVQP4FH91M5wnwnBNbMEUdH3t_IeZ0c_m9u56LMADwOE9eLIBPSSCvEPw_iUe9lXpdhIWQcsH_Kf6-C7eQogheRvjCEWnRLVkuzTkQETe8VYfDERF8X52Mxobd-MVhMPqnBt8AMNBdLAWUmg47sbuip2_TvMO5IeZaVY7WtE9tfzdFWooN4lYyPunAyp0_WkqPGwOlJ-DdjBL8ZpNgS-bzh"/>
+</div>
+<div class="flex flex-col flex-grow justify-between py-xs">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Canvas Structured Tote</h3>
+<button aria-label="Remove item" class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Color: Pristine White | Size: One Size</p>
+</div>
+<div class="flex justify-between items-end mt-md sm:mt-0">
+<div class="flex items-center border border-outline-variant rounded-md">
+<button aria-label="Decrease quantity" class="px-3 py-1 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-l-md">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="font-label-md text-label-md px-3 py-1 border-x border-outline-variant min-w-[40px] text-center">1</span>
+<button aria-label="Increase quantity" class="px-3 py-1 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-r-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<span class="font-headline-md text-headline-md text-primary">$145.00</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex flex-col sm:flex-row gap-lg p-lg bg-surface-container-lowest border border-surface-container-highest rounded-lg relative group transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+<div class="w-full sm:w-48 h-48 sm:h-auto flex-shrink-0 rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product Image" class="w-full h-full object-cover" data-alt="A striking close-up photograph of a tailored, charcoal-grey oversized blazer draped elegantly on a modern wire hanger. The background is a soft, stark white studio setting, illuminated by high-key, directional lighting that highlights the luxurious wool texture and sharp lapel details. The overall mood is sophisticated and avant-garde." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGeefZl4OrYO4LSo_fZwWVsIdOt-zowBkseAfZF1gCJxUlXTBxipAbhEyA5fPuj_QizxIc7LOyGdHca5LstA3Dn0Pr599LPtBaN9olgTK83xJ2jZIMoKu_5fo0eoe5pkq9FwM91PJnIHEK7fbdg_XRYhBPC2iUXUXrJasIvu-xlRUEsn5eXv1aJomfpfISOCiZcvVpwcme5-sYsOdpL8rgotznMHoFof1tyHLmP-Z-hbrXxqp8KVAP"/>
+</div>
+<div class="flex flex-col flex-grow justify-between py-xs">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Oversized Wool Blazer</h3>
+<button aria-label="Remove item" class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Color: Charcoal | Size: M</p>
+</div>
+<div class="flex justify-between items-end mt-md sm:mt-0">
+<div class="flex items-center border border-outline-variant rounded-md">
+<button aria-label="Decrease quantity" class="px-3 py-1 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-l-md">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="font-label-md text-label-md px-3 py-1 border-x border-outline-variant min-w-[40px] text-center">1</span>
+<button aria-label="Increase quantity" class="px-3 py-1 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-r-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<span class="font-headline-md text-headline-md text-primary">$290.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary (Right Column - Sticky) -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-lg p-lg sticky top-28 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-lg">Order Summary</h2>
+<div class="flex flex-col gap-md mb-xl border-b border-surface-container-highest pb-lg">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-primary">$435.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Estimated Delivery</span>
+<span class="font-body-md text-body-md text-primary">$15.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Taxes</span>
+<span class="font-body-md text-body-md text-primary">Calculated at checkout</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-xl">
+<span class="font-headline-md text-headline-md text-primary">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$450.00</span>
+</div>
+<div class="mb-xl">
+<label class="block font-label-md text-label-md text-primary mb-sm" for="promo">Promo Code</label>
+<div class="flex gap-sm">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-md px-md py-sm font-body-md text-body-md text-primary focus:border-primary focus:ring-0 focus:outline-none transition-colors" id="promo" placeholder="Enter code" type="text"/>
+<button class="bg-surface-container-high text-primary font-label-md text-label-md px-md py-sm rounded-md hover:bg-surface-dim transition-colors whitespace-nowrap">Apply</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-sm">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center mt-md mt-sm flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                        Secure SSL Checkout
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl border-t border-surface-container-highest dark:border-outline-variant bg-surface-container-lowest dark:bg-inverse-surface mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col gap-sm">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed hover:underline transition-all duration-200" href="#">
+                    OrderRight
+                </a>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">© 2024 OrderRight. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Sitemap</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Shipping Info</a>
+</div>
+<div class="flex flex-col gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

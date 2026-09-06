@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e8e8e8",
+                      "surface": "#f9f9f9",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-surface-variant": "#444748",
+                      "inverse-surface": "#2f3131",
+                      "on-background": "#1a1c1c",
+                      "surface-dim": "#dadada",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "tertiary": "#000000",
+                      "tertiary-fixed": "#dde1ff",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-container": "#5979ff",
+                      "on-secondary-fixed-variant": "#832700",
+                      "surface-container-low": "#f3f3f3",
+                      "background": "#f9f9f9",
+                      "secondary": "#ab3600",
+                      "primary-fixed": "#e5e2e1",
+                      "tertiary-container": "#001356",
+                      "on-surface": "#1a1c1c",
+                      "inverse-primary": "#c8c6c5",
+                      "surface-variant": "#e2e2e2",
+                      "on-primary-container": "#858383",
+                      "outline-variant": "#c4c7c7",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary-container": "#551600",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#b8c3ff",
+                      "secondary-container": "#fe5e1e",
+                      "on-secondary-fixed": "#390c00",
+                      "surface-container": "#eeeeee",
+                      "surface-tint": "#5f5e5e",
+                      "primary-container": "#1c1b1b",
+                      "secondary-fixed": "#ffdbcf",
+                      "primary": "#000000",
+                      "inverse-on-surface": "#f1f1f1",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "outline": "#747878",
+                      "on-tertiary-fixed": "#001356",
+                      "on-tertiary-fixed-variant": "#0035be"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "2xl": "64px",
+                      "sm": "8px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "margin-desktop": "40px",
+                      "xl": "40px",
+                      "md": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Montserrat"],
+                      "headline-lg": ["Montserrat"],
+                      "label-sm": ["Inter"],
+                      "display-lg-mobile": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md text-primary dark:text-on-primary-fixed fixed top-0 w-full z-50 border-b border-surface-container-highest dark:border-outline-variant shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<a class="flex items-center" href="#"><img src="../../media/logo_black.png" alt="OrderRight" class="h-10 w-auto object-contain"/></a>
+<nav class="hidden md:flex space-x-lg items-center">
+<a class="font-body-md text-body-md uppercase tracking-wider text-primary font-bold border-b-2 border-secondary pb-1" href="#">Home</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#">Shop</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#">Categories</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm relative hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<span class="absolute top-sm right-sm w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 bg-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat object-cover" data-alt="A highly stylized, cinematic fashion photography shot of a confident young model standing in an architectural, minimalist concrete environment. The lighting is bright and high-contrast, casting sharp shadows that emphasize the high-fashion streetwear aesthetic. The model wears striking, avant-garde clothing in neutral tones with sudden flashes of vibrant sunset orange. The overall mood is youthful, premium, and dynamically modern, fitting perfectly into a corporate light-mode design system." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4LcLM-zMNCbqKTTi_uai41DNUX07e4ZocABHZZH2QjUNwXXHixoG7weaKcyNtVMIVcEEWqg7Tn8yLCfzDrU3lHQAlQaisGeLXDXiy1cuhiDzyGfZXDIDU0VF3DNHIFfbVSF3NkiBUvH3jYTCTv38m706XhXT0jbptTGp9ufTkViq5MyZJUKsXdvW7hH8_OpYUY0-0qELHw4PTZ7q65XldeNYqXkm3JSJ3OSoxggBYRef4w0-rPQoI')"></div>
+</div>
+<div class="relative z-10 text-center px-margin-desktop max-w-4xl mx-auto flex flex-col items-center">
+<h1 class="font-display-lg text-display-lg text-surface-container-lowest drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] mb-lg">
+                    Wear What Represents You
+                </h1>
+<p class="font-body-lg text-body-lg text-surface-container-lowest/90 mb-xl max-w-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                    Discover a curated collection of premium fashion pieces designed to elevate your personal style.
+                </p>
+<a class="bg-primary text-on-primary font-label-md text-label-md py-4 px-8 rounded-lg hover:bg-surface-tint transition-colors duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.1)] inline-flex items-center" href="#">
+                    Shop The Collection
+                </a>
+</div>
+</section>
+<!-- Shop by Vibe (Bento Grid) -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-2xl">
+<div class="flex justify-between items-end mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary">Shop by Vibe</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter h-[600px]">
+<!-- Large Feature Tile (Streetwear) -->
+<div class="md:col-span-6 h-full relative rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Dynamic shot of a young adult in an urban setting wearing high-end streetwear. The background features blurred concrete and glass structures, emphasizing the modern, energetic vibe. Bright, natural lighting creates sharp contrasts. The subject exudes confidence, with the clothing showcasing a mix of deep charcoal and subtle orange accents, perfectly aligning with a premium, youthful brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxB9ZyXl9vPrWnFj_DJAZdU-1RkmZiiO4DhL-cED1pbszN_nqVRcSpZNo0goG6d990Htnd4axzFo7A17tTj0QV-O_xkiT2ef_prDSoJ6XflU_0cFcNLWF50_cmkqqvfflqzWd9IURVLjOiBA6tWo3GXl1snqO3SL9HfUkgfqanu8d-Q5ewvxf0IephIh43wbzvZxx9w3ogQsaeSZxNGg4roU15jkVEva0rXm_mrw8wFoYuh-Q5cFUH')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest mb-xs">Streetwear</h3>
+<a class="font-label-md text-label-md text-surface-container-lowest flex items-center hover:text-secondary-fixed transition-colors" href="#">
+                             Explore Collection <span class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right Side Stack -->
+<div class="md:col-span-6 grid grid-rows-2 gap-gutter h-full">
+<!-- Classy -->
+<div class="relative rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Elegant, minimalist fashion photography of a model wearing a sophisticated, tailored suit in a stark, bright white studio setting. The lighting is soft and diffused, highlighting the clean lines and premium fabric of the clothing. The aesthetic is extremely polished, minimalist, and luxurious, complementing a corporate yet modern brand identity with a high-key light mode vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpgb3lCcG4c1uiKYekhoM3cqlANpu2MVmeT9qv-MIoJ4c7m00V4527iusbKDqNSIgnRV-H6je5AOrbEgofAkN0ka0lYL6tE16SeO10v1UVwNAkIWupIOTk4xEIINneSWpmWCM8vZ6IUqp_6h_VAqP-cpSDjjSbKM0f0Dmi53X3p0Nd80sQG-4WWG8mVsyZOFbDDmVAGEMRpGDltm1mYvy4QOI_mSWNw5u1A96P8mNQe5_F2p9NNDxX')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest mb-xs">Classy</h3>
+<a class="font-label-md text-label-md text-surface-container-lowest flex items-center hover:text-secondary-fixed transition-colors" href="#">
+                                Explore Collection <span class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Gen Z Lifestyle -->
+<div class="relative rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A vibrant, energetic lifestyle photo of diverse youth in casual, colorful clothing hanging out in a sunlit, creative studio space. The image is bright and airy, with pops of sunset orange and deep charcoal in the styling. The mood is casual, authentic, and expressive, capturing a modern Gen Z aesthetic that is both premium and accessible within a light-mode UI context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDKsPZN7I_CRZFFC2_kcJICbNU90762lKlzRC6xllq-FRyCtR0C9PgNpeVCLnrYC4qWIfxtLHyD9rdEfDPpU5CiijTFagggUuecXEuCuveg61g6r3nrxOH80tU-et93K8feuWYmjxzW9wuyg5LxeZxJiQoFqW71UXFKRkhfHYCiGG3QcPdosDQyTOb6hwky1cTUg5zsvyo7uxstTGhV-F5ZkuIAukOquVFnumAV1i6VxRKq6O4wuiGu')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-headline-md text-headline-md text-surface-container-lowest mb-xs">Gen Z Lifestyle</h3>
+<a class="font-label-md text-label-md text-surface-container-lowest flex items-center hover:text-secondary-fixed transition-colors" href="#">
+                                Explore Collection <span class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface text-primary dark:text-on-primary-fixed w-full py-xl border-t border-surface-container-highest dark:border-outline-variant transition-all duration-200">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col space-y-md">
+<a class="inline-block" href="#"><img src="../../media/logo_black.png" alt="OrderRight" class="h-8 w-auto object-contain"/></a>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 OrderRight. All rights reserved.</p>
+</div>
+<div class="flex flex-col space-y-sm">
+<a class="font-body-md text-body-md text-secondary font-medium hover:underline transition-all duration-200" href="#">Sitemap</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all duration-200" href="#">Shipping Info</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all duration-200" href="#">Returns</a>
+</div>
+<div class="md:col-span-2">
+<!-- Empty for alignment or future newsletter -->
+</div>
+</div>
+</footer>
+</body></html>

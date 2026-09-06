@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight Shop Catalogue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-surface-variant": "#444748",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-container": "#5979ff",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface-container-low": "#f3f3f3",
+                        "background": "#f9f9f9",
+                        "secondary": "#ab3600",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-container": "#001356",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-container": "#858383",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-container": "#551600",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "secondary-container": "#fe5e1e",
+                        "on-secondary-fixed": "#390c00",
+                        "surface-container": "#eeeeee",
+                        "surface-tint": "#5f5e5e",
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed": "#ffdbcf",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "outline": "#747878",
+                        "on-tertiary-fixed": "#001356",
+                        "on-tertiary-fixed-variant": "#0035be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "64px",
+                        "sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm border-b border-surface-container-highest dark:border-outline-variant">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<!-- Brand -->
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">
+                OrderRight
+            </div>
+<!-- Navigation Links -->
+<div class="hidden md:flex space-x-lg items-center">
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Home</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-primary font-bold border-b-2 border-secondary pb-1 hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Shop</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Categories</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">About Us</a>
+<a class="font-body-md text-body-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Contact</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center space-x-md text-primary dark:text-on-primary-fixed">
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out relative">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-margin-desktop pt-32 pb-2xl min-h-screen">
+<!-- Header & Sorting -->
+<div class="flex justify-between items-end mb-xl border-b border-surface-container-highest pb-lg">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-xs">Shop All</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Explore our latest collection of premium fashion.</p>
+</div>
+<div class="flex items-center space-x-md">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase">Sort By</label>
+<select class="bg-surface-container-lowest border border-surface-container-highest text-primary font-body-md text-body-md rounded px-md py-sm focus:border-primary focus:ring-0 outline-none cursor-pointer">
+<option>Recommended</option>
+<option>Newest Arrivals</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-1/4 flex flex-col gap-lg pr-lg">
+<!-- Category Filter -->
+<div class="border-b border-surface-container-highest pb-lg">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Category</h3>
+<div class="flex flex-col space-y-sm">
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input checked="" class="rounded border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">All Clothing</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="rounded border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Dresses</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="rounded border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Tops</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="rounded border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Bottoms</span>
+</label>
+</div>
+</div>
+<!-- Price Filter -->
+<div class="border-b border-surface-container-highest pb-lg">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Price</h3>
+<div class="flex flex-col space-y-sm">
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" name="price" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Under $50</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" name="price" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">$50 - $100</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" name="price" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">$100 - $200</span>
+</label>
+<label class="flex items-center space-x-sm cursor-pointer group">
+<input class="border-surface-container-highest text-primary focus:ring-primary w-4 h-4 cursor-pointer" name="price" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Over $200</span>
+</label>
+</div>
+</div>
+<!-- Size Filter -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Size</h3>
+<div class="flex flex-wrap gap-xs">
+<button class="px-md py-sm rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">XS</button>
+<button class="px-md py-sm rounded border border-primary bg-primary text-on-primary font-label-md text-label-md">S</button>
+<button class="px-md py-sm rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">M</button>
+<button class="px-md py-sm rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">L</button>
+<button class="px-md py-sm rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">XL</button>
+<button class="px-md py-sm rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">XXL</button>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="w-full md:w-3/4">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group flex flex-col relative bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-container-highest hover:shadow-lg transition-shadow duration-300">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-fashion studio shot of a modern, minimalist silk slip dress in deep emerald green, worn by a diverse model against a stark white background with dramatic, high-contrast lighting emphasizing the fabric's sheen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAla0ByG7P5tlYzzNT5PdmPatJOH0KeZRT28Ozxtqa6LEfgcio9MfLDYo9YKwUjTNxo7AOa31dsKAkxEzLARZArldyN4MtU7UJsEwljHEHMYshJd8uwXAowDZWnA-gKbCx3Dk5nzZn9LnnOU5TCrVEgLPZSP9YLBCPlNoF-k-t9aNOT5AWG3_g7sGxq4e6_PA6c_z7c8QkX5D2pmpHWQCMSTjbAB7_tC4hM1cLenZ4AQc7RYANwPydv"/>
+<!-- Quick Action Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/50 to-transparent flex justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-sm px-lg rounded-full hover:bg-primary/90 transition-colors shadow-md w-full">Quick Add</button>
+</div>
+<button class="absolute top-sm right-sm p-sm rounded-full bg-surface-container-lowest/80 text-on-surface-variant hover:text-secondary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col gap-xs flex-grow">
+<h4 class="font-body-md text-body-md font-medium text-primary line-clamp-1">Emerald Silk Slip Dress</h4>
+<p class="font-body-lg text-body-lg font-semibold text-primary">$185.00</p>
+<!-- Quick Size Selection -->
+<div class="flex gap-xs mt-auto pt-sm">
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">S</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">M</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">L</button>
+<div class="w-8 h-8 rounded-full flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant opacity-50 relative cursor-not-allowed">
+                                    XL
+                                    <div class="absolute w-full h-[1px] bg-outline-variant rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col relative bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-container-highest hover:shadow-lg transition-shadow duration-300">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sleek, tailored asymmetric blazer in charcoal grey, photographed in a well-lit, contemporary gallery space with white walls and subtle ambient lighting, showcasing modern corporate elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABohxi6EDzVmmVgWWvg5YxdRCvhDFBctw0psi5qMP24ju_vlTcw2vpM-CEJi7VLNHT-RllRkA-W6F7gt_c2zqhor4zL3edKXt8xQFCD8iPjwO8A95rI4AhXk5PEodHKCIf8w7j0I6oD8rw0o-958rlj0c_WlRKiCaxVUxrUxolh0OsPX6lotvRbDyhszgBskdrckWBtdxtdfl-FpeXUFbt9HjTB6lRyPYv5-jCTQ7jj6GjUg1iG7Ly"/>
+<div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/50 to-transparent flex justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-sm px-lg rounded-full hover:bg-primary/90 transition-colors shadow-md w-full">Quick Add</button>
+</div>
+<button class="absolute top-sm right-sm p-sm rounded-full bg-surface-container-lowest/80 text-on-surface-variant hover:text-secondary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col gap-xs flex-grow">
+<h4 class="font-body-md text-body-md font-medium text-primary line-clamp-1">Asymmetric Tailored Blazer</h4>
+<p class="font-body-lg text-body-lg font-semibold text-primary">$240.00</p>
+<div class="flex gap-xs mt-auto pt-sm">
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">S</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">M</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">L</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">XL</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col relative bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-container-highest hover:shadow-lg transition-shadow duration-300">
+<div class="absolute top-sm left-sm z-10">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm py-1 px-2 rounded-full uppercase tracking-wider">New</span>
+</div>
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A modern, high-contrast flat lay of a crisp white cotton poplin oversized shirt with geometric black buttons, resting on a smooth, slightly reflective light grey surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi8hPcCYZbObifC87O8yA8HgguPnn2Kq83a9hV8wQR0Nsi2i-S4_Qj4JN5PQKpavCvNXdOWO6FYcPlBfLY-DF4PbD5AE97Uz3RwiihfVgsR_MtOxAF0Btg1NADiafsB4e86kSwwaEyCeGVOr7Voozxt2OvANRlRKsnEkrToNvjr-nbnHQjN9a2prtQWtKjTYqswjNkDLuhlNhUxlxtQaJpiMXD2i1e0TzhdClQq_oe-QLGizNjrppQ"/>
+<div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/50 to-transparent flex justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-sm px-lg rounded-full hover:bg-primary/90 transition-colors shadow-md w-full">Quick Add</button>
+</div>
+<button class="absolute top-sm right-sm p-sm rounded-full bg-surface-container-lowest/80 text-on-surface-variant hover:text-secondary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col gap-xs flex-grow">
+<h4 class="font-body-md text-body-md font-medium text-primary line-clamp-1">Oversized Poplin Shirt</h4>
+<p class="font-body-lg text-body-lg font-semibold text-primary">$120.00</p>
+<div class="flex gap-xs mt-auto pt-sm">
+<div class="w-8 h-8 rounded-full flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant opacity-50 relative cursor-not-allowed">
+                                    S
+                                    <div class="absolute w-full h-[1px] bg-outline-variant rotate-45"></div>
+</div>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">M</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">L</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">XL</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group flex flex-col relative bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-container-highest hover:shadow-lg transition-shadow duration-300">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Dynamic shot of wide-leg structural trousers in deep navy blue, fabric in motion, set against a pristine, minimalist architectural background with soft natural sunlight creating long shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Hj_jzbGo1bwnyxhJ6luWXwe2Nnqy53is9jnZTOK15TlePiYOH35NGromH56AZvJWp-JmUC4NDwc8laLl9_zriH_oqO6b8GuRqHyw44Wav2PfJyOWS1qFuE4366MCKkcbSROxuhN_aDmZR5mMsNmKhr2apSXxDA3UA0b4y-scQe_y37Dy0f86mbjEji6XXW3awX9aSNt2RyhDfnY8x5G5txEaoAg719ZbxNqEFJTgLvRtY99t7VrX"/>
+<div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/50 to-transparent flex justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-sm px-lg rounded-full hover:bg-primary/90 transition-colors shadow-md w-full">Quick Add</button>
+</div>
+<button class="absolute top-sm right-sm p-sm rounded-full bg-surface-container-lowest/80 text-on-surface-variant hover:text-secondary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="p-md flex flex-col gap-xs flex-grow">
+<h4 class="font-body-md text-body-md font-medium text-primary line-clamp-1">Structural Wide-Leg Trousers</h4>
+<p class="font-body-lg text-body-lg font-semibold text-primary">$195.00</p>
+<div class="flex gap-xs mt-auto pt-sm">
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">S</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">M</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">L</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">XL</button>
+<button class="w-8 h-8 rounded-full border border-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-colors">XXL</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-xl">
+<div class="flex items-center space-x-sm">
+<button class="p-sm rounded border border-surface-container-highest text-on-surface-variant hover:border-primary hover:text-primary transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded border border-primary bg-primary text-on-primary font-label-md text-label-md">1</button>
+<button class="w-10 h-10 rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">2</button>
+<button class="w-10 h-10 rounded border border-surface-container-highest bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-primary transition-colors">3</button>
+<span class="font-body-md text-on-surface-variant px-sm">...</span>
+<button class="p-sm rounded border border-surface-container-highest text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-lowest dark:bg-inverse-surface border-t border-surface-container-highest dark:border-outline-variant mt-2xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col gap-sm col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-md">
+                    OrderRight
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 OrderRight. All rights reserved.</p>
+</div>
+<div class="col-span-1 md:col-span-3 flex justify-end gap-xl items-center flex-wrap">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Sitemap</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Shipping Info</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

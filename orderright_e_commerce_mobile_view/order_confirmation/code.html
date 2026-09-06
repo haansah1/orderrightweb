@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmation - OrderRight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "inverse-primary": "#c8c6c5",
+                      "secondary-container": "#fe5e1e",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-variant": "#e2e2e2",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "surface-bright": "#f9f9f9",
+                      "outline": "#747878",
+                      "surface-container-high": "#e8e8e8",
+                      "on-background": "#1a1c1c",
+                      "surface-tint": "#5f5e5e",
+                      "primary": "#000000",
+                      "surface-container": "#eeeeee",
+                      "on-error": "#ffffff",
+                      "background": "#f9f9f9",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#001356",
+                      "tertiary-fixed": "#dde1ff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#444748",
+                      "on-tertiary-container": "#5979ff",
+                      "secondary-fixed": "#ffdbcf",
+                      "secondary": "#ab3600",
+                      "outline-variant": "#c4c7c7",
+                      "surface-dim": "#dadada",
+                      "on-surface": "#1a1c1c",
+                      "inverse-surface": "#2f3131",
+                      "primary-fixed": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#832700",
+                      "surface": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#1c1b1b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#551600",
+                      "on-tertiary-fixed": "#001356",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-fixed-variant": "#0035be",
+                      "on-primary-container": "#858383",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#000000",
+                      "surface-container-low": "#f3f3f3",
+                      "tertiary-fixed-dim": "#b8c3ff",
+                      "on-secondary-fixed": "#390c00",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "2xl": "64px",
+                      "margin-desktop": "40px",
+                      "xl": "40px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+          }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 full-width z-50 flat no shadows flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 border-none">
+<button aria-label="Menu" class="text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">
+            OrderRight
+        </div>
+<button aria-label="Shopping Cart" class="text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-xl md:py-2xl max-w-container-max mx-auto w-full">
+<!-- Confirmation Hero -->
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto space-y-md">
+<div class="w-24 h-24 rounded-full bg-secondary-fixed flex items-center justify-center mb-sm shadow-md animate-bounce">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">
+                Order Confirmed!
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Thank you for your purchase. We're getting your order ready to be shipped. We will notify you when it has been sent.
+            </p>
+</div>
+<!-- Order Summary Card -->
+<div class="mt-2xl w-full max-w-3xl bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-lg md:p-xl shadow-sm">
+<!-- Order Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant/30 pb-lg mb-lg">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-unit">Order Number</p>
+<p class="font-headline-md text-headline-md text-primary">#ORD-2024-89012</p>
+</div>
+<div class="mt-md md:mt-0 text-left md:text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-unit">Date Placed</p>
+<p class="font-body-md text-body-md text-primary">October 24, 2024</p>
+</div>
+</div>
+<!-- Delivery Timeline (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-xl">
+<div class="bg-surface rounded-lg p-md border border-outline-variant/20 flex flex-col justify-center items-start">
+<div class="flex items-center gap-sm mb-sm text-secondary">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-label-md">Estimated Delivery</span>
+</div>
+<p class="font-headline-md text-headline-md text-primary">Oct 28 - Oct 30</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-unit">Standard Shipping</p>
+</div>
+<div class="bg-surface rounded-lg p-md border border-outline-variant/20 flex flex-col justify-center items-start">
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md">Shipping Address</span>
+</div>
+<p class="font-body-md text-body-md text-primary">123 Fashion Ave, Suite 4B</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-unit">Accra, Ghana</p>
+</div>
+</div>
+<!-- Items Summary (Minimal) -->
+<div class="space-y-md">
+<h3 class="font-headline-lg text-headline-lg text-primary mb-md">Order Items</h3>
+<!-- Item 1 -->
+<div class="flex items-center gap-md">
+<img class="w-16 h-16 rounded-lg object-cover bg-surface-container" data-alt="A high-fashion studio shot of a minimalist black cotton t-shirt neatly folded. High key white lighting, bright modern aesthetic, isolated on a stark white background to emphasize the premium fabric texture and deep charcoal color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMNNpKFFFQwfFyqvLnie-9dZ8o5uMpXKKeN98nyEQjg2iRYtE51leJo30QLnbZWXKhfD85NJ13YQyGSggxe1kpel85Sk_btrNIdu5Npg-wcWZcQE-TdDmDBRbPJsuxwHkYQ2lqfj7POPIj3YZp5ZMJvR1P-t2VRD7453JxljTWXfYfOA3p4XLQr5lvFS3G9fs6sT5M6ZxIJgo9ZsQv_eJSj8PW71UftwE-jYSMlsgo_5cremhhvmb1"/>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-primary">Essential Premium Tee</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Color: Deep Black | Size: M</p>
+</div>
+<p class="font-label-md text-label-md text-primary">GHS 250</p>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-md">
+<img class="w-16 h-16 rounded-lg object-cover bg-surface-container" data-alt="A high-fashion studio shot of a minimalist white linen shirt neatly folded. High key white lighting, bright modern aesthetic, isolated on a stark white background to emphasize the premium fabric texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGXvmV0dQ_vc1iltn08FUy85mw-aooPztL8MKgywmVi1NWEsiCeVtlKbGYAbC2JNEAnggwUmbCFfV0K6JQknrYDG-XbKbFypiaq_jvqsiZXJBTYMPdWOwNmdmB2UzzxgHYjXjwQhOU_rRbwJ9pJyc9FYtImQ3028_JSgBMMF6XgfbOOvxMzadBdG99bzN_HHpalKkCJejYJclA9JpGBhtTCTnnnQSx_Ygh8MEXokW8-MZ218Apb7NX"/>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-primary">Linen Resort Shirt</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Color: Ivory | Size: L</p>
+</div>
+<p class="font-label-md text-label-md text-primary">GHS 400</p>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant/30 flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface-variant">Total (including shipping)</span>
+<span class="font-headline-md text-headline-md text-primary">GHS 650</span>
+</div>
+</div>
+<!-- CTAs -->
+<div class="mt-xl flex flex-col sm:flex-row gap-md w-full max-w-xl">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-4 px-6 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-sm" data-icon="directions_boat">directions_boat</span>
+                Track Order
+            </button>
+<button class="flex-1 bg-transparent text-primary font-label-md text-label-md py-4 px-6 rounded-lg border-[1.5px] border-primary hover:bg-surface-container-high transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-sm" data-icon="storefront">storefront</span>
+                Continue Shopping
+            </button>
+</div>
+</main>
+<!-- Suppressed Footer & Bottom Nav as this is a linear/transactional success screen -->
+</body></html>

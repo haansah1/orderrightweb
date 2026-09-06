@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmation - OrderRight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e8e8e8",
+                      "surface": "#f9f9f9",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-surface-variant": "#444748",
+                      "inverse-surface": "#2f3131",
+                      "on-background": "#1a1c1c",
+                      "surface-dim": "#dadada",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "tertiary": "#000000",
+                      "tertiary-fixed": "#dde1ff",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-container": "#5979ff",
+                      "on-secondary-fixed-variant": "#832700",
+                      "surface-container-low": "#f3f3f3",
+                      "background": "#f9f9f9",
+                      "secondary": "#ab3600",
+                      "primary-fixed": "#e5e2e1",
+                      "tertiary-container": "#001356",
+                      "on-surface": "#1a1c1c",
+                      "inverse-primary": "#c8c6c5",
+                      "surface-variant": "#e2e2e2",
+                      "on-primary-container": "#858383",
+                      "outline-variant": "#c4c7c7",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary-container": "#551600",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#b8c3ff",
+                      "secondary-container": "#fe5e1e",
+                      "on-secondary-fixed": "#390c00",
+                      "surface-container": "#eeeeee",
+                      "surface-tint": "#5f5e5e",
+                      "primary-container": "#1c1b1b",
+                      "secondary-fixed": "#ffdbcf",
+                      "primary": "#000000",
+                      "inverse-on-surface": "#f1f1f1",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "outline": "#747878",
+                      "on-tertiary-fixed": "#001356",
+                      "on-tertiary-fixed-variant": "#0035be"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "2xl": "64px",
+                      "sm": "8px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "margin-desktop": "40px",
+                      "xl": "40px",
+                      "md": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Montserrat"],
+                      "headline-lg": ["Montserrat"],
+                      "label-sm": ["Inter"],
+                      "display-lg-mobile": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar Suppressed: Transactional/Success Screen -->
+<header class="w-full bg-surface-container-lowest border-b border-surface-container-highest py-lg flex justify-center">
+<a class="font-headline-lg text-headline-lg font-bold text-primary" href="#">OrderRight</a>
+</header>
+<main class="flex-grow flex items-center justify-center py-2xl px-margin-desktop w-full max-w-container-max mx-auto">
+<div class="w-full max-w-4xl bg-surface-container-lowest border border-surface-container-highest rounded-xl p-xl shadow-[0px_12px_40px_rgba(0,0,0,0.1)] flex flex-col items-center">
+<!-- Success Header -->
+<div class="flex flex-col items-center text-center mb-xl">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-[64px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-md">Order Confirmed!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Thank you for your purchase. Your order has been received and is being processed.</p>
+</div>
+<!-- Order Details Grid -->
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-gutter mb-xl">
+<!-- Info Column -->
+<div class="flex flex-col gap-lg">
+<div class="bg-surface rounded-lg p-lg border border-surface-container-highest">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Order Number</h2>
+<p class="font-headline-md text-headline-md text-primary">#ORD-99321-XR</p>
+</div>
+<div class="bg-surface rounded-lg p-lg border border-surface-container-highest flex gap-md items-start">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">local_shipping</span>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Estimated Delivery</h2>
+<p class="font-body-lg text-body-lg text-primary font-medium">Thursday, Oct 26</p>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-lg border border-surface-container-highest flex gap-md items-start">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">location_on</span>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Shipping Address</h2>
+<p class="font-body-md text-body-md text-primary">
+                                Kwame Nkrumah<br/>
+                                12 Independence Avenue<br/>
+                                Accra, Ghana
+                            </p>
+</div>
+</div>
+</div>
+<!-- Summary Column -->
+<div class="bg-surface rounded-lg p-lg border border-surface-container-highest flex flex-col h-full">
+<h2 class="font-headline-md text-headline-md text-primary mb-md pb-md border-b border-surface-container-highest">Order Summary</h2>
+<div class="flex-grow flex flex-col gap-md mb-lg">
+<!-- Item 1 -->
+<div class="flex items-center gap-md">
+<img class="w-16 h-16 rounded-md object-cover border border-surface-container-highest" data-alt="A sleek, modern black minimalist wristwatch resting on a clean white surface with subtle soft lighting highlighting its metallic accents and premium leather strap." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2n__Ddi2EHcYXSDxokZNQhs6Z6omIelY5EeDtJRe-rvcaVRR-rzNDI0pwFRGolV_liBxesC4zcjjBVa7QrSncikydED53TR41e-lfadc26h8sg-7NADG4jFV-Y3STy1nhjua1XBN44YyNAsDhIEp9Cj2o7iZbWhKWYTUrouDpxohKZl4dLjqWnV3A-2t1octWMV4YTBTdyomyYgUD5kC4iCELOQv1y4Wigz0Apu5wJdEj6lw5jYXu"/>
+<div class="flex-grow">
+<h3 class="font-body-md text-body-md font-medium text-primary">Midnight Chronograph</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Qty: 1</p>
+</div>
+<span class="font-body-md text-body-md text-primary">$299.00</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-md">
+<img class="w-16 h-16 rounded-md object-cover border border-surface-container-highest" data-alt="A high-quality, structured leather tote bag in a deep charcoal grey, presented against a stark minimalist studio background to emphasize its modern fashion aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmXMM5QmhCq6rG4GMM-rux8B2TOcZLk_6egWQVT0AZdZstwFZByd0dU5LNWqTWEtClu08rbgdUxrwCcZXeey0pl5ynCIM-De7wNtx627mKA7AUO1qp4UMi7JDBgYgr84fihLujV-QrRZa9V_JEwOAA2T6ey2VcgqgIUBLEs8N5QBPHP6t1Kj5NWyXXiXcvbmRP-JDj88KnGdLu20fxBsQbN_aMBb5xMX0erz2S0DWYutotQSfYnZMK"/>
+<div class="flex-grow">
+<h3 class="font-body-md text-body-md font-medium text-primary">Essential Canvas Tote</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Qty: 2</p>
+</div>
+<span class="font-body-md text-body-md text-primary">$130.00</span>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-surface-container-highest flex flex-col gap-sm">
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$429.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Shipping</span>
+<span>$15.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Tax</span>
+<span>$34.32</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-primary mt-sm pt-sm border-t border-surface-container-highest">
+<span>Total</span>
+<span>$478.32</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-xl py-md rounded-lg hover:opacity-90 transition-opacity">
+                    Track Order
+                </button>
+<button class="bg-transparent text-primary font-label-md text-label-md px-xl py-md rounded-lg border-2 border-primary hover:bg-surface-container-highest transition-colors">
+                    Continue Shopping
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer Suppressed: Transactional Screen -->
+</body></html>

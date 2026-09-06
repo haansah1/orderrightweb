@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Tracking - OrderRight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-container": "#fe5e1e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "outline": "#747878",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#5f5e5e",
+                        "primary": "#000000",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#001356",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary-container": "#5979ff",
+                        "secondary-fixed": "#ffdbcf",
+                        "secondary": "#ab3600",
+                        "outline-variant": "#c4c7c7",
+                        "surface-dim": "#dadada",
+                        "on-surface": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#551600",
+                        "on-tertiary-fixed": "#001356",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed-variant": "#0035be",
+                        "on-primary-container": "#858383",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#390c00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "2xl": "64px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50">
+<button class="text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">
+                OrderRight
+            </div>
+<button class="text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-xl md:py-2xl">
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-unit">Track Order</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Order #ORD-84729-GH</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Status Timeline -->
+<div class="md:col-span-7 lg:col-span-8 flex flex-col gap-lg">
+<!-- Status Card -->
+<div class="bg-surface border border-outline-variant/30 rounded-xl p-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-md">Out for Delivery</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Estimated delivery: Today, 2:00 PM - 5:00 PM</p>
+<!-- Timeline Component -->
+<div class="relative pl-sm">
+<!-- Timeline Line -->
+<div class="absolute left-[19px] top-2 bottom-6 w-0.5 bg-surface-container-high z-0"></div>
+<div class="absolute left-[19px] top-2 h-3/5 w-0.5 bg-secondary z-0"></div>
+<!-- Status Nodes -->
+<div class="relative z-10 flex gap-md mb-lg">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Order Received</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Oct 24, 09:30 AM</p>
+</div>
+</div>
+<div class="relative z-10 flex gap-md mb-lg">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Confirmed</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Oct 24, 10:15 AM</p>
+</div>
+</div>
+<div class="relative z-10 flex gap-md mb-lg">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Prepared</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Oct 25, 08:00 AM</p>
+</div>
+</div>
+<div class="relative z-10 flex gap-md mb-lg">
+<div class="w-8 h-8 rounded-full border-2 border-secondary bg-surface flex items-center justify-center shrink-0 shadow-[0_0_0_4px_rgba(171,54,0,0.1)]">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-secondary font-bold">Out for Delivery</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Your package is with the courier.</p>
+</div>
+</div>
+<div class="relative z-10 flex gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Delivered</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Details -->
+<div class="bg-surface border border-outline-variant/30 rounded-xl p-lg grid grid-cols-1 sm:grid-cols-2 gap-lg">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-sm uppercase tracking-wider text-xs">Delivery Address</h4>
+<p class="font-body-md text-body-md text-primary">Kwame Mensah<br/>42 Independence Avenue<br/>Cantonments, Accra<br/>Ghana</p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-sm uppercase tracking-wider text-xs">Courier</h4>
+<div class="flex items-center gap-sm mt-sm">
+<div class="w-10 h-10 bg-surface-container rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait photo of a professional courier driver wearing a clean uniform, smiling slightly, set against a neutral, well-lit urban background. The lighting is natural and bright, emphasizing a trustworthy and efficient mood consistent with a modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQcWQXgZ8UjqQ5Wg2BIuh4qHEu_5UiQsDJc-Rlcqsg3jsQ4e9uiQDsUWVUrEvX-pj8f4ML1JWf1mZaM9Dy8Vg3jLt8AREZlgogjjsQd092ydH-qv33-E_10RIz2iIbGapgXj-mI8kQrAwInSKVM75BQnAGd_-x51gJSrX_edKQHWIPcqLcoCEy6a2FKl93Ggwl4RWriDKkrJIgAqt-JM7kLdRigzrAdo8bWYHoUetVVLcd_YMDl9G1"/>
+</div>
+<div>
+<p class="font-body-md text-body-md text-primary font-medium">Samuel Osei</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">+233 24 123 4567</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Items -->
+<div class="md:col-span-5 lg:col-span-4">
+<div class="bg-surface border border-outline-variant/30 rounded-xl p-lg sticky top-[100px]">
+<h3 class="font-headline-md text-headline-md text-primary mb-md pb-md border-b border-outline-variant/30">Order Summary</h3>
+<div class="flex flex-col gap-md mb-lg">
+<!-- Item 1 -->
+<div class="flex gap-md items-center">
+<div class="w-20 h-24 bg-surface-container rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A high-fashion product photography shot of a sleek, tailored dark charcoal linen blazer for men. The blazer is presented on a minimalist mannequin against a pristine white background. The lighting is soft yet high-contrast, highlighting the texture and premium quality of the fabric. Corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCnVQv3PGlNSOwx3PWgIUeisobQalP01_XqsRtUg-UC6UYT3XNBnuAvNgZOY_8B-rcOldO1gRsWUYoMJRR0crQxAPwaUexoJ4kf8g-05N4vXte3FXKI0O7X4Y1vuHI3HibK-YZmCRxe2T4Ub9tBtolwA-Yux077kL0YPqBBBn7LyoB2N7suhXJNhhllhGTXeVXvZhXeUGxmwAKDMfGrDikbXFE3K6AJSiBpDWbpWjvwcJH3iPg-0el"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-md text-label-md text-primary font-bold">Tailored Linen Blazer</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Size: 40R | Qty: 1</p>
+<p class="font-body-md text-body-md text-primary font-medium mt-unit">₵1,450.00</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-md items-center">
+<div class="w-20 h-24 bg-surface-container rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A flat lay product shot of a pair of minimalist, crisp white leather sneakers with subtle black detailing. The sneakers are arranged diagonally on a light gray concrete textured surface. Bright, diffused top-down lighting emphasizes the clean lines and premium leather material. Modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIY_0OiS0Hx-vbao8YeGf9t5qZb_LB70Js9UcJBDClwu4XlmEnONHjIMUur0tQXVmM4tMrhbWaxVX7AyBntpTcNDelEGuOeV9sGGgC_TvAYjlUI-DDOCkCWgMspoC-B9MSzzZFPPj4dAbyaESWr-tjtSJSmWCRZJsTUOJ7oGg5T41satQNLrH7huJDtLTmZrz3VA2YQ-YvbOynNRWFeC59458yBnng85zoq7uWBvV9wMlyomup6aws"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-md text-label-md text-primary font-bold">Minimalist Leather Sneakers</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Size: 44 | Qty: 1</p>
+<p class="font-body-md text-body-md text-primary font-medium mt-unit">₵850.00</p>
+</div>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 pt-md mt-md">
+<div class="flex justify-between mb-sm font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>₵2,300.00</span>
+</div>
+<div class="flex justify-between mb-sm font-body-md text-body-md text-on-surface-variant">
+<span>Shipping</span>
+<span>₵50.00</span>
+</div>
+<div class="flex justify-between mt-md font-label-md text-label-md font-bold text-primary text-lg">
+<span>Total</span>
+<span>₵2,350.00</span>
+</div>
+</div>
+<button class="w-full mt-lg bg-primary text-on-primary font-label-md text-label-md py-3 px-6 rounded-[8px] hover:opacity-90 transition-opacity">
+                        View Receipt
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

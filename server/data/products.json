@@ -1,0 +1,146 @@
+[
+  {
+    "id": "cld-boys-1",
+    "name": "Heavyweight Essential Tee",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.9,
+    "reviewsCount": 128,
+    "isNew": true,
+    "isFeatured": true,
+    "description": "Premium Streetwear cotton t-shirt fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/heavyweight_essential_tee",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/heavyweight_essential_tee"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Deep Charcoal", "Off White", "Crimson Red"],
+    "details": {
+      "material": "100% Organic Cotton (240gsm)",
+      "care": "Machine wash cold inside out.",
+      "shipping": "Standard shipping within Ghana (2-5 business days)."
+    }
+  },
+  {
+    "id": "cld-boys-2",
+    "name": "Graphic Streetwear Tee",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.8,
+    "reviewsCount": 94,
+    "isNew": true,
+    "isFeatured": true,
+    "description": "Custom graphic streetwear tee fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/graphic_streetwear_tee",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/graphic_streetwear_tee"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Off White", "Crimson Red"],
+    "details": {
+      "material": "100% Combed Cotton",
+      "care": "Machine wash cold inside out.",
+      "shipping": "Express delivery across Accra & Kumasi."
+    }
+  },
+  {
+    "id": "cld-boys-3",
+    "name": "Avant Garde Sunset Hoodie",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.9,
+    "reviewsCount": 110,
+    "isNew": true,
+    "isFeatured": true,
+    "description": "Heavyweight hoodie fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/avant_garde_sunset_hoodie",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/avant_garde_sunset_hoodie"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Charcoal / Crimson Red"],
+    "details": {
+      "material": "450gsm Cotton French Terry",
+      "care": "Cold wash inside out.",
+      "shipping": "Express shipping available."
+    }
+  },
+  {
+    "id": "cld-boys-4",
+    "name": "Vintage Washed Street Tee",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.7,
+    "reviewsCount": 76,
+    "isNew": false,
+    "isFeatured": true,
+    "description": "Vintage acid-washed streetwear t-shirt fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/vintage_washed_street_tee",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/vintage_washed_street_tee"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Washed Charcoal", "Crimson Red"],
+    "details": {
+      "material": "200gsm Heavy Washed Cotton",
+      "care": "Gentle wash.",
+      "shipping": "Standard delivery (2-5 business days)."
+    }
+  },
+  {
+    "id": "cld-boys-5",
+    "name": "Urban Utility Oversized Tee",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.9,
+    "reviewsCount": 62,
+    "isNew": true,
+    "isFeatured": false,
+    "description": "Urban utility streetwear t-shirt fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/urban_utility_oversized_tee",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/urban_utility_oversized_tee"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Matte Black", "Cream White"],
+    "details": {
+      "material": "100% Organic Cotton",
+      "care": "Machine wash cold.",
+      "shipping": "Standard shipping (2-5 business days)."
+    }
+  },
+  {
+    "id": "cld-boys-6",
+    "name": "Signature Monochrome Tee",
+    "vibe": "Streetwear",
+    "category": "Tops",
+    "price": 60.00,
+    "currency": "GH₵",
+    "rating": 4.8,
+    "reviewsCount": 88,
+    "isNew": false,
+    "isFeatured": true,
+    "description": "Signature minimalist streetwear tee fetched directly from Orderright/tshirts/boys in Cloudinary.",
+    "cloudinaryPublicId": "Orderright/tshirts/boys/signature_monochrome_tee",
+    "images": [
+      "https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/boys/signature_monochrome_tee"
+    ],
+    "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+    "colors": ["Pristine White", "Crimson Red"],
+    "details": {
+      "material": "Double-knit Jersey Cotton",
+      "care": "Machine wash cold.",
+      "shipping": "Standard delivery (2-5 business days)."
+    }
+  }
+]

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight Fashion - Wishlist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-container": "#fe5e1e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "outline": "#747878",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#5f5e5e",
+                        "primary": "#000000",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#001356",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary-container": "#5979ff",
+                        "secondary-fixed": "#ffdbcf",
+                        "secondary": "#ab3600",
+                        "outline-variant": "#c4c7c7",
+                        "surface-dim": "#dadada",
+                        "on-surface": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#551600",
+                        "on-tertiary-fixed": "#001356",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed-variant": "#0035be",
+                        "on-primary-container": "#858383",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#390c00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "2xl": "64px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "pb-safe": "env(safe-area-inset-bottom)"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Hide scrollbar for clean look in horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md docked full-width top-0 sticky flat no shadows">
+<button class="text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity duration-200 Active: scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">OrderRight</div>
+<button class="text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity duration-200 Active: scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-xl md:py-2xl">
+<div class="mb-lg md:mb-xl flex justify-between items-end">
+<div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary mb-unit">Your Wishlist</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">4 items saved for later.</p>
+</div>
+</div>
+<!-- Wishlist Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-gutter" id="wishlist-grid">
+<!-- Product Card 1 -->
+<div class="group flex flex-col relative rounded-xl hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow duration-300 bg-surface border border-surface-container-highest hover:border-transparent pb-md h-full">
+<button aria-label="Remove from wishlist" class="absolute top-sm right-sm z-10 w-8 h-8 flex items-center justify-center rounded-full bg-surface/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors" onclick="this.closest('.group').remove()">
+<span class="material-symbols-outlined filled text-xl" data-icon="favorite">favorite</span>
+</button>
+<div class="w-full aspect-[4/5] rounded-t-xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high fashion studio shot of a model wearing a minimalist black oversized blazer. The lighting is crisp and modern, casting soft shadows against a stark white background. The aesthetic is clean, luxurious, and deeply focused on the texture and tailoring of the garment, suitable for a premium fashion e-commerce site." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOAurfaVRVIANRWHwXZDy1VLKtMwrqrWyNTHyiODhHx6_ZWyhz_Lz3TyQPPbHDgnfTdLrk-ZiJNpL27DwQDkZlclWeqZhaW91tsZsxS77j_z4nnp6rXw4yZKdter6s7r2qIc9GuuFbzKwxNGUyUOmRxacJnxCLkQYaPfXJ5romnq2Lw0TkynMzyaJYESeWw4wy58Xo8LznHv-jCXiRgssCioedGcxAlwdNcYdSoQC4g1t7yJJXINZ0"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+<button class="pointer-events-auto opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="px-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md text-label-md text-primary truncate pr-sm">Oversized Obsidian Blazer</h3>
+<span class="font-label-md text-label-md text-primary font-bold whitespace-nowrap">$245</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md truncate">Premium Wool Blend</p>
+<div class="mt-auto">
+<label class="sr-only" for="size-1">Select Size</label>
+<select class="w-full bg-surface border border-outline-variant text-primary font-label-sm text-label-sm rounded-lg px-sm py-sm focus:border-primary focus:ring-0 transition-colors mb-sm" id="size-1">
+<option value="">Select Size</option>
+<option value="s">Small</option>
+<option value="m">Medium</option>
+<option selected="" value="l">Large</option>
+<option value="xl">X-Large</option>
+</select>
+<button class="w-full bg-transparent border-[1.5px] border-primary text-primary font-label-md text-label-md rounded-lg py-sm hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-lg">shopping_bag</span> Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col relative rounded-xl hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow duration-300 bg-surface border border-surface-container-highest hover:border-transparent pb-md h-full">
+<button aria-label="Remove from wishlist" class="absolute top-sm right-sm z-10 w-8 h-8 flex items-center justify-center rounded-full bg-surface/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors" onclick="this.closest('.group').remove()">
+<span class="material-symbols-outlined filled text-xl" data-icon="favorite">favorite</span>
+</button>
+<div class="w-full aspect-[4/5] rounded-t-xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of a structural, geometric leather handbag in a deep charcoal grey. The bag rests on a polished concrete block under soft, diffused lighting that highlights the smooth grain of the leather. The overall mood is architectural, modern, and minimalist, emphasizing high-end craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQ5iwqH7TA25dRB5b1MAbY48V3VN88Zcb8m_ThCZ8HvwsO6YVOk_0dQGcajX9SMxEPfgRGp3V0eK3MYZUjFg6P9qe17NZJwSmoKUvu3HJnoYhDP2AdFqCAsRvqEkhaW4Jg--yILsStq_AzpeIGhKCL9wtnfmMRGf6hG3HsSrukT8mIZbHrdeBNjhdaX5zOPIlTzulngnu_RreLEZmSxI-V2OFt0syV6spYZ5CZPbeteVRlvU6wAKe"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+<button class="pointer-events-auto opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="px-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md text-label-md text-primary truncate pr-sm">Architect Tote</h3>
+<span class="font-label-md text-label-md text-primary font-bold whitespace-nowrap">$320</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md truncate">Vegan Leather</p>
+<div class="mt-auto">
+<label class="sr-only" for="size-2">Select Size</label>
+<select class="w-full bg-surface border border-outline-variant text-primary font-label-sm text-label-sm rounded-lg px-sm py-sm focus:border-primary focus:ring-0 transition-colors mb-sm opacity-50 cursor-not-allowed" disabled="" id="size-2">
+<option value="">One Size</option>
+</select>
+<button class="w-full bg-transparent border-[1.5px] border-primary text-primary font-label-md text-label-md rounded-lg py-sm hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-lg">shopping_bag</span> Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col relative rounded-xl hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow duration-300 bg-surface border border-surface-container-highest hover:border-transparent pb-md h-full">
+<button aria-label="Remove from wishlist" class="absolute top-sm right-sm z-10 w-8 h-8 flex items-center justify-center rounded-full bg-surface/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors" onclick="this.closest('.group').remove()">
+<span class="material-symbols-outlined filled text-xl" data-icon="favorite">favorite</span>
+</button>
+<div class="w-full aspect-[4/5] rounded-t-xl overflow-hidden mb-sm relative">
+<div class="absolute top-sm left-sm z-10 bg-secondary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded-sm uppercase tracking-wider">Low Stock</div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A full body editorial fashion image of a model wearing wide-leg trousers in a vibrant sunset orange hue paired with a simple white ribbed tank top. The setting is an abstract, sunlit studio with stark geometric shadows, conveying a dynamic, youthful, and contemporary high-fashion energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE0Vnyhc-vwp470BT1pTneBFNfecfEa5S9xFi9f1JXdloQJo7gac4Cg84ZWim7L75Mh5OI2tVWJ8iaO19BHDHLQvg6IwxFvn953in0Ed67HYi_DsWx_oYpiVnBqSaorl6JkcBG-FT1GTG51kghlMoNL1p35jn3x_hJArEaMrBlG_GsAvfoWAwZaeVjKnn8PbaVghScBUEkYFyO4vFIwrn7DXVzI-WJ40GSi_vWAkeChzb5iTmu1HYe"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+<button class="pointer-events-auto opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="px-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md text-label-md text-primary truncate pr-sm">Fluid Wide-Leg Trousers</h3>
+<span class="font-label-md text-label-md text-primary font-bold whitespace-nowrap">$180</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md truncate">Sunset Orange</p>
+<div class="mt-auto">
+<label class="sr-only" for="size-3">Select Size</label>
+<select class="w-full bg-surface border border-outline-variant text-primary font-label-sm text-label-sm rounded-lg px-sm py-sm focus:border-primary focus:ring-0 transition-colors mb-sm" id="size-3">
+<option value="">Select Size</option>
+<option value="26">W26</option>
+<option selected="" value="28">W28</option>
+<option value="30">W30</option>
+<option value="32">W32</option>
+</select>
+<button class="w-full bg-secondary text-on-primary border-[1.5px] border-secondary font-label-md text-label-md rounded-lg py-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-lg">shopping_bag</span> Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 (Sold Out) -->
+<div class="group flex flex-col relative rounded-xl hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow duration-300 bg-surface border border-surface-container-highest hover:border-transparent pb-md h-full opacity-70">
+<button aria-label="Remove from wishlist" class="absolute top-sm right-sm z-10 w-8 h-8 flex items-center justify-center rounded-full bg-surface/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors" onclick="this.closest('.group').remove()">
+<span class="material-symbols-outlined filled text-xl" data-icon="favorite">favorite</span>
+</button>
+<div class="w-full aspect-[4/5] rounded-t-xl overflow-hidden mb-sm relative">
+<div class="absolute inset-0 bg-surface/40 backdrop-blur-[2px] z-10 flex items-center justify-center">
+<span class="bg-primary text-on-primary font-label-md text-label-md px-md py-xs rounded-full">Sold Out</span>
+</div>
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="A detail shot focusing on chunky, modern platform boots in polished black leather. The boots are styled against a sterile, bright white background, emphasizing their sculptural shape and heavy sole. The visual style is stark, contemporary, and minimalist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7OJEDSsx7VIb3Eow_Gk2VKb28JSl4CMZCwS_NxkZ39qiLZCh88Y7ckPnF01l_rdo4S5jjIDElkF5gDZG3V-inCafXacs3uzLmrztUgQsBPmmkRQ9errxpohXhaJyOFP8UwoNQZY-f9O7g3lUXE1Jds7H5PK4nL5sG4eRcZoezlylewbo9ZBwRchXNe95eX8ZCf3dcgdLuBXN-oxoKMfyg5VJvVVS7ACxEyxfhjvthXnJnIDGJJM4-"/>
+</div>
+<div class="px-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md text-label-md text-primary truncate pr-sm">Monolith Platform Boots</h3>
+<span class="font-label-md text-label-md text-primary font-bold whitespace-nowrap">$295</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md truncate">Black Leather</p>
+<div class="mt-auto">
+<label class="sr-only" for="size-4">Select Size</label>
+<select class="w-full bg-surface-container border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm rounded-lg px-sm py-sm mb-sm cursor-not-allowed" disabled="" id="size-4">
+<option value="">Size 39 (Sold Out)</option>
+</select>
+<button class="w-full bg-surface-container text-on-surface-variant border-[1.5px] border-outline-variant/50 font-label-md text-label-md rounded-lg py-sm cursor-not-allowed flex items-center justify-center gap-xs" disabled="">
+                           Out of Stock
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden by default, shown via JS if needed, but included in DOM for structure) -->
+<div class="hidden flex-col items-center justify-center py-2xl text-center" id="empty-state">
+<div class="w-64 h-64 mb-xl bg-surface-container-high rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[120px] text-outline-variant font-light">favorite_border</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-md">Your wishlist is empty</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl max-w-md">Save items you love to your wishlist. Review them anytime and easily move them to your cart when you're ready to buy.</p>
+<a class="bg-primary text-on-primary font-label-md text-label-md px-xl py-md rounded-lg hover:bg-primary/90 transition-colors shadow-[0px_4px_20px_rgba(0,0,0,0.05)]" href="#">Start Shopping</a>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 md:hidden border-t border-outline-variant/30 bg-surface dark:bg-surface-container shadow-md">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="storefront">storefront</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 Active: scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1 filled" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">Wishlist</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg relative" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute top-1 right-3 w-2 h-2 bg-secondary rounded-full"></span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+<!-- Desktop spacer for footer if needed, though this design aims to fill screen -->
+<div class="h-20 md:h-0"></div>
+<script>
+        // Simple script to toggle empty state if all items are removed (for demonstration)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('button[aria-label="Remove from wishlist"]')) {
+                setTimeout(() => {
+                    const grid = document.getElementById('wishlist-grid');
+                    if (grid && grid.children.length === 0) {
+                        grid.classList.add('hidden');
+                        document.querySelector('.mb-lg').classList.add('hidden'); // Hide header
+                        document.getElementById('empty-state').classList.remove('hidden');
+                        document.getElementById('empty-state').classList.add('flex');
+                    }
+                }, 50); // small delay to allow DOM removal
+            }
+        });
+    </script>
+</body></html>

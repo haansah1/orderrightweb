@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-surface-variant": "#444748",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-container": "#5979ff",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface-container-low": "#f3f3f3",
+                        "background": "#f9f9f9",
+                        "secondary": "#ab3600",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-container": "#001356",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-container": "#858383",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-container": "#551600",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "secondary-container": "#fe5e1e",
+                        "on-secondary-fixed": "#390c00",
+                        "surface-container": "#eeeeee",
+                        "surface-tint": "#5f5e5e",
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed": "#ffdbcf",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "outline": "#747878",
+                        "on-tertiary-fixed": "#001356",
+                        "on-tertiary-fixed-variant": "#0035be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "64px",
+                        "sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f9f9f9; color: #1a1c1c; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Input Styles based on Design System */
+        .ds-input {
+            width: 100%;
+            border: 1px solid #eeeeee;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background-color: #ffffff;
+        }
+        .ds-input:focus {
+            outline: none;
+            border-color: #000000;
+            border-width: 1.5px;
+            box-shadow: none;
+        }
+        .ds-label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #444748;
+        }
+        
+        .ds-btn-primary {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1rem 2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+        .ds-btn-primary:hover {
+            opacity: 0.8;
+        }
+        
+        .ds-surface {
+            background-color: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm border-b border-surface-container-highest flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20 transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-lg">
+<a class="font-headline-lg text-headline-lg font-bold text-primary" href="#">OrderRight</a>
+</div>
+<!-- Navigation Suppressed for Checkout (Transactional Flow) per Design System Rules -->
+<div class="hidden md:flex flex-1 justify-center">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span> Secure Checkout
+             </span>
+</div>
+<div class="flex items-center gap-sm">
+<button aria-label="person" class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button aria-label="favorite" class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button aria-label="shopping_bag" class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</header>
+<!-- Main Checkout Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-margin-desktop py-xl">
+<!-- Progress Indicator -->
+<div class="mb-xl flex items-center justify-center max-w-2xl mx-auto">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Cart</span>
+</div>
+<div class="flex-1 h-px bg-primary mx-4 mb-6"></div>
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full border-2 border-primary text-primary flex items-center justify-center font-label-md text-label-md mb-2">
+                    2
+                </div>
+<span class="font-label-sm text-label-sm text-primary">Checkout</span>
+</div>
+<div class="flex-1 h-px bg-surface-container-highest mx-4 mb-6"></div>
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-highest text-surface-tint flex items-center justify-center font-label-md text-label-md mb-2">
+                    3
+                </div>
+<span class="font-label-sm text-label-sm text-surface-tint">Confirmation</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Forms -->
+<div class="col-span-12 md:col-span-7 lg:col-span-8 flex flex-col gap-xl">
+<!-- Shipping Section -->
+<section class="ds-surface p-lg">
+<h2 class="font-headline-md text-headline-md mb-lg">Shipping Information</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-md gap-y-lg">
+<div class="col-span-1 md:col-span-2 flex justify-end mb-sm">
+<button class="flex items-center gap-2 text-secondary font-label-md text-label-md hover:underline" type="button">
+<span class="material-symbols-outlined text-sm">my_location</span> Use current location
+                            </button>
+</div>
+<div>
+<label class="ds-label" for="firstName">First Name</label>
+<input class="ds-input" id="firstName" placeholder="Kwame" type="text"/>
+</div>
+<div>
+<label class="ds-label" for="lastName">Last Name</label>
+<input class="ds-input" id="lastName" placeholder="Mensah" type="text"/>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="ds-label" for="address">Street Address</label>
+<input class="ds-input" id="address" placeholder="123 Independence Ave" type="text"/>
+</div>
+<div>
+<label class="ds-label" for="city">City</label>
+<input class="ds-input" id="city" placeholder="Accra" type="text"/>
+</div>
+<div>
+<label class="ds-label" for="region">Region</label>
+<select class="ds-input bg-white" id="region">
+<option>Greater Accra</option>
+<option>Ashanti</option>
+<option>Central</option>
+</select>
+</div>
+<div>
+<label class="ds-label" for="phone">Phone Number</label>
+<input class="ds-input" id="phone" placeholder="+233 20 123 4567" type="tel"/>
+</div>
+<div>
+<label class="ds-label" for="email">Email Address</label>
+<input class="ds-input" id="email" placeholder="kwame@example.com" type="email"/>
+</div>
+</form>
+</section>
+<!-- Payment Section -->
+<section class="ds-surface p-lg">
+<h2 class="font-headline-md text-headline-md mb-lg">Payment Method</h2>
+<div class="flex flex-col gap-md">
+<!-- Mobile Money Option -->
+<label class="flex items-start p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-lowest">
+<input checked="" class="mt-1 text-primary focus:ring-primary border-outline" name="payment" type="radio"/>
+<div class="ml-4 flex-1">
+<span class="block font-label-md text-label-md text-on-surface mb-1">Mobile Money</span>
+<span class="block font-body-md text-body-md text-on-surface-variant text-sm">Pay securely via MTN, Telecel, or AT</span>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="ds-label text-xs">Network</label>
+<select class="ds-input py-2">
+<option>MTN MoMo</option>
+<option>Telecel Cash</option>
+<option>AT Money</option>
+</select>
+</div>
+<div>
+<label class="ds-label text-xs">MoMo Number</label>
+<input class="ds-input py-2" placeholder="054 123 4567" type="tel"/>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-surface-tint">smartphone</span>
+</label>
+<!-- Card Option -->
+<label class="flex items-start p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-lowest">
+<input class="mt-1 text-primary focus:ring-primary border-outline" name="payment" type="radio"/>
+<div class="ml-4 flex-1">
+<span class="block font-label-md text-label-md text-on-surface">Credit / Debit Card</span>
+</div>
+<span class="material-symbols-outlined text-surface-tint">credit_card</span>
+</label>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary Sidebar -->
+<div class="col-span-12 md:col-span-5 lg:col-span-4">
+<div class="ds-surface p-lg sticky top-28">
+<h2 class="font-headline-md text-headline-md mb-lg">Order Summary</h2>
+<div class="flex flex-col gap-md mb-lg border-b border-surface-container-highest pb-lg">
+<!-- Product Item 1 -->
+<div class="flex gap-4">
+<div class="w-20 h-24 rounded bg-surface-container-high overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio shot of a modern, minimalist tailored jacket in deep charcoal grey. The jacket features sharp lines and a subtle, textured fabric, presented against a clean, light grey backdrop with soft, diffused lighting that highlights its premium construction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCocVFeLE8EEo4eKpXqHmts-DKKNPmNa6_BQw255ZWW_H87t-CW7gf66cvx7SHDIsn5UsY0Y_56wz-g8NP1OO8VM6KVAvqcAnGjtSma3M6wayd8NYkaX0EaonOURUPkKH8E63jnGNZU7gLSr7xv1YvbnSj0v4M49w60HBsuHKNBb5STxMqt0Rzy3hf85vx3fCpkhQ41-8jc1dIlOvwc5n60cYseBCyHrwq-WqHibNzdJSepvbZ7j_l0"/>
+</div>
+<div class="flex flex-col justify-between flex-1">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Charcoal Tailored Jacket</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Size: M</p>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Qty: 1</span>
+<span class="font-label-md text-label-md text-on-surface">GH₵ 1,250</span>
+</div>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex gap-4">
+<div class="w-20 h-24 rounded bg-surface-container-high overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A detailed close-up shot of a pair of minimalist, premium white leather sneakers with subtle sunset orange accents on the heel. The shoes are styled elegantly against a polished, concrete-textured floor in a bright, modern light-mode setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6hCFeRrYhyTHPvvn0rq4FwQmILr4a09ohWErehea678Mf0LNn8asohJuO6pLIXS0gxXAbc2AxZef63x7WkOyMQ06yyebnkf5a2jYejU6e4MXSZnUiivi8bisOcOQjKdvGKM4oMSOOjUXDiWWeHTlr6v9kPlcQva506gKPOvZLQgtiZoV23df3k4upHi_JJa088-obG_hiFDR-enp6Q50t3VE8hTzPWOlWZa-Hln7ORkzGAdPqkq7V"/>
+</div>
+<div class="flex flex-col justify-between flex-1">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Minimalist Leather Sneakers</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Size: 42</p>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Qty: 1</span>
+<span class="font-label-md text-label-md text-on-surface">GH₵ 850</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="flex flex-col gap-sm mb-lg">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">GH₵ 2,100</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Shipping</span>
+<span class="font-body-md text-body-md text-on-surface">GH₵ 50</span>
+</div>
+<div class="flex justify-between mt-md pt-md border-t border-surface-container-highest">
+<span class="font-headline-md text-headline-md text-lg">Total</span>
+<span class="font-headline-md text-headline-md text-lg">GH₵ 2,150</span>
+</div>
+</div>
+<button class="ds-btn-primary w-full flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+                        Place Order Securely
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-container-highest w-full py-xl transition-all duration-200">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="col-span-1 md:col-span-1 flex flex-col items-start gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">OrderRight</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">© 2024 OrderRight. All rights reserved.</p>
+</div>
+<div class="col-span-1 md:col-span-3 flex justify-end">
+<ul class="flex flex-wrap gap-x-lg gap-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Sitemap</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Shipping Info</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Returns</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-surface-variant": "#444748",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-container": "#5979ff",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface-container-low": "#f3f3f3",
+                        "background": "#f9f9f9",
+                        "secondary": "#ab3600",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-container": "#001356",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-container": "#858383",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-container": "#551600",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "secondary-container": "#fe5e1e",
+                        "on-secondary-fixed": "#390c00",
+                        "surface-container": "#eeeeee",
+                        "surface-tint": "#5f5e5e",
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed": "#ffdbcf",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "outline": "#747878",
+                        "on-tertiary-fixed": "#001356",
+                        "on-tertiary-fixed-variant": "#0035be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "64px",
+                        "sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- Top Navigation -->
+<header class="bg-surface/80 backdrop-blur-md text-primary font-body-md uppercase tracking-wider fixed top-0 w-full z-50 border-b border-surface-container-highest shadow-sm duration-300 ease-in-out">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">
+                OrderRight
+            </div>
+<nav class="hidden md:flex gap-lg h-full items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity flex items-center h-full" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity flex items-center h-full" href="#">Shop</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity flex items-center h-full" href="#">Categories</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:opacity-70 transition-opacity flex items-center h-full" href="#">About Us</a>
+<a class="text-primary font-bold border-b-2 border-secondary pb-1 flex items-center h-full hover:opacity-70 transition-opacity" href="#">Contact</a>
+</nav>
+<div class="flex gap-md items-center">
+<button aria-label="person" class="hover:opacity-70 transition-opacity p-sm rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</button>
+<button aria-label="favorite" class="hover:opacity-70 transition-opacity p-sm rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+</button>
+<button aria-label="shopping_bag" class="hover:opacity-70 transition-opacity p-sm rounded-full hover:bg-surface-container-highest relative">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-xl max-w-container-max mx-auto w-full px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mt-lg">
+<!-- Left Navigation Rail -->
+<aside class="col-span-1 md:col-span-3 lg:col-span-2 hidden md:block">
+<div class="sticky top-32 flex flex-col gap-sm">
+<h3 class="font-headline-md text-headline-md mb-md">Account</h3>
+<nav class="flex flex-col gap-unit">
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container-highest text-primary font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+                            Profile Overview
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                            My Orders
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+                            Wishlist
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">location_on</span>
+                            Addresses
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">payment</span>
+                            Payment Methods
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors mt-lg border-t border-surface-container-highest pt-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                            Sign Out
+                        </a>
+</nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-1 md:col-span-9 lg:col-span-10 flex flex-col gap-xl">
+<!-- User Overview Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Profile Card -->
+<div class="col-span-1 lg:col-span-2 bg-surface-container-lowest rounded-[16px] border border-surface-container-highest p-lg flex flex-col md:flex-row items-center md:items-start gap-lg relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-lowest to-surface-container-low opacity-50 pointer-events-none"></div>
+<img alt="User Profile" class="w-24 h-24 rounded-full object-cover border-4 border-surface z-10" data-alt="A high-quality, professional headshot of a stylish young adult in modern, minimalist clothing. The background is a clean, well-lit studio setting in neutral tones. The lighting is soft and flattering, highlighting the subject's features, fitting a premium light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9y9dt5dTvJCw7ch6H_Ic3OeeMli1htEIPPJ1D9geBTvOY2XJk43MGZT5UDjLAt_EAF_Eh0gLgXZpCFASDr-kkxclUavE2HQSslgt33XWMRqq842UI_D6gQl1xcO96vKupRTi8k-KIWpGrwMrTPN8NTrQoZdE_1m2YIJdW3dCN71jrrd37uxJF6B1e2jZGwluTdDU7Pmb13hn-5hcITVzMpM0v8RTHhuX3_Mpzz5Ka7ouEXmlx986h"/>
+<div class="flex-grow text-center md:text-left z-10">
+<h1 class="font-headline-lg text-headline-lg mb-unit">Kwame Mensah</h1>
+<p class="text-on-surface-variant font-body-md mb-md">Premium Member since 2022</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:opacity-90 transition-opacity">Edit Profile</button>
+<button class="bg-transparent border-[1.5px] border-primary text-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-surface-container transition-colors">Manage Preferences</button>
+</div>
+</div>
+</div>
+<!-- Reward Points Card -->
+<div class="col-span-1 bg-primary text-on-primary rounded-[16px] p-lg flex flex-col justify-between relative overflow-hidden group hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-secondary opacity-20 rounded-full blur-2xl group-hover:bg-secondary-container transition-colors duration-500"></div>
+<div class="z-10">
+<div class="flex justify-between items-center mb-sm">
+<span class="font-label-md text-label-md opacity-80 uppercase">Reward Points</span>
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div class="font-display-lg text-display-lg">
+                                2,450
+                            </div>
+<p class="font-body-md mt-unit opacity-80 text-sm">Equivalent to $24.50 store credit</p>
+</div>
+<button class="z-10 mt-lg bg-surface-container-lowest text-primary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-surface-container transition-colors w-full text-center">
+                            Redeem Now
+                        </button>
+</div>
+</div>
+<!-- Status & Active Orders Section -->
+<div>
+<h2 class="font-headline-md text-headline-md mb-lg">Active Activity</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Active Order Card 1 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-[16px] p-md flex gap-md hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow group">
+<img alt="Product Thumbnail" class="w-24 h-24 rounded-[12px] object-cover bg-surface-container-low" data-alt="A clean, minimalist product shot of a sleek, modern black leather tote bag on a pristine white background. The lighting is studio quality, emphasizing the texture of the leather. The overall aesthetic is premium, high-fashion, and suitable for a light-mode e-commerce interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnOgKfiPvG12bWc0RUqBC2_-jA_ofB5HE_JW2ynNRiFXzD9XiSEqonpKKhuYrvamK_cr3bxMP1RjGrTtd23pZ-b5-HtaMa0wjvbqs8-j0LKDTcR7a9sta8qzB5aWlcWDWrdrlphSOGysFI4lMxIP6slU_Rq6yN9otZLKXyULcquU9FOBBnn-bhfKHS-N7ePoV-6LxPO09zrgqyeToM7zTju0uywM0U1rdp_zt6yR2nBLSwe1cWY4Wz"/>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start mb-unit">
+<h4 class="font-label-md text-label-md text-primary">Order #10293</h4>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-1 rounded text-xs font-medium">In Transit</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant truncate">Premium Leather Tote Bag - Midnight Black</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-primary">Est. Delivery: Tomorrow</span>
+<button class="text-secondary font-label-md text-label-md hover:underline">Track</button>
+</div>
+</div>
+</div>
+<!-- Active Order Card 2 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-[16px] p-md flex gap-md hover:shadow-[0px_4px_20px_rgba(0,0,0,0.05)] transition-shadow group">
+<img alt="Product Thumbnail" class="w-24 h-24 rounded-[12px] object-cover bg-surface-container-low" data-alt="A minimalist product shot of a pair of minimalist, white canvas sneakers on a light grey background. Studio lighting highlights the clean lines and texture of the fabric. The image feels fresh, modern, and perfectly aligned with a premium, light-themed retail experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiTXDUyMdW7KH8GMC8P4V0Io0RHH-L5IjUvaIJGlQtIewmgQpStGHwXHbsvpwz00x94ODNGlfw4L_e7W_l5vr_sHYNA1WsgA_CVanMZWJ47KT7mNGsTq0eZeJMM8KiAfNVPY0VN3z6rwrGgOPNB4e-7Cz1Td-oGbcFRneHkBpswKj-K95dRJ20vrHUQnDPSRYNTogmQOQYGdVdqwGFR5y443nxru-43evpVrGhBqvf8-q9JrJktYaE"/>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start mb-unit">
+<h4 class="font-label-md text-label-md text-primary">Order #10290</h4>
+<span class="bg-secondary text-on-secondary px-2 py-1 rounded text-xs font-medium">Action Required</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant truncate">Classic Canvas Sneakers - Chalk White</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-primary text-sm">Awaiting pickup</span>
+<button class="text-secondary font-label-md text-label-md hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Wishlist Preview -->
+<div>
+<h2 class="font-headline-md text-headline-md mb-lg">Recently Saved</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Product Card Minimal -->
+<div class="group relative">
+<div class="relative overflow-hidden rounded-[16px] mb-md bg-surface-container-low aspect-[3/4]">
+<img alt="Saved Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-fashion, editorial style photograph of a tailored beige linen blazer draped over a modern, minimalist wooden chair. The background is a soft, airy white room with natural light spilling in. The aesthetic is sophisticated, modern, and perfect for a premium light-mode fashion brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCybv97QYT_oe8RapEauiSKlHNohQ9d8zLD9EF7ekzAQqBE8ZhHQHLkMqa-7HNbz98zbBCTxIzFttQ8y9d9lWAMVOwVCKdn9A2HLCuvdOprqEhgqHh7kmXvicHsFoTi_jugHvCcHVVTeYSDqkGHhJ4ubQAzXs7bTwFMDOJHRO-c1QgalYAk5-_duUFXGruarwZZSbMt18IHEBop2DcMSq4buI5FTcgKYlB4KALlz4eYSeIyoBALBw6Q"/>
+<button class="absolute top-sm right-sm p-unit bg-surface-container-lowest rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="absolute bottom-sm left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-md py-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-[0px_12px_40px_rgba(0,0,0,0.1)]">
+                                    Quick Add
+                                </button>
+</div>
+<h3 class="font-label-md text-label-md truncate">Linen Blend Blazer</h3>
+<p class="font-body-md text-on-surface-variant">$145.00</p>
+</div>
+<!-- Product Card Minimal -->
+<div class="group relative">
+<div class="relative overflow-hidden rounded-[16px] mb-md bg-surface-container-low aspect-[3/4]">
+<img alt="Saved Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A detail-oriented close-up shot of a delicate gold chain necklace with a small geometric pendant, resting on a smooth, white marble surface. Soft, diffused lighting enhances the shine of the metal. The visual style is luxurious, clean, and complements a modern light UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNMbcKNcOF-aHoUukOlFnJCrOM86jpfbVmwQpLUZdn-tHyvNqAS8XLv8Nt2jxWUeeDchCXUk8cG7FGjNstHAo9ir-DyWv5MhJ8_b-B_WvqZSa5JZMIki3xivQrk9HeXjxr5CTQHVZMORjwwqGoat43rHAntU_ow8F02nxgxv_tJF_4VjCkEicZAfA3GrR2mkt1NvUU_z-QRCoFY_fIKIv1r_Tdu904gNg6P67gNRyqZtKlTUW43CK9"/>
+<button class="absolute top-sm right-sm p-unit bg-surface-container-lowest rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="absolute bottom-sm left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-md py-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-[0px_12px_40px_rgba(0,0,0,0.1)]">
+                                    Quick Add
+                                </button>
+</div>
+<h3 class="font-label-md text-label-md truncate">Geometric Pendant</h3>
+<p class="font-body-md text-on-surface-variant">$85.00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest text-primary font-body-md w-full py-xl border-t border-surface-container-highest transition-all duration-200">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary mb-sm">OrderRight</span>
+<p class="text-sm text-on-surface-variant">© 2024 OrderRight. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-secondary font-medium hover:underline" href="#">Sitemap</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Shipping Info</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

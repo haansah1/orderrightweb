@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart - OrderRight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "inverse-primary": "#c8c6c5",
+                      "secondary-container": "#fe5e1e",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-variant": "#e2e2e2",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "surface-bright": "#f9f9f9",
+                      "outline": "#747878",
+                      "surface-container-high": "#e8e8e8",
+                      "on-background": "#1a1c1c",
+                      "surface-tint": "#5f5e5e",
+                      "primary": "#000000",
+                      "surface-container": "#eeeeee",
+                      "on-error": "#ffffff",
+                      "background": "#f9f9f9",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#001356",
+                      "tertiary-fixed": "#dde1ff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#444748",
+                      "on-tertiary-container": "#5979ff",
+                      "secondary-fixed": "#ffdbcf",
+                      "secondary": "#ab3600",
+                      "outline-variant": "#c4c7c7",
+                      "surface-dim": "#dadada",
+                      "on-surface": "#1a1c1c",
+                      "inverse-surface": "#2f3131",
+                      "primary-fixed": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#832700",
+                      "surface": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#1c1b1b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#551600",
+                      "on-tertiary-fixed": "#001356",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-fixed-variant": "#0035be",
+                      "on-primary-container": "#858383",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#000000",
+                      "surface-container-low": "#f3f3f3",
+                      "tertiary-fixed-dim": "#b8c3ff",
+                      "on-secondary-fixed": "#390c00",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "2xl": "64px",
+                      "margin-desktop": "40px",
+                      "xl": "40px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "pb-safe": "env(safe-area-inset-bottom)"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50 flat no shadows border-none">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity duration-200 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">
+            OrderRight
+        </div>
+<button class="text-primary dark:text-on-primary-fixed font-bold hover:opacity-80 transition-opacity duration-200 active:scale-95 transition-transform duration-150 relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary-container rounded-full translate-x-1/4 -translate-y-1/4"></span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-2xl md:pb-2xl">
+<div class="mb-lg flex items-center justify-between">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary">Your Cart</h1>
+<span class="font-body-md text-body-md text-on-surface-variant">3 Items</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Cart Items List -->
+<div class="md:col-span-8 flex flex-col gap-md">
+<!-- Item 1 -->
+<div class="flex gap-md p-md bg-surface border border-outline-variant/30 rounded-xl">
+<div class="w-24 h-32 md:w-32 md:h-40 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-fashion studio shot of a modern minimalist charcoal grey tailored blazer for men. The lighting is crisp and bright, highlighting the premium fabric texture. Light mode aesthetic with sharp contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBITubA-Aa5VfaoX9Y6L0C_hHyF7LaXPfoFj6RtXVsFMrJjlQZk9AfAPKl2xixegdI_WonNkAqxfonS13cjMeyUoGrgcWpiLz3z_rSo3HGlM9bIrzumWPHzkY1-IuxSTnuvdCsl8PpE-MNti6OEwCBNogiUGprCQHzvT2gU-8CUcXhl2F-Lks_JH2-C7YsxCFD24cc1XgJDqhtI-B3mkhied6a05Y_fiQPVp5wRhEWok7f6p0KQTq08"/>
+</div>
+<div class="flex flex-col flex-grow justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Charcoal Tailored Blazer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Size: <span class="text-primary font-medium">M</span></p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-xs rounded-full hover:bg-error-container/20">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center border border-outline-variant/50 rounded-lg bg-surface">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-l-lg transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>
+</button>
+<span class="font-label-md text-label-md w-8 text-center">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-r-lg transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+</button>
+</div>
+<span class="font-headline-md text-headline-md text-primary">$245.00</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-md p-md bg-surface border border-outline-variant/30 rounded-xl">
+<div class="w-24 h-32 md:w-32 md:h-40 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, flat-lay photography style image of a crisp white organic cotton t-shirt. The background is a very subtle off-white, emphasizing a minimalist, premium corporate fashion look. Soft, diffused lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCPtYncqlSbSTnOL5-dp0VjYN3RrdPxmwRK3khGDDHRpSJ446Ku3QBkMexjlbNX--EqvqZKXKreOIntQMeEiMtVAortIgllF2wwbsJ0L67yHsbJOlWkhuBaaSnNL85_lC7HnEHk6wzOPj9I40RqrHeXKZ-xq2Hl9Mf4jwv5BKQH-JsD7jsft127Gc1I3RWv_vay_-gb9BRaV8TMFyDkbI6XSWHnDtMfGbjApbS3ZD9La3GtPBGWfwY"/>
+</div>
+<div class="flex flex-col flex-grow justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Essential Cotton Tee</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Size: <span class="text-primary font-medium">L</span></p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-xs rounded-full hover:bg-error-container/20">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<div class="flex items-center border border-outline-variant/50 rounded-lg bg-surface">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-l-lg transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>
+</button>
+<span class="font-label-md text-label-md w-8 text-center">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-r-lg transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+</button>
+</div>
+<span class="font-headline-md text-headline-md text-primary">$45.00</span>
+</div>
+</div>
+</div>
+<div class="mt-md">
+<a class="inline-flex items-center gap-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                        Continue Shopping
+                    </a>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="md:col-span-4 mt-xl md:mt-0">
+<div class="bg-surface border border-outline-variant/30 rounded-xl p-lg flex flex-col gap-md sticky top-24">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Order Summary</h2>
+<div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span class="text-primary">$335.00</span>
+</div>
+<div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant pb-md border-b border-outline-variant/30">
+<span>Delivery</span>
+<span class="text-primary">Calculated at checkout</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-headline-md text-primary">Total</span>
+<span class="font-display-lg-mobile text-display-lg-mobile text-primary">$335.00</span>
+</div>
+<div class="mt-md relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg px-md py-sm font-body-md text-body-md text-primary placeholder:text-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Promo code" type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 font-label-md text-label-md text-primary hover:text-secondary transition-colors px-sm py-xs">Apply</button>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg mt-md hover:bg-primary/90 transition-colors shadow-md flex items-center justify-center gap-sm">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Hidden Empty State (For reference) -->
+<div class="hidden flex-col items-center justify-center py-2xl text-center">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-outline" style="font-size: 48px;">shopping_bag</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Your cart is empty</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Looks like you haven't added anything yet.</p>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-primary/90 transition-colors">
+                Browse Shop
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 md:hidden bg-surface dark:bg-surface-container border-none shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-xs">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-sm text-label-sm mt-xs">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-label-sm mt-xs">Wishlist</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-sm text-label-sm mt-xs">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-xs">Account</span>
+</a>
+</nav>
+</body></html>

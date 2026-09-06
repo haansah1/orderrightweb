@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OrderRight Fashion - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "inverse-primary": "#c8c6c5",
+                      "secondary-container": "#fe5e1e",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-variant": "#e2e2e2",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "surface-bright": "#f9f9f9",
+                      "outline": "#747878",
+                      "surface-container-high": "#e8e8e8",
+                      "on-background": "#1a1c1c",
+                      "surface-tint": "#5f5e5e",
+                      "primary": "#000000",
+                      "surface-container": "#eeeeee",
+                      "on-error": "#ffffff",
+                      "background": "#f9f9f9",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#001356",
+                      "tertiary-fixed": "#dde1ff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#444748",
+                      "on-tertiary-container": "#5979ff",
+                      "secondary-fixed": "#ffdbcf",
+                      "secondary": "#ab3600",
+                      "outline-variant": "#c4c7c7",
+                      "surface-dim": "#dadada",
+                      "on-surface": "#1a1c1c",
+                      "inverse-surface": "#2f3131",
+                      "primary-fixed": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#832700",
+                      "surface": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#1c1b1b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#551600",
+                      "on-tertiary-fixed": "#001356",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-fixed-variant": "#0035be",
+                      "on-primary-container": "#858383",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#000000",
+                      "surface-container-low": "#f3f3f3",
+                      "tertiary-fixed-dim": "#b8c3ff",
+                      "on-secondary-fixed": "#390c00",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "2xl": "64px",
+                      "margin-desktop": "40px",
+                      "xl": "40px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md docked full-width top-0 sticky flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50 flat no shadows">
+<button aria-label="Menu" class="text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">OrderRight</div>
+<button aria-label="Cart" class="text-on-surface-variant dark:text-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-xl md:py-2xl pb-[100px] md:pb-2xl">
+<!-- Progress Indicator -->
+<div class="mb-xl max-w-2xl mx-auto">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-surface-container-high -z-10"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/3 h-0.5 bg-primary -z-10 transition-all duration-500"></div>
+<div class="flex flex-col items-center gap-sm bg-background px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Cart</span>
+</div>
+<div class="flex flex-col items-center gap-sm bg-background px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md shadow-[0_0_0_4px_theme(colors.primary-fixed-dim)]">
+                        2
+                    </div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Delivery</span>
+</div>
+<div class="flex flex-col items-center gap-sm bg-background px-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md">
+                        3
+                    </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Payment</span>
+</div>
+<div class="flex flex-col items-center gap-sm bg-background px-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md">
+                        4
+                    </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Done</span>
+</div>
+</div>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-lg md:mb-xl">Checkout</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Form Area -->
+<div class="lg:col-span-8 flex flex-col gap-lg md:gap-xl">
+<!-- Customer Info -->
+<section class="bg-surface rounded-xl border border-surface-container-high p-lg">
+<h2 class="font-headline-md text-headline-md mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">person</span>
+                        Customer Information
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="fullName">Full Name</label>
+<input class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fullName" placeholder="Kofi Mensah" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="email">Email Address</label>
+<input class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="email" placeholder="kofi@example.com" type="email"/>
+</div>
+<div class="flex flex-col gap-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="phone">Phone Number</label>
+<div class="flex">
+<span class="inline-flex items-center px-md rounded-l-lg border border-r-0 border-outline-variant/50 bg-surface-container-low font-body-md text-body-md text-on-surface-variant">+233</span>
+<input class="flex-1 h-12 rounded-r-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="phone" placeholder="24 123 4567" type="tel"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Delivery Address -->
+<section class="bg-surface rounded-xl border border-surface-container-high p-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-md">
+<h2 class="font-headline-md text-headline-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                            Delivery Address
+                        </h2>
+<button class="flex items-center justify-center gap-xs text-secondary hover:text-secondary-fixed-dim transition-colors font-label-md text-label-md bg-secondary/10 px-md py-sm rounded-full w-fit">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+                            Use current location
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="address">Street Address / Landmark</label>
+<input class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="address" placeholder="123 Independence Ave, near National Theatre" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="region">Region</label>
+<select class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none" id="region">
+<option disabled="" selected="" value="">Select Region</option>
+<option value="greater_accra">Greater Accra</option>
+<option value="ashanti">Ashanti</option>
+<option value="central">Central</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="city">City / Town</label>
+<input class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="city" placeholder="Accra" type="text"/>
+</div>
+</div>
+<h3 class="font-label-md text-label-md mt-lg mb-sm text-on-surface-variant uppercase tracking-wider">Delivery Method</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<!-- Standard -->
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/50 bg-background p-md focus:outline-none hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+<input checked="" class="sr-only" name="delivery_method" type="radio" value="standard"/>
+<div class="flex w-full flex-col">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-md text-label-md text-primary">Standard</span>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 transition-opacity peer-checked:opacity-100">check_circle</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">2-3 Business Days</span>
+<span class="font-label-sm text-label-sm text-primary mt-sm">GHS 35.00</span>
+</div>
+</label>
+<!-- Express -->
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/50 bg-background p-md focus:outline-none hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+<input class="sr-only" name="delivery_method" type="radio" value="express"/>
+<div class="flex w-full flex-col">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-md text-label-md text-primary">Express</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Next Day Delivery</span>
+<span class="font-label-sm text-label-sm text-primary mt-sm">GHS 70.00</span>
+</div>
+</label>
+<!-- Pickup -->
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/50 bg-background p-md focus:outline-none hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+<input class="sr-only" name="delivery_method" type="radio" value="pickup"/>
+<div class="flex w-full flex-col">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-md text-label-md text-primary">Store Pickup</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Osu, Accra Branch</span>
+<span class="font-label-sm text-label-sm text-primary mt-sm">Free</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Payment Options -->
+<section class="bg-surface rounded-xl border border-surface-container-high p-lg">
+<h2 class="font-headline-md text-headline-md mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">payments</span>
+                        Payment Details
+                    </h2>
+<div class="flex flex-col gap-sm mb-md">
+<!-- Mobile Money -->
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/50 bg-background p-md focus:outline-none hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="momo"/>
+<div class="flex items-center w-full gap-md">
+<div class="w-5 h-5 rounded-full border border-outline-variant/50 flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2 h-2 rounded-full bg-on-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">smartphone</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">Mobile Money (MoMo)</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">MTN, Vodafone, AirtelTigo</span>
+</div>
+</div>
+</label>
+<!-- Mobile Money Fields (Conditional - would be handled by JS) -->
+<div class="ml-10 p-md bg-surface-container-low rounded-lg flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="momoNetwork">Network</label>
+<select class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none" id="momoNetwork">
+<option value="mtn">MTN Mobile Money</option>
+<option value="vodafone">Vodafone Cash</option>
+<option value="airteltigo">AirtelTigo Money</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="momoNumber">MoMo Number</label>
+<input class="w-full h-12 rounded-lg border-outline-variant/50 bg-background px-md font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="momoNumber" placeholder="024 123 4567" type="tel"/>
+</div>
+</div>
+<!-- Credit Card -->
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/50 bg-background p-md focus:outline-none hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary mt-sm">
+<input class="peer sr-only" name="payment_method" type="radio" value="card"/>
+<div class="flex items-center w-full gap-md">
+<div class="w-5 h-5 rounded-full border border-outline-variant/50 flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2 h-2 rounded-full bg-on-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">Credit / Debit Card</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Visa, Mastercard</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Order Summary Sidebar -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-low rounded-xl p-lg sticky top-[88px] flex flex-col gap-md border border-surface-container-high">
+<h2 class="font-headline-md text-headline-md border-b border-outline-variant/30 pb-sm">Order Summary</h2>
+<!-- Items -->
+<div class="flex flex-col gap-md max-h-[300px] overflow-y-auto pr-sm">
+<div class="flex gap-md">
+<div class="w-20 h-24 rounded-lg bg-surface-container flex-shrink-0 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A detailed flat lay photograph of a modern, minimalist silk blouse in deep charcoal grey. The fabric has a subtle sheen, reflecting soft, high-key studio lighting. The setting is clean and high-end, utilizing expansive whitespace to emphasize the garment's premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU0w2gJfRUpFKo7TKZitDl-eEg3DhVw0ZDG9o8EM3CgywVgxGB1yhLiMrUNSV-FuZ02FKK4HL1SBtB7ct-he84tFupDXfLCh1-ubTm02_yNFrijYMhB8ggmRph7uyxKEu21y5q8eHWCNbgdwR6sCDBGYDc9TTfhTFTOW-td4bxGasAhIREJuy35os64CbYqGt83hqdmEWB4qvz34HjcVIiJDzJfFHJEYzf5Nopl1pBHNX2U27QuGuJ"/>
+<span class="absolute top-1 right-1 bg-primary text-on-primary font-label-sm text-label-sm w-5 h-5 flex items-center justify-center rounded-full text-[10px]">1</span>
+</div>
+<div class="flex flex-col flex-1 py-xs justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-primary line-clamp-1">Kente Trim Silk Blouse</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Size: M | Color: Charcoal</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">GHS 450.00</span>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="w-20 h-24 rounded-lg bg-surface-container flex-shrink-0 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A detailed photograph of a pair of minimalist, modern tailored trousers in a rich earthy brown tone. The lighting is soft and diffused, creating a luxurious and clean aesthetic against a light gray background, highlighting the garment's sharp lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsUQKaNDsxNoKbigK1aZx4KrJeh5yq6VOSvteS2Uz7mKU40DLzJUFYM3VzC68kAluwrWbHRuMYNTdfRGBNi-IW6W34_K5J3Otu6FCVXZw894Cx8ySNldxsIZCTZPHSQIRCDylJ4zpqEMb4l5NlaD2BgNUWASXl3Q7x19SoJpfT05M9QcmmrWKn8ZxzarHlpJllprmNI6j--pRKyevE1lJrv_e6bf84ejlLZiZ5DBNljW7JDhV3oyOv"/>
+<span class="absolute top-1 right-1 bg-primary text-on-primary font-label-sm text-label-sm w-5 h-5 flex items-center justify-center rounded-full text-[10px]">2</span>
+</div>
+<div class="flex flex-col flex-1 py-xs justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-primary line-clamp-1">Tailored Linen Trousers</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Size: 32 | Color: Earth Brown</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">GHS 600.00</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant/30 my-sm"/>
+<!-- Totals -->
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>GHS 1,050.00</span>
+</div>
+<div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
+<span>Delivery (Standard)</span>
+<span>GHS 35.00</span>
+</div>
+<div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
+<span>Taxes</span>
+<span>GHS 15.00</span>
+</div>
+<div class="flex justify-between items-center font-headline-md text-headline-md text-primary mt-sm pt-sm border-t border-outline-variant/30">
+<span>Total</span>
+<span>GHS 1,100.00</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary text-on-primary h-14 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity mt-md flex items-center justify-center gap-sm">
+                        Place Order
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="font-body-md text-body-md text-[12px] text-on-surface-variant text-center mt-xs flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                        Secure encrypted checkout
+                    </p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

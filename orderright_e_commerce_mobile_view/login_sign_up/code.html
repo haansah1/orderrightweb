@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login / Sign Up - OrderRight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-container": "#fe5e1e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "outline": "#747878",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#5f5e5e",
+                        "primary": "#000000",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#001356",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary-container": "#5979ff",
+                        "secondary-fixed": "#ffdbcf",
+                        "secondary": "#ab3600",
+                        "outline-variant": "#c4c7c7",
+                        "surface-dim": "#dadada",
+                        "on-surface": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#551600",
+                        "on-tertiary-fixed": "#001356",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed-variant": "#0035be",
+                        "on-primary-container": "#858383",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#390c00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "2xl": "64px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline-md, .font-display-lg { font-family: 'Montserrat', sans-serif; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group input {
+            transition: all 0.2s ease-in-out;
+        }
+        .input-group input:focus {
+            border-width: 1.5px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md docked full-width top-0 sticky flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50 flat no shadows">
+<div class="flex items-center gap-md">
+<button class="hover:opacity-80 transition-opacity duration-200 Active: scale-95 transition-transform duration-150 p-2 text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">
+            OrderRight
+        </div>
+<div class="flex items-center gap-md">
+<button class="hover:opacity-80 transition-opacity duration-200 Active: scale-95 transition-transform duration-150 p-2 text-on-surface-variant dark:text-surface-variant relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center py-2xl px-margin-mobile md:px-margin-desktop relative">
+<!-- Decorative Background Element -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center opacity-30">
+<div class="w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-surface-container-highest to-surface-bright blur-3xl mix-blend-multiply"></div>
+</div>
+<!-- Auth Card -->
+<div class="w-full max-w-md bg-surface rounded-[24px] shadow-[0px_12px_40px_rgba(0,0,0,0.1)] border border-surface-container-highest z-10 overflow-hidden flex flex-col">
+<!-- Tab Navigation -->
+<div class="flex border-b border-surface-container-highest relative">
+<button class="flex-1 py-lg font-label-md text-label-md text-primary font-bold transition-colors hover:bg-surface-bright relative z-10" id="tab-login" onclick="switchTab('login')">
+                    Login
+                </button>
+<button class="flex-1 py-lg font-label-md text-label-md text-on-surface-variant transition-colors hover:bg-surface-bright relative z-10" id="tab-signup" onclick="switchTab('signup')">
+                    Sign Up
+                </button>
+<!-- Active Indicator -->
+<div class="absolute bottom-0 left-0 w-1/2 h-[3px] bg-primary transition-transform duration-300 ease-out z-20" id="tab-indicator"></div>
+</div>
+<div class="p-xl flex-grow">
+<!-- Welcome Text -->
+<div class="text-center mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-sm">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Enter your details to continue.</p>
+</div>
+<!-- Login Form (Active by default) -->
+<form class="tab-content active space-y-md" id="form-login">
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="login-email">Email</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="login-email" placeholder="Enter your email" required="" type="email"/>
+</div>
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="login-password">Password</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="login-password" placeholder="Enter your password" required="" type="password"/>
+<div class="flex justify-end mt-xs">
+<a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">Forgot password?</a>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-lg py-sm font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors mt-lg h-12 flex items-center justify-center" type="submit">
+                        Login
+                    </button>
+</form>
+<!-- Sign Up Form -->
+<form class="tab-content space-y-md" id="form-signup">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="signup-fname">First Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="signup-fname" placeholder="First Name" required="" type="text"/>
+</div>
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="signup-lname">Last Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="signup-lname" placeholder="Last Name" required="" type="text"/>
+</div>
+</div>
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="signup-email">Email</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="signup-email" placeholder="Enter your email" required="" type="email"/>
+</div>
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="signup-phone">Phone Number</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="signup-phone" placeholder="Enter your phone number" type="tel"/>
+</div>
+<div class="input-group flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="signup-password">Password</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder-outline" id="signup-password" placeholder="Create a password" required="" type="password"/>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-lg py-sm font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors mt-lg h-12 flex items-center justify-center" type="submit">
+                        Create Account
+                    </button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-xl">
+<div class="flex-grow border-t border-outline-variant/50"></div>
+<span class="mx-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Or</span>
+<div class="flex-grow border-t border-outline-variant/50"></div>
+</div>
+<!-- Social Login -->
+<button class="w-full bg-transparent border-[1.5px] border-primary text-primary rounded-lg py-sm font-label-md text-label-md hover:bg-surface-container-low transition-colors h-12 flex items-center justify-center gap-sm">
+<svg class="w-5 h-5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Continue with Google
+                </button>
+</div>
+</div>
+</main>
+<script>
+        function switchTab(tab) {
+            const loginForm = document.getElementById('form-login');
+            const signupForm = document.getElementById('form-signup');
+            const loginBtn = document.getElementById('tab-login');
+            const signupBtn = document.getElementById('tab-signup');
+            const indicator = document.getElementById('tab-indicator');
+            const welcomeTitle = document.querySelector('h1');
+            const welcomeText = document.querySelector('p');
+
+            if (tab === 'login') {
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+                
+                loginBtn.classList.add('text-primary', 'font-bold');
+                loginBtn.classList.remove('text-on-surface-variant');
+                
+                signupBtn.classList.remove('text-primary', 'font-bold');
+                signupBtn.classList.add('text-on-surface-variant');
+                
+                indicator.style.transform = 'translateX(0)';
+                
+                welcomeTitle.textContent = 'Welcome Back';
+                welcomeText.textContent = 'Enter your details to continue.';
+            } else {
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+                
+                signupBtn.classList.add('text-primary', 'font-bold');
+                signupBtn.classList.remove('text-on-surface-variant');
+                
+                loginBtn.classList.remove('text-primary', 'font-bold');
+                loginBtn.classList.add('text-on-surface-variant');
+                
+                indicator.style.transform = 'translateX(100%)';
+                
+                welcomeTitle.textContent = 'Create Account';
+                welcomeText.textContent = 'Join us for an exclusive experience.';
+            }
+        }
+    </script>
+</body></html>

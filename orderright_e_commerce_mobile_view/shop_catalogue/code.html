@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop Our Collection - OrderRight Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-container": "#fe5e1e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#f9f9f9",
+                        "outline": "#747878",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#5f5e5e",
+                        "primary": "#000000",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#001356",
+                        "tertiary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary-container": "#5979ff",
+                        "secondary-fixed": "#ffdbcf",
+                        "secondary": "#ab3600",
+                        "outline-variant": "#c4c7c7",
+                        "surface-dim": "#dadada",
+                        "on-surface": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#832700",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#551600",
+                        "on-tertiary-fixed": "#001356",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed-variant": "#0035be",
+                        "on-primary-container": "#858383",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#390c00",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "2xl": "64px",
+                        "margin-desktop": "40px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative pb-[100px] md:pb-0">
+<!-- TopAppBar (Hidden md to show it only on mobile context based on prompt, but keeping it visible as requested, hidden on desktop if drawer is preferred, but json says docked full-width) -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md full-width top-0 sticky flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16 z-50">
+<button aria-label="Menu" class="text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-fixed tracking-tight">OrderRight</div>
+<button aria-label="Shopping Cart" class="text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</header>
+<!-- NavigationDrawer (Hidden by default, structure provided) -->
+<nav class="fixed inset-y-0 left-0 z-[60] flex flex-col py-6 bg-surface dark:bg-surface-container-low shadow-xl h-full w-80 rounded-r-xl transform -translate-x-full transition-transform duration-300" id="drawer">
+<div class="px-6 mb-8 flex justify-between items-center">
+<span class="font-headline-md text-headline-md font-bold text-primary">OrderRight Fashion</span>
+<button class="text-on-surface-variant hover:text-primary" id="close-drawer"><span class="material-symbols-outlined">close</span></button>
+</div>
+<ul class="flex flex-col gap-2">
+<li><a class="flex items-center gap-4 py-3 text-on-surface-variant dark:text-surface-variant pl-4 hover:bg-surface-container-high dark:hover:bg-surface-variant" href="#"><span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span> <span class="font-body-md text-body-md">New Arrivals</span></a></li>
+<li><a class="flex items-center gap-4 py-3 text-secondary font-bold border-l-4 border-secondary pl-4 hover:bg-surface-container-high dark:hover:bg-surface-variant" href="#"><span class="material-symbols-outlined" data-icon="trending_up">trending_up</span> <span class="font-body-md text-body-md">Bestsellers</span></a></li>
+<li><a class="flex items-center gap-4 py-3 text-on-surface-variant dark:text-surface-variant pl-4 hover:bg-surface-container-high dark:hover:bg-surface-variant" href="#"><span class="material-symbols-outlined" data-icon="style">style</span> <span class="font-body-md text-body-md">Collections</span></a></li>
+<li><a class="flex items-center gap-4 py-3 text-on-surface-variant dark:text-surface-variant pl-4 hover:bg-surface-container-high dark:hover:bg-surface-variant" href="#"><span class="material-symbols-outlined" data-icon="straighten">straighten</span> <span class="font-body-md text-body-md">Size Guide</span></a></li>
+<li><a class="flex items-center gap-4 py-3 text-on-surface-variant dark:text-surface-variant pl-4 hover:bg-surface-container-high dark:hover:bg-surface-variant" href="#"><span class="material-symbols-outlined" data-icon="help">help</span> <span class="font-body-md text-body-md">Support</span></a></li>
+</ul>
+</nav>
+<div class="fixed inset-0 bg-primary/50 z-50 hidden backdrop-blur-sm" id="drawer-overlay"></div>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-2xl flex flex-col gap-xl">
+<!-- Header & Search/Filter Section -->
+<section class="flex flex-col gap-lg">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary text-center md:text-left">Shop Our Collection</h1>
+<div class="flex flex-col md:flex-row gap-md justify-between items-start md:items-center w-full bg-surface-container p-md rounded-xl">
+<!-- Search -->
+<div class="relative w-full md:max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Search collection..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-sm w-full md:w-auto items-center">
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-8 font-label-md text-label-md text-on-surface focus:border-primary outline-none">
+<option>Category</option>
+<option>Dresses</option>
+<option>Outerwear</option>
+<option>Tops</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-8 font-label-md text-label-md text-on-surface focus:border-primary outline-none">
+<option>Size</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+<option>XXL</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-8 font-label-md text-label-md text-on-surface focus:border-primary outline-none">
+<option>Sort By</option>
+<option>Newest</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">sort</span>
+</div>
+<button class="md:hidden flex items-center justify-center p-2 bg-secondary text-on-primary rounded-lg">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-gutter gap-y-xl w-full">
+<!-- Product Card 1 -->
+<div class="group flex flex-col gap-4 bg-surface rounded-xl hover:shadow-lg transition-all duration-300 p-2 border border-surface-container">
+<div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-surface-container-high">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A high-fashion studio shot of a model wearing a minimalist structured white blazer. The background is a soft, pristine light gray. The lighting is bright, even, and creates a luxurious, modern aesthetic. The mood is sophisticated and clean, perfectly suited for a premium brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSvonqMFXMN64-I2WczT3yEUWpy1dOqGfliAd4xyrw5X0N8v9TvCc5vcZvvon6JW0C5q9O-aVX4kSPfjqKmm_Mnc0KkfyI7nngjrJE1Al0czv3p7_tU0mrckk1U6byBGELtfJsSH80wGrH0auroj8fKndVj9qYR80M5IW2agYvfFV0dX9iLfEZw6bX2zfisHky9HCEoz4vRflGnrzt8y5vFHuF_0gfQVZyeaYBUNx2RfCOHNrqq2Oj"/>
+<button class="absolute top-3 right-3 bg-surface/80 backdrop-blur rounded-full p-2 text-on-surface-variant hover:text-secondary hover:scale-110 transition-all z-10 shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="flex flex-col gap-1 px-2 pb-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Outerwear</p>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Structured White Blazer</h3>
+<p class="font-body-lg text-body-lg text-primary font-medium mt-1">GHS 850</p>
+<div class="mt-3 flex flex-col gap-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Select Size</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">S</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">M</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">L</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-outline cursor-not-allowed opacity-50 relative overflow-hidden before:absolute before:w-full before:h-px before:bg-outline before:rotate-45 before:top-1/2 before:-translate-y-1/2">XL</button>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-surface-tint transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span> Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col gap-4 bg-surface rounded-xl hover:shadow-lg transition-all duration-300 p-2 border border-surface-container">
+<div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-surface-container-high">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A full body editorial shot of a woman in an elegant, flowing midnight blue silk dress. The setting is a minimalist studio with subtle, moody directional lighting that highlights the sheen of the fabric. The aesthetic is luxurious, modern, and slightly dramatic. Bright white background contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzlAbf3j0mecD4J5SIs-yJ-WvCB67pWknO1Fr2wgNcTSaAunVHqohcybAgBYUHyq0W4M-2nrFNGWP14KDbebz3_wTHOh8Q80Q1go6fNeVZhEqLO87KG7Ck7jJztLqdDCguAtr2iG-RkxltoK7jfE30Rl9mIytoMmTbfOtqCApupAdSqi9qXbFaYeDu3M14wsybdDWmQHt61oDzy0pNS6_3OZXF_JYuRPH6o2qweSar2230QJj1oeSq"/>
+<button class="absolute top-3 right-3 bg-surface/80 backdrop-blur rounded-full p-2 text-on-surface-variant hover:text-secondary hover:scale-110 transition-all z-10 shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-secondary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded">Bestseller</div>
+</div>
+<div class="flex flex-col gap-1 px-2 pb-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Dresses</p>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Midnight Silk Gown</h3>
+<p class="font-body-lg text-body-lg text-primary font-medium mt-1">GHS 1,200</p>
+<div class="mt-3 flex flex-col gap-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Select Size</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">S</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">M</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">L</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">XL</button>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-surface-tint transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span> Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col gap-4 bg-surface rounded-xl hover:shadow-lg transition-all duration-300 p-2 border border-surface-container">
+<div class="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-surface-container-high">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist product shot of a tailored charcoal gray vest top on an invisible mannequin. The background is a seamless bright white, providing high contrast. The lighting is soft and even, highlighting the premium texture of the fabric. Clean, modern, light-mode corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Sdx_-X4QBd4xadqldibl_oNeijUe4fviFrVSARJEBGkHqU7m-6Rmhkrx4tCfXPIVAm44jf-xaQwXAdutrWYJkR9BJP_SjMQSA3oLVt3KouKqGu_pmy2c108hrnQpoYvXUN-b1RiMy8UTxoVc0oV9fg8TAFuosd7CnDCQ8qWC3wNlsLWaTQW9H0c_t_UQz6NFsy8iNUUXqAL_4vFcNTM2bYWN8Ya9ouARx6kiQWhPbP-55GNTBtRQ"/>
+<button class="absolute top-3 right-3 bg-surface/80 backdrop-blur rounded-full p-2 text-on-surface-variant hover:text-secondary hover:scale-110 transition-all z-10 shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="flex flex-col gap-1 px-2 pb-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tops</p>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Tailored Vest Top</h3>
+<p class="font-body-lg text-body-lg text-primary font-medium mt-1">GHS 450</p>
+<div class="mt-3 flex flex-col gap-2">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Select Size</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">S</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">M</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">L</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:border-primary hover:bg-surface-container-high transition-colors focus:bg-primary focus:text-on-primary">XXL</button>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-surface-tint transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span> Add to Cart
+                    </button>
+</div>
+</div>
+</section>
+<!-- Pagination (Conceptual) -->
+<div class="w-full flex justify-center mt-xl gap-2">
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-high"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:bg-surface-container-high">2</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center font-label-md text-label-md text-on-surface hover:bg-surface-container-high">3</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-high"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 md:hidden bg-surface dark:bg-surface-container border-t border-outline-variant/30 shadow-md">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 transition-transform" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined scale-90 transition-transform" data-icon="storefront" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-sm text-label-sm mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 transition-transform" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm mt-1">Wishlist</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group relative" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 transition-transform" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute top-1 right-3 w-2 h-2 bg-secondary rounded-full"></span>
+<span class="font-label-sm text-label-sm mt-1">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 transition-transform" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Account</span>
+</a>
+</nav>
+<!-- Footer (Included as part of general layout hygiene) -->
+<footer class="w-full py-2xl px-margin-mobile md:px-margin-desktop mt-2xl bg-primary dark:bg-surface-container-highest text-on-primary dark:text-on-surface relative">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-lg">
+<div class="font-headline-md text-headline-md text-on-primary dark:text-on-surface font-bold">OrderRight Fashion</div>
+<ul class="flex flex-wrap justify-center gap-6 font-label-sm text-label-sm text-on-primary/70 dark:text-on-surface/70">
+<li><a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors" href="#">Contact</a></li>
+</ul>
+<div class="font-body-md text-body-md text-on-primary/70">© 2024 OrderRight Fashion. All rights reserved.</div>
+</div>
+</footer>
+<script>
+        // Simple Drawer Toggle Logic
+        const menuBtn = document.querySelector('[aria-label="Menu"]');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('drawer-overlay');
+        const closeBtn = document.getElementById('close-drawer');
+
+        function toggleDrawer() {
+            const isClosed = drawer.classList.contains('-translate-x-full');
+            if (isClosed) {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        if(menuBtn) menuBtn.addEventListener('click', toggleDrawer);
+        if(closeBtn) closeBtn.addEventListener('click', toggleDrawer);
+        if(overlay) overlay.addEventListener('click', toggleDrawer);
+    </script>
+</body></html>
