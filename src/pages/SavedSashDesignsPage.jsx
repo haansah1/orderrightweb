@@ -18,7 +18,11 @@ export default function SavedSashDesignsPage() {
   const handleDelete = (id) => {
     const updated = savedDesigns.filter(d => d.id !== id);
     setSavedDesigns(updated);
-    localStorage.setItem('orderright_saved_sashes', JSON.stringify(updated));
+    try {
+      localStorage.setItem('orderright_saved_sashes', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('Could not save updated sashes to localStorage:', e);
+    }
   };
 
   const handleAddToCart = (design) => {

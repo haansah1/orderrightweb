@@ -6,24 +6,18 @@ export function WishlistProvider({ children }) {
   const [wishlist, setWishlist] = useState(() => {
     try {
       const saved = localStorage.getItem('orderright_wishlist');
-      return saved ? JSON.parse(saved) : [
-        {
-          id: "prod-3",
-          name: "Oversized Wool Blazer",
-          price: 1200.00,
-          currency: "GH₵",
-          vibe: "Classy",
-          category: "Outerwear",
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAGeefZl4OrYO4LSo_fZwWVsIdOt-zowBkseAfZF1gCJxUlXTBxipAbhEyA5fPuj_QizxIc7LOyGdHca5LstA3Dn0Pr599LPtBaN9olgTK83xJ2jZIMoKu_5fo0eoe5pkq9FwM91PJnIHEK7fbdg_XRYhBPC2iUXUXrJasIvu-xlRUEsn5eXv1aJomfpfISOCiZcvVpwcme5-sYsOdpL8rgotznMHoFof1tyHLmP-Z-hbrXxqp8KVAP"
-        }
-      ];
+      return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
   });
 
   useEffect(() => {
-    localStorage.setItem('orderright_wishlist', JSON.stringify(wishlist));
+    try {
+      localStorage.setItem('orderright_wishlist', JSON.stringify(wishlist));
+    } catch (err) {
+      console.warn('Could not save wishlist to localStorage:', err.message);
+    }
   }, [wishlist]);
 
   const toggleWishlist = (product) => {

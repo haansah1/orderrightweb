@@ -1,0 +1,19 @@
+# Allow Chrome / Google bots and standard web crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Chrome-Lighthouse
+Allow: /
+
+User-agent: *
+Allow: /
+
+# Disallow API endpoints & checkout confirmation pages
+Disallow: /api/
+Disallow: /order-confirmation
+
+# Sitemap (Replace with your live domain when deployed)
+Sitemap: https://orderrightweb.vercel.app/sitemap.xml

@@ -111,14 +111,46 @@ export async function fetchGirlsFolderProducts() {
 }
 
 /**
- * Fetch ALL products from both Boys and Girls folders
+ * Fetch products from the Signout folder: Orderright/tshirts/signout or signout
+ */
+export async function fetchSignoutFolderProducts() {
+  const possibleFolders = [
+    'Orderright/tshirts/signout',
+    'Orderright/tshirts/Signout',
+    'Orderright/tshirts/signout_tees',
+    'Orderright/signout',
+    'Orderright/Signout',
+    'signout',
+    'Signout',
+    'tshirts/signout'
+  ];
+
+  for (const folder of possibleFolders) {
+    try {
+      const res = await fetchFolderProducts(folder, {
+        collection: 'Signout',
+        vibe: 'Streetwear',
+        idPrefix: 'cld-signout',
+      });
+      if (res && res.length > 0) return res;
+    } catch (e) {
+      // Continue to next candidate path
+    }
+  }
+
+  return [];
+}
+
+/**
+ * Fetch ALL products from Boys, Girls, and Signout folders
  */
 export async function fetchAllFolderProducts() {
-  const [boys, girls] = await Promise.all([
+  const [boys, girls, signout] = await Promise.all([
     fetchBoysFolderProducts(),
     fetchGirlsFolderProducts(),
+    fetchSignoutFolderProducts(),
   ]);
-  return [...(boys || []), ...(girls || [])];
+  return [...(boys || []), ...(girls || []), ...(signout || [])];
 }
 
 export { cloudinary };

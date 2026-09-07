@@ -30,12 +30,15 @@ import ShippingInfoPage from './pages/ShippingInfoPage';
 import GenZPage from './pages/GenZPage';
 import FAQsPage from './pages/FAQsPage';
 
+import ScrollToTop from './components/ScrollToTop';
+
 export default function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
           <Router>
+            <ScrollToTop />
             <div className="flex flex-col min-h-screen bg-background text-on-background selection:bg-secondary-fixed selection:text-on-secondary-fixed">
               <Navbar />
               <div className="flex-grow">

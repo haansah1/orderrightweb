@@ -6,28 +6,7 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem('orderright_cart');
-      return saved ? JSON.parse(saved) : [
-        {
-          id: "prod-1",
-          name: "The Essential Heavyweight Tee",
-          price: 60.00,
-          currency: "GH₵",
-          size: "L",
-          color: "Deep Charcoal",
-          quantity: 1,
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC6mkgLDzF3nBP9-Rqd3IG2CE0IIMnoU413shAiDBEhpBqYiUVs7nZJBhKLITd9QxTMIRYWuKNqTF2CirELde9-wA2abhqcKiE8h_0fvjT9p7BAIo8rjyEfYHbKkmcoLFQotWUgpx8IS2fBchwUiH2VT25E9IUIOfg8ARJVGdrBHlKXmL81BPEGZ_pQij4Y9N98mS-LAeWmNM3Pi9Hpnvj9VllgZDIQgln_-RFjktViveui9vG5aK5z"
-        },
-        {
-          id: "prod-2",
-          name: "Canvas Structured Tote",
-          price: 580.00,
-          currency: "GH₵",
-          size: "One Size",
-          color: "Pristine White",
-          quantity: 1,
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDh8-f6ezM9I205HS6NmCvSikDH1j4yDDVQP4FH91M5wnwnBNbMEUdH3t_IeZ0c_m9u56LMADwOE9eLIBPSSCvEPw_iUe9lXpdhIWQcsH_Kf6-C7eQogheRvjCEWnRLVkuzTkQETe8VYfDERF8X52Mxobd-MVhMPqnBt8AMNBdLAWUmg47sbuip2_TvMO5IeZaVY7WtE9tfzdFWooN4lYyPunAyp0_WkqPGwOlJ-DdjBL8ZpNgS-bzh"
-        }
-      ];
+      return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
@@ -36,7 +15,11 @@ export function CartProvider({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('orderright_cart', JSON.stringify(cart));
+    try {
+      localStorage.setItem('orderright_cart', JSON.stringify(cart));
+    } catch (err) {
+      console.warn('Could not save cart to localStorage:', err.message);
+    }
   }, [cart]);
 
   const addToCart = (product, selectedSize = 'M', selectedColor = 'Default', quantity = 1) => {

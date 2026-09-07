@@ -45,47 +45,56 @@ export default function LayersAndControls({ onOpenPreview }) {
 
   // Handle Add To Cart with Custom Sash Payload
   const handleAddToCart = async () => {
-    const savedDesign = saveCurrentDesign(`${selectedUniversity?.shortName || 'Custom'} Heritage Sash`);
-    
-    // Generate actual snapshot preview image of the custom sash
-    const snapshotImage = await generateSashSnapshot({
-      selectedUniversity,
-      leftName: leftNameElem?.content,
-      rightVerse: rightVerseElem?.content,
-      rightProg: rightProgElem?.content,
-      elements
-    });
-
-    // Create cart item
-    const cartSashItem = {
-      id: `sash-${Date.now()}`,
-      itemType: "graduation_sash",
-      name: `Custom Heritage Sash (${selectedUniversity?.shortName || 'Custom'})`,
-      price: totalPrice,
-      currency: "GH₵",
-      localPrice: localPrice,
-      localCurrency: localCurrency,
-      quantity: 1,
-      image: snapshotImage,
-      size: "Standard (72\")",
-      color: "Deep Satin Black / Pan-African Trim",
-      customizationData: {
-        designId: savedDesign.id,
-        university: selectedUniversity?.name,
-        universityId: selectedUniversity?.id,
-        name: leftNameElem?.content || "N/A",
-        verse: rightVerseElem?.content || "N/A",
-        programme: rightProgElem?.content || "N/A",
-        elements: elements,
-        basePrice,
-        customEmbroideryPrice,
-        totalPrice
+    try {
+      const savedDesign = saveCurrentDesign(`${selectedUniversity?.shortName || 'Custom'} Heritage Sash`);
+      
+      // Generate actual snapshot preview image of the custom sash
+      let snapshotImage = '/media/sash_sample_1.png';
+      try {
+        snapshotImage = await generateSashSnapshot({
+          selectedUniversity,
+          leftName: leftNameElem?.content,
+          rightVerse: rightVerseElem?.content,
+          rightProg: rightProgElem?.content,
+          elements
+        });
+      } catch (snapErr) {
+        console.warn('Snapshot generation notice:', snapErr);
       }
-    };
 
-    addToCart(cartSashItem, "Standard (72\")", "Deep Satin Black", 1);
-    setAddedNotice(true);
-    setTimeout(() => setAddedNotice(false), 3000);
+      // Create cart item
+      const cartSashItem = {
+        id: `sash-${Date.now()}`,
+        itemType: "graduation_sash",
+        name: `Custom Heritage Sash (${selectedUniversity?.shortName || 'Custom'})`,
+        price: totalPrice,
+        currency: "GH₵",
+        localPrice: localPrice,
+        localCurrency: localCurrency,
+        quantity: 1,
+        image: snapshotImage,
+        size: "Standard (72\")",
+        color: "Deep Satin Black / Pan-African Trim",
+        customizationData: {
+          designId: savedDesign?.id || `design-${Date.now()}`,
+          university: selectedUniversity?.name || 'Custom University',
+          universityId: selectedUniversity?.id || 'ug_legon',
+          name: leftNameElem?.content || "N/A",
+          verse: rightVerseElem?.content || "N/A",
+          programme: rightProgElem?.content || "N/A",
+          elements: elements || [],
+          basePrice,
+          customEmbroideryPrice,
+          totalPrice
+        }
+      };
+
+      addToCart(cartSashItem, "Standard (72\")", "Deep Satin Black", 1);
+      setAddedNotice(true);
+      setTimeout(() => setAddedNotice(false), 3000);
+    } catch (err) {
+      console.error('Error adding sash to cart:', err);
+    }
   };
 
   return (

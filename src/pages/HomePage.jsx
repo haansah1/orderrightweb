@@ -48,6 +48,68 @@ export default function HomePage() {
       {/* Shop by Vibe (Bento Grid) */}
       <BentoGrid />
 
+      {/* Signout Tees Collection Section - ABOVE Featured New Drops */}
+      <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-lg w-full">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-zinc-950 via-zinc-900 to-black border border-zinc-800 p-6 sm:p-10 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+          
+          {/* Subtle Glow Backdrop */}
+          <div className="absolute -top-24 -left-24 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Left Text Column */}
+          <div className="relative z-10 max-w-xl text-center md:text-left space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-label font-bold text-xs uppercase tracking-widest">
+              <span className="material-symbols-outlined text-[16px]">school</span>
+              Class of 2026 Special Release
+            </div>
+
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight leading-tight">
+              Signout Tees Collection
+            </h2>
+
+            <p className="font-body text-zinc-300 text-sm sm:text-base leading-relaxed">
+              Celebrate your milestone with our premium heavyweight Class of 2026 graduation signout t-shirts. Crafted with 100% organic combed cotton to capture every signature and memory.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+              <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-headline">
+                GH₵ 60.00 <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">/ shirt</span>
+              </span>
+
+              <Link
+                to="/shop?collection=Signout"
+                className="py-3.5 px-7 bg-white hover:bg-zinc-100 text-black font-label font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl inline-flex items-center gap-2"
+              >
+                <span>Shop Signout Tees</span>
+                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Image Banner Card */}
+          <Link 
+            to="/shop?collection=Signout"
+            className="relative z-10 w-full md:w-5/12 h-64 sm:h-72 md:h-80 rounded-2xl overflow-hidden group border border-zinc-700/50 shadow-2xl block cursor-pointer"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{
+                backgroundImage: `url('https://res.cloudinary.com/dvdsrlh5g/image/upload/f_auto,q_auto/Orderright/tshirts/signout/signout_tee_1')`
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 p-3 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 flex items-center justify-between text-white">
+              <div>
+                <span className="font-headline font-bold text-sm block">Class of '26 Graduation Tee</span>
+                <span className="text-xs text-amber-400 font-semibold">GH₵ 60.00 • Order Now</span>
+              </div>
+              <span className="material-symbols-outlined text-white text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+          </Link>
+
+        </div>
+      </section>
+
       {/* Featured Collection Drops */}
       <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-xl w-full">
         <div className="flex justify-between items-end mb-xl border-b border-surface-container-highest pb-md">

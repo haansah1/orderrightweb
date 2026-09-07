@@ -3,14 +3,23 @@ import { UniversityCrest, AdinkraIcon } from '../features/sash_studio/components
 
 export default function SashCartPreview({ item, className = "" }) {
   const data = item?.customizationData || {};
-  const universityId = data.universityId || 'ug_legon';
-  const studentName = data.name || item?.name || 'GRADUATE NAME';
-  const programme = data.programme || 'GRADUATION 2026';
-  const verse = data.verse;
+  const universityId = typeof data.universityId === 'string' ? data.universityId : (data.university?.id || 'ug_legon');
   
+  const rawName = data.name || item?.name;
+  const studentName = typeof rawName === 'string' ? rawName : (typeof rawName === 'object' && rawName?.content ? String(rawName.content) : 'GRADUATE NAME');
+  
+  const rawProg = data.programme;
+  const programme = typeof rawProg === 'string' ? rawProg : (typeof rawProg === 'object' && rawProg?.content ? String(rawProg.content) : 'GRADUATION 2026');
+  
+  const rawVerse = data.verse;
+  const verse = typeof rawVerse === 'string' ? rawVerse : (typeof rawVerse === 'object' && rawVerse?.content ? String(rawVerse.content) : null);
+  
+  const rawUni = data.university;
+  const uniName = typeof rawUni === 'string' ? rawUni : (typeof rawUni === 'object' && rawUni?.name ? String(rawUni.name) : 'GRADUATION STOLE');
+
   // Find symbol element if customized
-  const symbolElement = data.elements?.find(e => e.type === 'symbol');
-  const symbolId = symbolElement?.symbolId || data.symbolId;
+  const symbolElement = Array.isArray(data.elements) ? data.elements.find(e => e?.type === 'symbol') : null;
+  const symbolId = typeof symbolElement?.symbolId === 'string' ? symbolElement.symbolId : (typeof data.symbolId === 'string' ? data.symbolId : null);
 
   return (
     <div className={`relative bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800 p-2 text-white shadow-inner flex flex-col justify-between ${className}`}>
@@ -24,7 +33,7 @@ export default function SashCartPreview({ item, className = "" }) {
         </div>
         <div className="text-right min-w-0 flex-1">
           <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block break-words whitespace-normal">
-            {data.university || 'GRADUATION STOLE'}
+            {uniName}
           </span>
         </div>
       </div>

@@ -83,7 +83,11 @@ export function SashStudioProvider({ children }) {
   });
 
   useEffect(() => {
-    localStorage.setItem('orderright_saved_sashes', JSON.stringify(savedDesigns));
+    try {
+      localStorage.setItem('orderright_saved_sashes', JSON.stringify(savedDesigns));
+    } catch (err) {
+      console.warn('Could not save sashes to localStorage:', err.message);
+    }
   }, [savedDesigns]);
 
   // Push state to history

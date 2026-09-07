@@ -20,9 +20,9 @@ export default function CheckoutPage() {
   const [selectedBranch, setSelectedBranch] = useState(SPEEDAF_REGIONAL_BRANCHES[regions[0]][0]);
 
   const [formData, setFormData] = useState({
-    fullName: user ? user.name : '',
-    email: user ? user.email : '',
-    phone: user ? user.phone : '',
+    fullName: '',
+    email: '',
+    phone: '',
     streetAddress: '',
     notes: ''
   });
