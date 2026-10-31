@@ -157,7 +157,7 @@ export default function FormNXOrderWidget({ order }) {
                   <span className="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                     AUTOMATICALLY SUBMITTED
                   </span>
-                  <span className="text-xs text-emerald-700 font-bold">FormNX Portal Sync Confirmed</span>
+                  <span className="text-xs text-emerald-700 font-bold">FormNX Portal Sync Confirmed (v1.0.1)</span>
                 </div>
                 <h3 className="font-headline font-bold text-headline-sm text-primary mt-0.5">
                   Order Registered in FormNX
