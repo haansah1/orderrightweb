@@ -337,7 +337,6 @@ export async function autoSubmitFormNX(order, uploadedImagePath = null) {
   const orderId = order.id || order._id || order.reference || 'OR-DEFAULT';
 
   if (submittedOrdersSet.has(orderId)) {
-    console.log(`[FormNX Deduplication] Order ${orderId} already submitted. Skipping duplicate submission.`);
     return { success: true, message: 'FormNX order already submitted', duplicate: true };
   }
 
@@ -353,26 +352,33 @@ export async function autoSubmitFormNX(order, uploadedImagePath = null) {
       })
     });
 
-    const data = await res.json().catch(() => null);
-    if (res.ok && data?.success) {
-      submittedOrdersSet.add(orderId);
-      console.log('[FormNX Auto-Submit Confirmed]:', data);
-      return data;
+    const status = res.status;
+    const contentType = res.headers.get('content-type') || '';
+    let data = null;
+    let rawText = '';
+
+    if (contentType.includes('application/json')) {
+      data = await res.json().catch(() => null);
+    } else {
+      rawText = await res.text().catch(() => '');
     }
 
-    console.warn('[FormNX Auto-Submit Unconfirmed]:', data);
-    let cleanError = data?.error || data?.message || `Server returned HTTP ${res.status}`;
-    if (typeof cleanError === 'string' && (cleanError.includes('<!DOCTYPE') || cleanError.includes('Just a moment') || cleanError.includes('<html'))) {
-      cleanError = 'FormNX verification challenge encountered.';
+    if (res.ok && data?.success) {
+      submittedOrdersSet.add(orderId);
+      return { success: true, data, status };
     }
+
+    const rawError = data?.error || data?.msg || data?.message || (rawText ? rawText.slice(0, 200) : `HTTP ${status}`);
+    const isCloudflare = (typeof rawError === 'string' && (rawError.includes('Cloudflare') || rawError.includes('Just a moment') || rawError.includes('<!DOCTYPE') || rawError.includes('<html')));
 
     return { 
       success: false, 
-      cloudflareChallenge: data?.cloudflareChallenge || false,
-      error: cleanError 
+      status,
+      cloudflareChallenge: data?.cloudflareChallenge || isCloudflare,
+      error: isCloudflare ? 'FormNX Cloudflare Turnstile Verification Challenge Encountered' : (rawError || `HTTP ${status}`),
+      rawResponse: data || rawText
     };
   } catch (err) {
-    console.warn('FormNX auto-submit error:', err.message);
-    return { success: false, error: err.message };
+    return { success: false, error: err.message, status: 'NETWORK_ERROR' };
   }
 }
