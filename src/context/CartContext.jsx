@@ -9,9 +9,8 @@ export function CartProvider({ children }) {
       const saved = localStorage.getItem('orderright_cart');
       if (!saved) return [];
       const parsed = JSON.parse(saved);
-      // Migrate any legacy items stored in user's localStorage from 60 to promo 55
       return parsed.map(item => {
-        if (item.itemType !== 'graduation_sash') {
+        if (item.itemType !== 'graduation_sash' && item.itemType !== 'dummy' && item.itemType !== 'test' && !item.isTest) {
           const weightExtra = item.weight === '1000GMS' ? 10 : 0;
           return { ...item, price: 55 + weightExtra };
         }
@@ -105,6 +104,30 @@ export function CartProvider({ children }) {
     setCart([]);
   };
 
+  const setTestCartItem = (customProduct = {}) => {
+    const dummyProduct = {
+      id: customProduct.id || 'test-dummy-product-1',
+      name: customProduct.name || 'Dummy Test Product',
+      price: 1.00,
+      currency: 'GH₵',
+      size: customProduct.size || 'Standard',
+      color: customProduct.color || 'Default',
+      weight: 'Standard',
+      category: 'Test',
+      itemType: 'dummy',
+      isTest: true,
+      quantity: 1,
+      image: customProduct.image || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60'
+    };
+    setCart([dummyProduct]);
+    try {
+      localStorage.setItem('orderright_cart', JSON.stringify([dummyProduct]));
+    } catch (err) {
+      console.warn('Could not save test cart to localStorage:', err.message);
+    }
+    return dummyProduct;
+  };
+
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   
   // Calculate promo pricing breakdown
@@ -122,6 +145,8 @@ export function CartProvider({ children }) {
   return (
     <CartContext.Provider value={{
       cart,
+      setCart,
+      setTestCartItem,
       addToCart,
       removeFromCart,
       updateQuantity,

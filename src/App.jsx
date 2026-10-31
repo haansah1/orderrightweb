@@ -23,6 +23,7 @@ import SashStudioLandingPage from './pages/SashStudioLandingPage';
 import SashDesignerPage from './pages/SashDesignerPage';
 import SashGalleryPage from './pages/SashGalleryPage';
 import SavedSashDesignsPage from './pages/SavedSashDesignsPage';
+import TestPage from './pages/TestPage';
 
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
@@ -62,6 +63,10 @@ export default function App() {
                   <Route path="/genz" element={<GenZPage />} />
                   <Route path="/faqs" element={<FAQsPage />} />
                   <Route path="/faq" element={<FAQsPage />} />
+                  
+                  {/* Direct Test Route (Hidden / No Nav Links) */}
+                  <Route path="/test-page" element={<TestPage />} />
+                  <Route path="/testpage" element={<TestPage />} />
                   
                   {/* Graduation Sash Studio Routes */}
                   <Route path="/sash-studio" element={<SashStudioLandingPage />} />

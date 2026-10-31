@@ -29,6 +29,7 @@ export const SHIRT_PROMO_TIERS = [
 export function isShirtItem(item) {
   if (!item) return false;
   if (item.itemType === 'graduation_sash') return false;
+  if (item.itemType === 'dummy' || item.itemType === 'test' || item.isTest) return false;
   return true;
 }
 
