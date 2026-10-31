@@ -442,8 +442,9 @@ app.post('/api/orders', (req, res) => {
   });
 });
 
-// In-memory set to prevent duplicate FormNX submissions for the same order
+// In-memory sets to prevent duplicate and race-condition FormNX submissions
 const submittedOrdersBackendSet = new Set();
+const inFlightSubmissions = new Map();
 
 // REUSABLE FORMNX TRANSMISSION FUNCTION
 export async function sendOrderToFormNX(order, uploadedImagePath = null) {
@@ -452,177 +453,233 @@ export async function sendOrderToFormNX(order, uploadedImagePath = null) {
   }
 
   const orderId = order.id || order._id || order.reference || ('OR-' + Date.now());
+
+  // 1. Deduplication check: if already completed, return immediately
   if (submittedOrdersBackendSet.has(orderId)) {
-    console.log(`[Server FormNX Deduplication] Order ${orderId} already submitted. Skipping.`);
+    console.log(`[Server FormNX Deduplication] Order ${orderId} already submitted. Skipping duplicate.`);
     return { success: true, message: 'Order already submitted to FormNX', duplicate: true };
   }
 
-  try {
-    // 1. GET FormNX Page to obtain CSRF Token & Session Cookies
-    const pageRes = await fetch('https://fill.formnx.com/f/orderright-order-forms-38nu94', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-      }
-    });
+  // 2. Race condition lock: if already in-flight, await and share the existing Promise
+  if (inFlightSubmissions.has(orderId)) {
+    console.log(`[Server FormNX In-Flight Lock] Order ${orderId} is currently being transmitted. Joining in-flight submission.`);
+    return await inFlightSubmissions.get(orderId);
+  }
 
-    let cookieArr = [];
-    if (typeof pageRes.headers.getSetCookie === 'function') {
-      cookieArr = pageRes.headers.getSetCookie();
-    } else {
-      const raw = pageRes.headers.get('set-cookie') || '';
-      cookieArr = raw.split(/,(?=\s*[a-zA-Z0-9_\-]+=)/);
-    }
-    const cookies = cookieArr.map(c => c.split(';')[0].trim()).filter(Boolean).join('; ');
-    const html = await pageRes.text();
+  const performSubmission = async () => {
+    try {
+      // 1. GET FormNX Page to obtain CSRF Token, dynamic fnx_t security token & Session Cookies
+      const pageRes = await fetch('https://fill.formnx.com/f/orderright-order-forms-38nu94', {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
 
-    const csrfToken = (html.match(/<meta\s+name=["']csrf-token["']\s+content=["']([^"']+)["']/i) || [])[1] || '';
-    const formId = "28697d8c-8d0a-49a6-8dc7-82e2da3f4898";
-
-    const shipping = order.shippingAddress || {};
-    const customerName = shipping.fullName || order.customerName || 'OrderRight Customer';
-    const customerEmail = shipping.email || order.customerEmail || 'customer@orderright.com';
-    const customerPhone = shipping.phone || order.phone || '0507363108';
-
-    // Format sash details strictly into top-left, top-right, bottom-left, bottom-right
-    const formatSashSpecs = (item) => {
-      const cd = item.customizationData || item.sashDetails || {};
-      const elements = cd.elements || item.elements || [];
-
-      let topLeft = [];
-      let topRight = [];
-      let bottomLeft = [];
-      let bottomRight = [];
-
-      if (elements && elements.length > 0) {
-        elements.forEach(elem => {
-          const zone = elem.zoneId || '';
-          let text = '';
-          if (elem.type === 'crest') {
-            text = `Crest (${cd.university || elem.universityId || 'University Crest'})`;
-          } else if (elem.type === 'custom_logo') {
-            text = 'Custom Uploaded Logo';
-          } else if (elem.type === 'symbol') {
-            text = `Adinkra Symbol (${elem.name || elem.symbolId || 'Symbol'})`;
-          } else if (elem.content) {
-            text = elem.content;
-          }
-
-          if (!text) return;
-
-          if (zone === 'left_upper') topLeft.push(text);
-          else if (zone === 'right_upper') topRight.push(text);
-          else if (zone === 'left_lower') bottomLeft.push(text);
-          else if (zone === 'right_lower') bottomRight.push(text);
-          else {
-            if (elem.side === 'left') {
-              if (elem.type === 'crest' || elem.type === 'custom_logo') topLeft.push(text);
-              else bottomLeft.push(text);
-            } else {
-              if (elem.type === 'verse' || elem.type === 'quote') topRight.push(text);
-              else bottomRight.push(text);
-            }
-          }
-        });
+      let cookieArr = [];
+      if (typeof pageRes.headers.getSetCookie === 'function') {
+        cookieArr = pageRes.headers.getSetCookie();
       } else {
-        if (cd.university) topLeft.push(`Crest (${cd.university})`);
-        if (cd.verse && cd.verse !== 'N/A') topRight.push(cd.verse);
-        if (cd.name && cd.name !== 'N/A') bottomLeft.push(cd.name);
-        if (cd.programme && cd.programme !== 'N/A') bottomRight.push(cd.programme);
+        const raw = pageRes.headers.get('set-cookie') || '';
+        cookieArr = raw.split(/,(?=\s*[a-zA-Z0-9_\-]+=)/);
+      }
+      const cookies = cookieArr.map(c => c.split(';')[0].trim()).filter(Boolean).join('; ');
+      const html = await pageRes.text();
+
+      // Check if Cloudflare blocked the initial page GET
+      if (html.includes('Just a moment...') || html.includes('challenges.cloudflare.com') || html.includes('cf_chl')) {
+        console.warn(`[FormNX Cloudflare Notice] GET request for Order ${orderId} encountered Cloudflare challenge.`);
+        return {
+          success: false,
+          cloudflareChallenge: true,
+          error: 'FormNX automated transmission encountered Cloudflare verification.'
+        };
       }
 
-      return `top-left: ${topLeft.join(', ') || 'N/A'}\ntop-right: ${topRight.join(', ') || 'N/A'}\nbottom-left: ${bottomLeft.join(', ') || 'N/A'}\nbottom-right: ${bottomRight.join(', ') || 'N/A'}`;
-    };
+      // Extract CSRF token
+      const csrfToken = (html.match(/name=["']csrf-token["']\s+content=["']([^"']+)["']/i) || [])[1] || '';
 
-    // Format products summary for field_4
-    const itemsList = (order.items || []).map((item, idx) => {
-      let details = `${idx + 1}. ${item.name} (Quantity: ${item.quantity})`;
-      if (item.size) details += `\n   - Size: ${item.size}`;
-      if (item.weight) details += `\n   - Fabric Weight: ${item.weight}`;
-      if (item.price) details += `\n   - Unit Price: GH₵ ${Number(item.price).toFixed(2)}`;
-      details += `\n   - Item Total: GH₵ ${(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}`;
+      // Extract FormNX dynamic anti-bot security token (fnx_t)
+      const fnxToken = (html.match(/name\s*=\s*['"]fnx_t['"];\s*b\.value\s*=\s*["']([^"']+)["']/i) ||
+                        html.match(/name=["']fnx_t["'][^>]*value=["']([^"']+)["']/i) || [])[1] || '';
 
-      if (item.itemType === 'graduation_sash' || item.sashDetails || item.customizationData?.elements) {
-        details += `\n   🎓 SASH EMBROIDERY SPECIFICATIONS:\n${formatSashSpecs(item)}`;
+      // Extract visitor key cookie if available
+      let visitorId = 'visitor_' + Date.now();
+      const visitorCookie = cookieArr.find(c => c.includes('visitor_key='));
+      if (visitorCookie) {
+        const val = visitorCookie.split(';')[0].split('=')[1];
+        if (val) visitorId = decodeURIComponent(val);
       }
-      return details;
-    }).join('\n\n');
 
-    const productsSummary = `ORDER REFERENCE: #${order.id || order._id || ('OR-' + Date.now())}\n` +
-      `========================================\n` +
-      `${itemsList}\n` +
-      `========================================\n` +
-      `SUBTOTAL: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
-      `TOTAL AMOUNT PAID: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
-      `PAYMENT METHOD: ${order.paymentMethod || 'Paystack (MoMo / Card)'}`;
+      const formId = "28697d8c-8d0a-49a6-8dc7-82e2da3f4898";
+      const shipping = order.shippingAddress || {};
+      const customerName = shipping.fullName || order.customerName || 'OrderRight Customer';
+      const customerEmail = shipping.email || order.customerEmail || 'customer@orderright.com';
+      const customerPhone = shipping.phone || order.phone || '0507363108';
 
-    // Delivery Summary for field_6
-    let deliverySummary = `DELIVERY MODE: ${shipping.deliveryMode === 'university' ? 'Free Campus Delivery' : 'Speedaf Branch Pickup'}\n` +
-      `DESTINATION: ${shipping.deliveryDestination || 'Standard Delivery'}\n` +
-      `SPECIFIC ADDRESS / HALL / ROOM: ${shipping.streetAddress || 'N/A'}`;
-    if (shipping.notes) {
-      deliverySummary += `\nSPECIAL NOTES: ${shipping.notes}`;
+      // Format sash details strictly into top-left, top-right, bottom-left, bottom-right
+      const formatSashSpecs = (item) => {
+        const cd = item.customizationData || item.sashDetails || {};
+        const elements = cd.elements || item.elements || [];
+
+        let topLeft = [];
+        let topRight = [];
+        let bottomLeft = [];
+        let bottomRight = [];
+
+        if (elements && elements.length > 0) {
+          elements.forEach(elem => {
+            const zone = elem.zoneId || '';
+            let text = '';
+            if (elem.type === 'crest') {
+              text = `Crest (${cd.university || elem.universityId || 'University Crest'})`;
+            } else if (elem.type === 'custom_logo') {
+              text = 'Custom Uploaded Logo';
+            } else if (elem.type === 'symbol') {
+              text = `Adinkra Symbol (${elem.name || elem.symbolId || 'Symbol'})`;
+            } else if (elem.content) {
+              text = elem.content;
+            }
+
+            if (!text) return;
+
+            if (zone === 'left_upper') topLeft.push(text);
+            else if (zone === 'right_upper') topRight.push(text);
+            else if (zone === 'left_lower') bottomLeft.push(text);
+            else if (zone === 'right_lower') bottomRight.push(text);
+            else {
+              if (elem.side === 'left') {
+                if (elem.type === 'crest' || elem.type === 'custom_logo') topLeft.push(text);
+                else bottomLeft.push(text);
+              } else {
+                if (elem.type === 'verse' || elem.type === 'quote') topRight.push(text);
+                else bottomRight.push(text);
+              }
+            }
+          });
+        } else {
+          if (cd.university) topLeft.push(`Crest (${cd.university})`);
+          if (cd.verse && cd.verse !== 'N/A') topRight.push(cd.verse);
+          if (cd.name && cd.name !== 'N/A') bottomLeft.push(cd.name);
+          if (cd.programme && cd.programme !== 'N/A') bottomRight.push(cd.programme);
+        }
+
+        return `top-left: ${topLeft.join(', ') || 'N/A'}\ntop-right: ${topRight.join(', ') || 'N/A'}\nbottom-left: ${bottomLeft.join(', ') || 'N/A'}\nbottom-right: ${bottomRight.join(', ') || 'N/A'}`;
+      };
+
+      // Format products summary for field_4
+      const itemsList = (order.items || []).map((item, idx) => {
+        let details = `${idx + 1}. ${item.name} (Quantity: ${item.quantity})`;
+        if (item.size) details += `\n   - Size: ${item.size}`;
+        if (item.weight) details += `\n   - Fabric Weight: ${item.weight}`;
+        if (item.price) details += `\n   - Unit Price: GH₵ ${Number(item.price).toFixed(2)}`;
+        details += `\n   - Item Total: GH₵ ${(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}`;
+
+        if (item.itemType === 'graduation_sash' || item.sashDetails || item.customizationData?.elements) {
+          details += `\n   🎓 SASH EMBROIDERY SPECIFICATIONS:\n${formatSashSpecs(item)}`;
+        }
+        return details;
+      }).join('\n\n');
+
+      const productsSummary = `ORDER REFERENCE: #${order.id || order._id || ('OR-' + Date.now())}\n` +
+        `========================================\n` +
+        `${itemsList}\n` +
+        `========================================\n` +
+        `SUBTOTAL: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
+        `TOTAL AMOUNT PAID: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
+        `PAYMENT METHOD: ${order.paymentMethod || 'Paystack (MoMo / Card)'}`;
+
+      // Delivery Summary for field_6
+      let deliverySummary = `DELIVERY MODE: ${shipping.deliveryMode === 'university' ? 'Free Campus Delivery' : 'Speedaf Branch Pickup'}\n` +
+        `DESTINATION: ${shipping.deliveryDestination || 'Standard Delivery'}\n` +
+        `SPECIFIC ADDRESS / HALL / ROOM: ${shipping.streetAddress || 'N/A'}`;
+      if (shipping.notes) {
+        deliverySummary += `\nSPECIAL NOTES: ${shipping.notes}`;
+      }
+
+      const orderDate = order.createdAt || order.date
+        ? new Date(order.createdAt || order.date).toISOString().slice(0, 10) 
+        : new Date().toISOString().slice(0, 10);
+
+      const formInputs = {
+        "__form_id": formId,
+        "name_field_1": customerName,
+        "email_field_2": customerEmail,
+        "phone_number_field_5": customerPhone,
+        "field_4": productsSummary,
+        "field_6": deliverySummary,
+        "field_7": orderDate,
+        "form_meta": "",
+        "fnx_t": fnxToken,
+        "visitor_key": visitorId,
+        "__time_taken": String(Math.floor(15 + Math.random() * 15))
+      };
+
+      if (uploadedImagePath) {
+        formInputs.field_3 = uploadedImagePath;
+      }
+
+      const serializedFormData = new URLSearchParams(formInputs).toString();
+
+      // 2. POST to FormNX endpoint with full session context & security tokens
+      const submitUrl = `https://fill.formnx.com/form-data/${formId}`;
+      const postRes = await fetch(submitUrl, {
+        method: 'POST',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'X-CSRF-TOKEN': csrfToken,
+          'Cookie': cookies,
+          'X-Requested-With': 'XMLHttpRequest',
+          'Referer': 'https://fill.formnx.com/f/orderright-order-forms-38nu94',
+          'Origin': 'https://fill.formnx.com',
+          'Accept': 'application/json, text/javascript, */*; q=0.01'
+        },
+        body: new URLSearchParams({ form_data: serializedFormData }).toString()
+      });
+
+      let result = null;
+      const postContentType = postRes.headers.get('content-type') || '';
+      if (postContentType.includes('application/json')) {
+        result = await postRes.json();
+      } else {
+        const text = await postRes.text();
+        if (text.includes('Just a moment...') || text.includes('challenges.cloudflare.com') || text.includes('cf_chl') || text.startsWith('<!DOCTYPE')) {
+          console.warn(`[FormNX Cloudflare Notice on POST] Order ${orderId}: Cloudflare Challenge.`);
+          return {
+            success: false,
+            cloudflareChallenge: true,
+            error: 'FormNX automated transmission encountered Cloudflare verification.'
+          };
+        }
+        result = { success: postRes.ok, msg: text };
+      }
+
+      console.log(`[FormNX Backend Submission Result] Order ${orderId}:`, result?.success ? 'SUCCESS' : 'FAILED', result?.msg || '');
+
+      if (result && result.success) {
+        submittedOrdersBackendSet.add(orderId);
+        return { success: true, message: 'FormNX order form submitted successfully', result };
+      } else {
+        console.error(`[FormNX Submission Rejected] Order ${orderId}:`, result);
+        return { success: false, error: result?.msg || 'FormNX rejected submission', result };
+      }
+    } catch (err) {
+      console.error(`[FormNX Backend Exception] Order ${orderId}:`, err);
+      return { success: false, error: err.message };
     }
+  };
 
-    const orderDate = order.createdAt || order.date
-      ? new Date(order.createdAt || order.date).toISOString().slice(0, 10) 
-      : new Date().toISOString().slice(0, 10);
+  const currentPromise = performSubmission();
+  inFlightSubmissions.set(orderId, currentPromise);
 
-    const formInputs = {
-      "__form_id": formId,
-      "name_field_1": customerName,
-      "email_field_2": customerEmail,
-      "phone_number_field_5": customerPhone,
-      "field_4": productsSummary,
-      "field_6": deliverySummary,
-      "field_7": orderDate,
-      "visitor_key": "visitor_" + Date.now(),
-      "__time_taken": "15"
-    };
-
-    if (uploadedImagePath) {
-      formInputs.field_3 = uploadedImagePath;
-    }
-
-    const serializedFormData = new URLSearchParams(formInputs).toString();
-
-    // 2. POST to FormNX endpoint
-    const submitUrl = `https://fill.formnx.com/form-data/${formId}`;
-    const postRes = await fetch(submitUrl, {
-      method: 'POST',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-CSRF-TOKEN': csrfToken,
-        'Cookie': cookies,
-        'X-Requested-With': 'XMLHttpRequest',
-        'Referer': 'https://fill.formnx.com/f/orderright-order-forms-38nu94',
-        'Origin': 'https://fill.formnx.com'
-      },
-      body: new URLSearchParams({ form_data: serializedFormData }).toString()
-    });
-
-    let result = null;
-    const postContentType = postRes.headers.get('content-type') || '';
-    if (postContentType.includes('application/json')) {
-      result = await postRes.json();
-    } else {
-      const text = await postRes.text();
-      result = { success: postRes.ok, msg: text };
-    }
-
-    console.log('FormNX Backend Submission Result:', result);
-
-    if (result && result.success) {
-      submittedOrdersBackendSet.add(orderId);
-      return { success: true, message: 'FormNX order form submitted successfully', result };
-    } else {
-      console.error(`[FormNX Submission Rejected] Order ${orderId}:`, result);
-      return { success: false, error: result?.msg || 'FormNX rejected submission', result };
-    }
-  } catch (err) {
-    console.error(`[FormNX Backend Exception] Order ${orderId}:`, err);
-    return { success: false, error: err.message };
+  try {
+    return await currentPromise;
+  } finally {
+    inFlightSubmissions.delete(orderId);
   }
 }
 
@@ -637,7 +694,7 @@ app.post('/api/orders/submit-formnx', async (req, res) => {
   if (result.success) {
     res.json(result);
   } else {
-    res.status(502).json(result);
+    res.status(result.cloudflareChallenge ? 200 : 502).json(result);
   }
 });
 

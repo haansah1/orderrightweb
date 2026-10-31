@@ -164,7 +164,7 @@ export async function uploadImageToFormNX(blob) {
   if (!blob) return null;
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 1500);
 
     const formData = new FormData();
     formData.append('file', blob, `order_products_${Date.now()}.jpg`);
@@ -177,13 +177,13 @@ export async function uploadImageToFormNX(blob) {
     clearTimeout(timeoutId);
 
     if (res.ok) {
-      const data = await res.json();
-      if (data.success) {
+      const data = await res.json().catch(() => null);
+      if (data?.success) {
         return data.path || data.url;
       }
     }
   } catch (err) {
-    console.warn('FormNX image upload error:', err.message);
+    console.warn('FormNX image upload fallback:', err.message);
   }
   return null;
 }
@@ -291,10 +291,16 @@ export async function autoSubmitFormNX(order, uploadedImagePath = null) {
       return data;
     }
 
-    console.warn('[FormNX Auto-Submit Failed]:', data);
+    console.warn('[FormNX Auto-Submit Unconfirmed]:', data);
+    let cleanError = data?.error || data?.message || `Server returned HTTP ${res.status}`;
+    if (typeof cleanError === 'string' && (cleanError.includes('<!DOCTYPE') || cleanError.includes('Just a moment') || cleanError.includes('<html'))) {
+      cleanError = 'FormNX verification challenge encountered.';
+    }
+
     return { 
       success: false, 
-      error: data?.error || data?.message || `Server returned HTTP ${res.status}` 
+      cloudflareChallenge: data?.cloudflareChallenge || false,
+      error: cleanError 
     };
   } catch (err) {
     console.warn('FormNX auto-submit error:', err.message);
