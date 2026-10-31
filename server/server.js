@@ -606,6 +606,7 @@ export async function sendOrderToFormNX(order, uploadedImagePath = null) {
 
       const formInputs = {
         "__form_id": formId,
+        "predefined_status": "complete",
         "name_field_1": customerName,
         "email_field_2": customerEmail,
         "phone_number_field_5": customerPhone,
