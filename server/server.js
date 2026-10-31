@@ -58,6 +58,12 @@ async function getActiveProducts() {
         finalProducts = cldProducts;
       }
 
+      // Enforce 1st - 10th November Promo price (55 cedis) for all shirts
+      finalProducts = finalProducts.map(p => ({
+        ...p,
+        price: (p.itemType === 'graduation_sash' || (p.price && p.price > 70)) ? p.price : 55.00
+      }));
+
       cachedCloudinaryProducts = finalProducts;
       cacheTimestamp = now;
       console.log(`Cached ${finalProducts.length} products from Cloudinary + fallbacks`);
@@ -67,7 +73,10 @@ async function getActiveProducts() {
     console.error("Cloudinary fetch failed, using static products:", e.message);
   }
 
-  return staticProducts;
+  return staticProducts.map(p => ({
+    ...p,
+    price: (p.itemType === 'graduation_sash' || (p.price && p.price > 70)) ? p.price : 55.00
+  }));
 }
 
 // GET /api/cloudinary/config
@@ -380,12 +389,34 @@ app.post('/api/orders', (req, res) => {
     phone: "+233 24 000 0000"
   };
 
+  const calculateFallbackTotal = (orderItems) => {
+    let shirtQty = 0;
+    let weightExtra = 0;
+    let sashSubtotal = 0;
+    for (const item of orderItems) {
+      const q = Number(item.quantity) || 1;
+      if (item.itemType === 'graduation_sash') {
+        sashSubtotal += (Number(item.price) || 0) * q;
+      } else {
+        shirtQty += q;
+        if (item.weight === '1000GMS') weightExtra += 10 * q;
+      }
+    }
+    let shirtBase = 0;
+    if (shirtQty === 1) shirtBase = 55;
+    else if (shirtQty === 2) shirtBase = 105;
+    else if (shirtQty === 3) shirtBase = 155;
+    else if (shirtQty === 4) shirtBase = 205;
+    else if (shirtQty >= 5) shirtBase = shirtQty * 50;
+    return shirtBase + weightExtra + sashSubtotal;
+  };
+
   const newOrder = {
     id: "ORD-" + Math.floor(10000 + Math.random() * 90000),
     date: new Date().toISOString().split('T')[0],
     status: "Confirmed",
     items,
-    total: total || items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+    total: total !== undefined ? total : calculateFallbackTotal(items),
     currency: "GH₵",
     shippingAddress: shippingAddress || defaultShipping,
     paymentMethod: paymentMethod || "Paystack (MoMo / Card)"

@@ -12,6 +12,19 @@ export default function ProductCard({ product }) {
   const rawImage = product.cloudinaryPublicId || (product.images && product.images.length > 0 ? product.images[0] : (product.image || ''));
   const mainImage = getCloudinaryUrl(rawImage, { width: 500, height: 667, crop: 'fill' });
 
+  const isSash = product.itemType === 'graduation_sash' || (product.price && product.price > 70);
+  const currentPrice = isSash ? product.price : 55.00;
+  const originalPrice = isSash ? null : 60.00;
+
+  const handleQuickAdd = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart({
+      ...product,
+      price: currentPrice
+    });
+  };
+
   return (
     <div className="group flex flex-col transition-all duration-300">
       {/* Product Image Container */}
@@ -64,7 +77,7 @@ export default function ProductCard({ product }) {
         {/* Quick Add Pill Button (Appears on Hover) */}
         <div className="absolute bottom-3 inset-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleQuickAdd}
             className="w-full py-3 bg-primary text-on-primary rounded-full font-label text-label-md uppercase tracking-wider hover:bg-surface-tint transition-colors flex items-center justify-center gap-2 shadow-lg"
           >
             <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
@@ -80,9 +93,21 @@ export default function ProductCard({ product }) {
             {product.name}
           </Link>
         </div>
-        <p className="font-body text-body-md text-on-surface-variant font-medium">
-          {product.currency || 'GH₵'} {product.price ? product.price.toFixed(2) : '0.00'}
-        </p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-body text-body-md text-primary font-bold">
+            {product.currency || 'GH₵'} {currentPrice.toFixed(2)}
+          </span>
+          {originalPrice && (
+            <span className="text-body-sm text-zinc-400 line-through">
+              {product.currency || 'GH₵'} {originalPrice.toFixed(2)}
+            </span>
+          )}
+          {!isSash && (
+            <span className="text-[10px] bg-amber-500/15 text-amber-900 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Promo
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

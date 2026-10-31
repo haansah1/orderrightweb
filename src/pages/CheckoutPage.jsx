@@ -7,7 +7,7 @@ import SashCartPreview from '../components/SashCartPreview';
 import { FREE_UNIVERSITY_DELIVERY_OPTIONS, SPEEDAF_REGIONAL_BRANCHES } from '../data/speedafBranches';
 
 export default function CheckoutPage() {
-  const { cart, subtotal, clearCart } = useCart();
+  const { cart, subtotal, promoDiscount, originalSubtotal, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -478,6 +478,21 @@ export default function CheckoutPage() {
             </div>
 
             <div className="pt-md border-t border-surface-container-highest space-y-xs font-body text-body-md text-on-surface-variant">
+              {promoDiscount > 0 && (
+                <div className="flex justify-between text-xs">
+                  <span>Standard Price</span>
+                  <span className="line-through">GH₵ {originalSubtotal.toFixed(2)}</span>
+                </div>
+              )}
+              {promoDiscount > 0 && (
+                <div className="flex justify-between text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md font-bold text-xs sm:text-sm">
+                  <span className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[16px]">local_offer</span>
+                    Nov 1–10 Promo Savings
+                  </span>
+                  <span>- GH₵ {promoDiscount.toFixed(2)}</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span className="text-primary font-semibold">GH₵ {subtotal.toFixed(2)}</span>

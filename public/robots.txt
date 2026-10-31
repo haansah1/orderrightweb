@@ -16,4 +16,4 @@ Disallow: /api/
 Disallow: /order-confirmation
 
 # Sitemap (Replace with your live domain when deployed)
-Sitemap: https://orderrightweb.vercel.app/sitemap.xml
+Sitemap: https://orderrightgh.com/sitemap.xml

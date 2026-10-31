@@ -90,6 +90,24 @@ export default function ShopPage() {
         </div>
       </div>
 
+      {/* 1st - 10th November Promo Notice Bar */}
+      <div className="bg-gradient-to-r from-amber-500/10 via-amber-500/15 to-amber-500/10 border border-amber-500/30 rounded-2xl p-4 mb-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <div className="flex items-center gap-2.5">
+          <span className="material-symbols-outlined text-amber-600 text-[22px]">local_fire_department</span>
+          <div>
+            <span className="font-headline font-bold text-xs sm:text-sm text-amber-950 block">
+              Special Promo Active • 1st – 10th November
+            </span>
+            <span className="text-xs text-zinc-600 font-medium">
+              1 Shirt: GH₵ 55 • 2 Shirts: GH₵ 105 • 3 Shirts: GH₵ 155 • 4 Shirts: GH₵ 205 • 5+ Shirts: GH₵ 50 each
+            </span>
+          </div>
+        </div>
+        <span className="text-[11px] bg-amber-500/20 text-amber-900 font-bold px-3 py-1 rounded-full uppercase tracking-wider flex-shrink-0">
+          Discount Applied at Cart
+        </span>
+      </div>
+
       <div className="flex flex-col md:flex-row gap-gutter">
         {/* Desktop Sidebar Filters */}
         <div className="hidden md:block md:w-1/4">

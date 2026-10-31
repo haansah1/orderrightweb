@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import ProductCard from '../components/ProductCard';
 import { getCloudinaryUrl, handleImageError } from '../utils/cloudinary';
+import { getShirtPromoBasePrice, isShirtItem } from '../utils/pricing';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -75,8 +76,17 @@ export default function ProductDetailsPage() {
   }
 
   // Calculate dynamic unit price based on weight (600GMS standard vs 1000GMS +10 cedis)
+  const isSash = product?.itemType === 'graduation_sash' || (product?.price && product?.price > 70);
+  const baseShirtPrice = isSash ? product.price : 55.00;
   const extraWeightPrice = selectedWeight === '1000GMS' ? 10.00 : 0.00;
-  const currentUnitPrice = (product.price || 60.00) + extraWeightPrice;
+  const currentUnitPrice = baseShirtPrice + extraWeightPrice;
+  const promoBatchTotal = isSash 
+    ? (currentUnitPrice * quantity) 
+    : (getShirtPromoBasePrice(quantity) + (extraWeightPrice * quantity));
+  const effectivePerUnitPrice = quantity > 0 ? (promoBatchTotal / quantity) : currentUnitPrice;
+  const originalBatchTotal = isSash 
+    ? null 
+    : (60.00 * quantity + (extraWeightPrice * quantity));
 
   const handleAddToCart = () => {
     const productWithWeight = {
@@ -167,19 +177,75 @@ export default function ProductDetailsPage() {
               {product.name}
             </h1>
 
-            <div className="flex items-center gap-md mt-xs">
-              <p className="font-headline font-bold text-headline-md text-primary">
-                {product.currency || 'GH₵'} {currentUnitPrice.toFixed(2)}
+            <div className="flex flex-col gap-1 mt-xs">
+              <div className="flex items-center gap-md flex-wrap">
+                <p className="font-headline font-bold text-headline-md text-primary">
+                  {product.currency || 'GH₵'} {promoBatchTotal.toFixed(2)}
+                </p>
+                <span className="text-body-md text-zinc-400 line-through">
+                  GH₵ {(60.00 * quantity + (extraWeightPrice * quantity)).toFixed(2)}
+                </span>
+                {quantity > 1 && (
+                  <span className="text-body-sm text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">
+                    GH₵ {effectivePerUnitPrice.toFixed(2)} / shirt
+                  </span>
+                )}
+                <span className="text-body-sm text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full font-semibold">
+                  1st – 10th Nov Promo
+                </span>
+              </div>
+              <p className="text-body-sm text-on-surface-variant font-medium">
+                {selectedWeight === '1000GMS' ? 'Heavyweight 1000GMS (+GH₵ 10/shirt) • VAT Included' : 'Standard 600GMS • VAT Included'}
               </p>
-              <span className="text-body-md text-on-surface-variant font-medium">
-                {selectedWeight === '1000GMS' ? '(1000GMS +10 GH₵)' : 'VAT Included'}
-              </span>
             </div>
           </div>
 
           <p className="font-body text-body-md text-on-surface-variant leading-relaxed">
             {product.description}
           </p>
+
+          {/* Promo Pricing Tiers Selector Card */}
+          <div className="bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/25 rounded-2xl p-4 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 font-label font-bold text-xs uppercase tracking-wider text-amber-900">
+                <span className="material-symbols-outlined text-[16px] text-amber-600">local_fire_department</span>
+                1st – 10th November Shirt Promo
+              </span>
+              <span className="text-[10px] bg-amber-500/20 text-amber-900 font-bold px-2 py-0.5 rounded-full">
+                Tiered Discounts
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5 text-center text-xs">
+              {[
+                { qty: 1, price: 'GH₵ 55', note: '1 shirt' },
+                { qty: 2, price: 'GH₵ 105', note: '2 shirts' },
+                { qty: 3, price: 'GH₵ 155', note: '3 shirts' },
+                { qty: 4, price: 'GH₵ 205', note: '4 shirts' },
+                { qty: 5, price: 'GH₵ 50 ea', note: '5+ shirts' },
+              ].map((tier) => {
+                const isSelected = tier.qty === 5 ? quantity >= 5 : quantity === tier.qty;
+                return (
+                  <button
+                    key={tier.qty}
+                    type="button"
+                    onClick={() => setQuantity(tier.qty)}
+                    className={`p-2 rounded-xl border transition-all ${
+                      isSelected
+                        ? 'bg-amber-600 text-white font-bold border-amber-600 shadow-sm ring-2 ring-amber-500/20'
+                        : 'bg-white/80 border-amber-200/60 text-zinc-700 hover:border-amber-400 hover:bg-amber-50/50'
+                    }`}
+                  >
+                    <span className="block text-[11px] font-medium">{tier.note}</span>
+                    <span className="block font-bold text-xs mt-0.5">{tier.price}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[11px] text-zinc-600">
+              * Promo discount automatically applies to all shirts combined in your cart.
+            </p>
+          </div>
 
           {/* Size Selection (M, L, XL, XXL, XXXL) */}
           <div className="flex flex-col gap-sm">
@@ -236,8 +302,8 @@ export default function ProductDetailsPage() {
               onChange={(e) => setSelectedWeight(e.target.value)}
               className="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 text-body-md font-semibold text-primary focus:outline-none focus:border-primary"
             >
-              <option value="600GMS">600GMS (Standard — GH₵ 60.00)</option>
-              <option value="1000GMS">1000GMS (Heavyweight — GH₵ 70.00)</option>
+              <option value="600GMS">600GMS (Standard — GH₵ 55.00)</option>
+              <option value="1000GMS">1000GMS (Heavyweight — GH₵ 65.00)</option>
             </select>
           </div>
 

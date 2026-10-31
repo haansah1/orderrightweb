@@ -68,7 +68,7 @@ async function fetchFolderProducts(folderPath, { collection, vibe, idPrefix }) {
       collection,
       vibe,
       category: 'Tops',
-      price: 60.00,
+      price: 55.00,
       currency: 'GH₵',
       rating: parseFloat((4.5 + Math.random() * 0.5).toFixed(1)),
       reviewsCount: 20 + index * 7,

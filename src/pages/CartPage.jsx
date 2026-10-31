@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import SashCartPreview from '../components/SashCartPreview';
+import { getPromoTierMessage } from '../utils/pricing';
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, subtotal } = useCart();
+  const { 
+    cart, 
+    removeFromCart, 
+    updateQuantity, 
+    subtotal, 
+    promoDiscount, 
+    totalShirtQty, 
+    originalSubtotal 
+  } = useCart();
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [promoError, setPromoError] = useState('');
@@ -45,6 +54,30 @@ export default function CartPage() {
           
           {/* Cart Items List */}
           <div className="lg:col-span-8 flex flex-col gap-lg">
+            
+            {/* Promo Tier Status Banner */}
+            {totalShirtQty > 0 && (
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 sm:p-5 flex items-start gap-3 shadow-xs">
+                <span className="material-symbols-outlined text-amber-600 text-[24px] flex-shrink-0 mt-0.5">local_fire_department</span>
+                <div className="flex-grow">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <span className="font-headline font-bold text-sm sm:text-base text-amber-900">
+                      1st – 10th November Shirt Promo Active
+                    </span>
+                    <span className="bg-amber-500/20 text-amber-900 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                      {totalShirtQty} {totalShirtQty === 1 ? 'Shirt' : 'Shirts'} in Cart
+                    </span>
+                  </div>
+                  <p className="font-body text-xs sm:text-sm text-zinc-700 mt-1">
+                    {getPromoTierMessage(totalShirtQty)}
+                  </p>
+                  <div className="mt-2 text-[11px] text-zinc-500 font-medium">
+                    Pricing Tiers: 1 for GH₵ 55 • 2 for GH₵ 105 • 3 for GH₵ 155 • 4 for GH₵ 205 • 5+ @ GH₵ 50 each
+                  </div>
+                </div>
+              </div>
+            )}
+
             {cart.map((item, idx) => (
               <div 
                 key={`${item.id}-${item.size}-${item.color}-${idx}`}
@@ -143,6 +176,23 @@ export default function CartPage() {
               </h2>
 
               <div className="space-y-sm font-body text-body-md text-on-surface-variant">
+                {promoDiscount > 0 && (
+                  <div className="flex justify-between text-xs">
+                    <span>Original Price</span>
+                    <span className="line-through">GH₵ {originalSubtotal.toFixed(2)}</span>
+                  </div>
+                )}
+
+                {promoDiscount > 0 && (
+                  <div className="flex justify-between text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-lg font-bold text-xs sm:text-sm">
+                    <span className="flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[16px]">local_offer</span>
+                      Nov 1–10 Promo Savings
+                    </span>
+                    <span>- GH₵ {promoDiscount.toFixed(2)}</span>
+                  </div>
+                )}
+
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span className="text-primary font-semibold">GH₵ {subtotal.toFixed(2)}</span>

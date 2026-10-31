@@ -2,9 +2,19 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import SashCartPreview from './SashCartPreview';
+import { getPromoTierMessage } from '../utils/pricing';
 
 export default function CartDrawer({ isOpen, onClose }) {
-  const { cart, removeFromCart, updateQuantity, subtotal, totalItems } = useCart();
+  const { 
+    cart, 
+    removeFromCart, 
+    updateQuantity, 
+    subtotal, 
+    totalItems, 
+    promoDiscount, 
+    totalShirtQty, 
+    originalSubtotal 
+  } = useCart();
   const navigate = useNavigate();
 
   if (!isOpen) return null;
@@ -43,6 +53,17 @@ export default function CartDrawer({ isOpen, onClose }) {
 
           {/* Cart Items List */}
           <div className="flex-1 overflow-y-auto p-margin-desktop space-y-md">
+            {/* Promo Tier Notice */}
+            {totalShirtQty > 0 && (
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-amber-600 text-[18px] flex-shrink-0 mt-0.5">local_fire_department</span>
+                <div className="text-xs">
+                  <span className="font-bold text-amber-900 block">1st – 10th Nov Shirt Promo</span>
+                  <p className="text-zinc-600 mt-0.5">{getPromoTierMessage(totalShirtQty)}</p>
+                </div>
+              </div>
+            )}
+
             {cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center text-on-surface-variant space-y-md py-xl">
                 <span className="material-symbols-outlined text-[64px] text-outline-variant">shopping_bag</span>
@@ -87,7 +108,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                         {item.itemType === 'graduation_sash' ? (
                           <span>{item.customizationData?.name ? `Name: ${item.customizationData.name}` : `Size: ${item.size}`}</span>
                         ) : (
-                          <span>Size: {item.size} {item.color !== 'Default' && `| ${item.color}`}</span>
+                          <span>Size: {item.size} {item.weight && `| ${item.weight}`} {item.color !== 'Default' && `| ${item.color}`}</span>
                         )}
                       </p>
 
@@ -129,11 +150,23 @@ export default function CartDrawer({ isOpen, onClose }) {
           {/* Footer Subtotal & Checkout CTA */}
           {cart.length > 0 && (
             <div className="p-margin-desktop border-t border-surface-container-highest bg-surface-container-lowest space-y-md">
-              <div className="flex justify-between items-center text-body-lg font-headline font-semibold">
-                <span className="text-on-surface-variant">Subtotal</span>
-                <span className="text-primary font-bold text-headline-md">GH₵ {subtotal.toFixed(2)}</span>
+              <div className="space-y-1">
+                {promoDiscount > 0 && (
+                  <div className="flex justify-between items-center text-xs text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">
+                    <span className="flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[14px]">local_offer</span>
+                      Nov 1–10 Promo Savings
+                    </span>
+                    <span>- GH₵ {promoDiscount.toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center text-body-lg font-headline font-semibold pt-1">
+                  <span className="text-on-surface-variant">Subtotal</span>
+                  <span className="text-primary font-bold text-headline-md">GH₵ {subtotal.toFixed(2)}</span>
+                </div>
               </div>
-              <p className="font-body text-label-sm text-on-surface-variant">Shipping and taxes calculated at checkout.</p>
+
+              <p className="font-body text-label-sm text-on-surface-variant">Shipping and delivery calculated at checkout.</p>
               
               <div className="flex flex-col gap-sm pt-sm">
                 <button

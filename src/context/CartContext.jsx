@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { calculateCartSummary, isShirtItem } from '../utils/pricing';
 
 const CartContext = createContext();
 
@@ -6,7 +7,16 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem('orderright_cart');
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      // Migrate any legacy items stored in user's localStorage from 60 to promo 55
+      return parsed.map(item => {
+        if (item.itemType !== 'graduation_sash') {
+          const weightExtra = item.weight === '1000GMS' ? 10 : 0;
+          return { ...item, price: 55 + weightExtra };
+        }
+        return item;
+      });
     } catch {
       return [];
     }
@@ -25,7 +35,7 @@ export function CartProvider({ children }) {
   const addToCart = (product, selectedSize = 'M', selectedColor = 'Default', quantity = 1) => {
     setCart(prev => {
       const existingIndex = prev.findIndex(
-        item => item.id === product.id && item.size === selectedSize && item.color === selectedColor
+        item => item.id === product.id && item.size === selectedSize && item.color === selectedColor && item.weight === product.weight
       );
 
       if (existingIndex > -1) {
@@ -52,15 +62,21 @@ export function CartProvider({ children }) {
         ];
       }
 
+      const isSash = product.itemType === 'graduation_sash' || (product.price && product.price > 70);
+      const unitPrice = isSash ? product.price : (55.00 + (product.weight === '1000GMS' ? 10 : 0));
+
       return [
         ...prev,
         {
           id: product.id,
           name: product.name,
-          price: product.price,
+          price: unitPrice,
           currency: product.currency || 'GH₵',
           size: selectedSize || (product.sizes ? product.sizes[0] : 'M'),
           color: selectedColor || (product.colors ? product.colors[0] : 'Default'),
+          weight: product.weight || '600GMS',
+          category: product.category || 'Tops',
+          itemType: product.itemType || 'shirt',
           quantity,
           image: product.images ? product.images[0] : (product.image || '')
         }
@@ -90,7 +106,18 @@ export function CartProvider({ children }) {
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  
+  // Calculate promo pricing breakdown
+  const {
+    totalShirtQty,
+    promoShirtBase,
+    shirtWeightSurcharge,
+    promoShirtTotal,
+    sashSubtotal,
+    promoDiscount,
+    subtotal,
+    originalSubtotal
+  } = calculateCartSummary(cart);
 
   return (
     <CartContext.Provider value={{
@@ -101,6 +128,13 @@ export function CartProvider({ children }) {
       clearCart,
       totalItems,
       subtotal,
+      promoDiscount,
+      totalShirtQty,
+      promoShirtBase,
+      shirtWeightSurcharge,
+      promoShirtTotal,
+      sashSubtotal,
+      originalSubtotal,
       isCartOpen,
       setIsCartOpen
     }}>
@@ -112,3 +146,4 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
+
