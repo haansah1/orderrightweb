@@ -59,18 +59,24 @@ export default function FormNXOrderWidget({ order }) {
         document.body.appendChild(scriptWidget);
       }
 
-      // Complete submission progress
-      setProgress(100);
-      setStatusMessage('FormNX Submission Received & Verified!');
-      setSubmissionStatus('submitted');
+      // Complete submission progress if confirmed
+      if (submitRes && submitRes.success) {
+        setProgress(100);
+        setStatusMessage('FormNX Submission Received & Verified!');
+        setSubmissionStatus('submitted');
+      } else {
+        const errText = submitRes?.error || 'FormNX server did not confirm response.';
+        console.warn('FormNX submission unconfirmed:', errText);
+        setErrorMessage(errText);
+        setSubmissionStatus('error');
+      }
 
     } catch (err) {
       console.error('FormNX submission process error:', err);
-      // Even if network error occurs, set prefilled URL so user can view/interact with record
       const fallbackUrl = buildFormNXUrl(order, null);
       setFormUrl(fallbackUrl);
-      setErrorMessage('Verification in progress. Your order details have been stored.');
-      setSubmissionStatus('submitted');
+      setErrorMessage(err.message || 'Failed to submit order to FormNX.');
+      setSubmissionStatus('error');
     }
   };
 

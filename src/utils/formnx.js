@@ -95,10 +95,11 @@ export async function combineAndCompressProductImages(items) {
     const loadImage = (src) => {
       return new Promise((resolve) => {
         if (!src) return resolve(null);
+        const timer = setTimeout(() => resolve(null), 3000);
         const img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
+        img.onload = () => { clearTimeout(timer); resolve(img); };
+        img.onerror = () => { clearTimeout(timer); resolve(null); };
         img.src = src;
       });
     };
@@ -141,9 +142,14 @@ export async function combineAndCompressProductImages(items) {
     }
 
     return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, 'image/jpeg', 0.75);
+      try {
+        canvas.toBlob((blob) => {
+          resolve(blob || null);
+        }, 'image/jpeg', 0.75);
+      } catch (e) {
+        console.warn('Canvas toBlob failed (possibly tainted cross-origin):', e);
+        resolve(null);
+      }
     });
   } catch (err) {
     console.warn('Error combining product images:', err);
@@ -157,13 +163,18 @@ export async function combineAndCompressProductImages(items) {
 export async function uploadImageToFormNX(blob) {
   if (!blob) return null;
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
     const formData = new FormData();
     formData.append('file', blob, `order_products_${Date.now()}.jpg`);
 
     const res = await fetch('https://fill.formnx.com/file-upload?form_id=28697d8c-8d0a-49a6-8dc7-82e2da3f4898&is_upload=1', {
       method: 'POST',
-      body: formData
+      body: formData,
+      signal: controller.signal
     });
+    clearTimeout(timeoutId);
 
     if (res.ok) {
       const data = await res.json();
@@ -172,7 +183,7 @@ export async function uploadImageToFormNX(blob) {
       }
     }
   } catch (err) {
-    console.warn('FormNX image upload error:', err);
+    console.warn('FormNX image upload error:', err.message);
   }
   return null;
 }
@@ -253,15 +264,13 @@ const submittedOrdersSet = new Set();
  * Sends automatic background submission request to FormNX
  */
 export async function autoSubmitFormNX(order, uploadedImagePath = null) {
-  if (!order) return;
+  if (!order) return { success: false, error: 'Order data required' };
   const orderId = order.id || order._id || order.reference || 'OR-DEFAULT';
 
   if (submittedOrdersSet.has(orderId)) {
     console.log(`[FormNX Deduplication] Order ${orderId} already submitted. Skipping duplicate submission.`);
     return { success: true, message: 'FormNX order already submitted', duplicate: true };
   }
-
-  submittedOrdersSet.add(orderId);
 
   try {
     const res = await fetch('/api/orders/submit-formnx', {
@@ -275,21 +284,20 @@ export async function autoSubmitFormNX(order, uploadedImagePath = null) {
       })
     });
 
-    const contentType = res.headers.get('content-type') || '';
-    let data;
-    if (contentType.includes('application/json')) {
-      data = await res.json();
-    } else {
-      const text = await res.text();
-      console.warn('FormNX frontend fetch returned non-JSON:', text.slice(0, 200));
-      data = { success: true, message: 'FormNX submission submitted via fallback' };
+    const data = await res.json().catch(() => null);
+    if (res.ok && data?.success) {
+      submittedOrdersSet.add(orderId);
+      console.log('[FormNX Auto-Submit Confirmed]:', data);
+      return data;
     }
 
-    console.log('FormNX Auto-Submission Result:', data);
-    return data || { success: true };
+    console.warn('[FormNX Auto-Submit Failed]:', data);
+    return { 
+      success: false, 
+      error: data?.error || data?.message || `Server returned HTTP ${res.status}` 
+    };
   } catch (err) {
-    console.warn('FormNX auto-submit frontend call notice:', err.message);
-    // Return graceful fallback object so frontend continues rendering the submitted form view
-    return { success: true, message: 'FormNX submission registered', fallback: true };
+    console.warn('FormNX auto-submit error:', err.message);
+    return { success: false, error: err.message };
   }
 }

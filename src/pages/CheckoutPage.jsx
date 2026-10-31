@@ -136,6 +136,16 @@ export default function CheckoutPage() {
         callback_url: `${window.location.origin}/order-confirmation`
       });
 
+      // Save pending order so it can be restored and finalized upon return from Paystack redirect
+      try {
+        localStorage.setItem('orderright_pending_order', JSON.stringify({
+          ...orderPayload,
+          paystackReference: paystackData.reference
+        }));
+      } catch (storageErr) {
+        console.warn('Could not save pending order to localStorage:', storageErr);
+      }
+
       // If official Paystack authorization URL is returned, redirect to Paystack Payment Page
       if (paystackData.authorization_url) {
         window.location.href = paystackData.authorization_url;

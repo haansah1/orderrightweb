@@ -427,6 +427,15 @@ app.post('/api/orders', (req, res) => {
     currentUser.ordersCount = (currentUser.ordersCount || 0) + 1;
   }
 
+  // Automatically transmit to FormNX immediately on order creation!
+  sendOrderToFormNX(newOrder)
+    .then(formnxRes => {
+      console.log(`[Auto-FormNX on Order Create] Order #${newOrder.id} status:`, formnxRes.success ? 'SUCCESS' : 'FAILED');
+    })
+    .catch(err => {
+      console.error(`[Auto-FormNX on Order Create Error] Order #${newOrder.id}:`, err.message);
+    });
+
   res.status(201).json({
     message: "Order placed successfully",
     order: newOrder
@@ -436,20 +445,17 @@ app.post('/api/orders', (req, res) => {
 // In-memory set to prevent duplicate FormNX submissions for the same order
 const submittedOrdersBackendSet = new Set();
 
-// FORMNX BACKEND SUBMISSION API
-app.post('/api/orders/submit-formnx', async (req, res) => {
-  const { order, uploadedImagePath } = req.body;
+// REUSABLE FORMNX TRANSMISSION FUNCTION
+export async function sendOrderToFormNX(order, uploadedImagePath = null) {
   if (!order) {
-    return res.status(400).json({ error: "Order data required for FormNX submission" });
+    return { success: false, error: "Order data required for FormNX submission" };
   }
 
-  const orderId = order.id || order._id || order.reference || 'OR-DEFAULT';
+  const orderId = order.id || order._id || order.reference || ('OR-' + Date.now());
   if (submittedOrdersBackendSet.has(orderId)) {
-    console.log(`[Server FormNX Deduplication] Order ${orderId} already processed. Skipping duplicate call.`);
-    return res.json({ success: true, message: 'Order already submitted to FormNX', duplicate: true });
+    console.log(`[Server FormNX Deduplication] Order ${orderId} already submitted. Skipping.`);
+    return { success: true, message: 'Order already submitted to FormNX', duplicate: true };
   }
-
-  submittedOrdersBackendSet.add(orderId);
 
   try {
     // 1. GET FormNX Page to obtain CSRF Token & Session Cookies
@@ -460,11 +466,17 @@ app.post('/api/orders/submit-formnx', async (req, res) => {
       }
     });
 
-    const setCookie = pageRes.headers.get('set-cookie') || '';
-    const cookies = setCookie.split(',').map(c => c.split(';')[0]).join('; ');
+    let cookieArr = [];
+    if (typeof pageRes.headers.getSetCookie === 'function') {
+      cookieArr = pageRes.headers.getSetCookie();
+    } else {
+      const raw = pageRes.headers.get('set-cookie') || '';
+      cookieArr = raw.split(/,(?=\s*[a-zA-Z0-9_\-]+=)/);
+    }
+    const cookies = cookieArr.map(c => c.split(';')[0].trim()).filter(Boolean).join('; ');
     const html = await pageRes.text();
 
-    const csrfToken = (html.match(/<meta name="csrf-token" content="([^"]+)">/) || [])[1] || '';
+    const csrfToken = (html.match(/<meta\s+name=["']csrf-token["']\s+content=["']([^"']+)["']/i) || [])[1] || '';
     const formId = "28697d8c-8d0a-49a6-8dc7-82e2da3f4898";
 
     const shipping = order.shippingAddress || {};
@@ -552,8 +564,8 @@ app.post('/api/orders/submit-formnx', async (req, res) => {
       deliverySummary += `\nSPECIAL NOTES: ${shipping.notes}`;
     }
 
-    const orderDate = order.createdAt 
-      ? new Date(order.createdAt).toISOString().slice(0, 10) 
+    const orderDate = order.createdAt || order.date
+      ? new Date(order.createdAt || order.date).toISOString().slice(0, 10) 
       : new Date().toISOString().slice(0, 10);
 
     const formInputs = {
@@ -565,7 +577,7 @@ app.post('/api/orders/submit-formnx', async (req, res) => {
       "field_6": deliverySummary,
       "field_7": orderDate,
       "visitor_key": "visitor_" + Date.now(),
-      "__time_taken": "10"
+      "__time_taken": "15"
     };
 
     if (uploadedImagePath) {
@@ -596,24 +608,36 @@ app.post('/api/orders/submit-formnx', async (req, res) => {
       result = await postRes.json();
     } else {
       const text = await postRes.text();
-      console.warn('FormNX POST returned non-JSON:', text.slice(0, 200));
-      if (postRes.ok || text.toLowerCase().includes('success') || text.toLowerCase().includes('received')) {
-        result = { success: true, msg: 'Success' };
-      } else {
-        result = { success: true, msg: 'Submission FormNX Registered' };
-      }
+      result = { success: postRes.ok, msg: text };
     }
 
     console.log('FormNX Backend Submission Result:', result);
 
     if (result && result.success) {
-      res.json({ success: true, message: 'FormNX order form submitted successfully', result });
+      submittedOrdersBackendSet.add(orderId);
+      return { success: true, message: 'FormNX order form submitted successfully', result };
     } else {
-      res.json({ success: true, message: 'FormNX order form processed', result: { success: true } });
+      console.error(`[FormNX Submission Rejected] Order ${orderId}:`, result);
+      return { success: false, error: result?.msg || 'FormNX rejected submission', result };
     }
   } catch (err) {
-    console.error('FormNX submission backend error:', err);
-    res.json({ success: true, message: 'FormNX submission registered via fallback', fallback: true });
+    console.error(`[FormNX Backend Exception] Order ${orderId}:`, err);
+    return { success: false, error: err.message };
+  }
+}
+
+// FORMNX BACKEND SUBMISSION API
+app.post('/api/orders/submit-formnx', async (req, res) => {
+  const { order, uploadedImagePath } = req.body;
+  if (!order) {
+    return res.status(400).json({ error: "Order data required for FormNX submission" });
+  }
+
+  const result = await sendOrderToFormNX(order, uploadedImagePath);
+  if (result.success) {
+    res.json(result);
+  } else {
+    res.status(502).json(result);
   }
 });
 

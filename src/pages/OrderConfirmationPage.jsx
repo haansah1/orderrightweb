@@ -1,13 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import FormNXOrderWidget from '../components/FormNXOrderWidget';
+import { useCart } from '../context/CartContext';
+import { createOrder } from '../services/api';
 
 export default function OrderConfirmationPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const order = location.state?.order;
+  const { clearCart } = useCart();
+  const initialOrder = location.state?.order || null;
+  const [order, setOrder] = useState(initialOrder);
+  const [loading, setLoading] = useState(!initialOrder);
+  const isFinalizingRef = useRef(false);
 
-  // Fallback order if visited directly or state missing
+  useEffect(() => {
+    if (order || isFinalizingRef.current) return;
+
+    // Check for Paystack redirect query params & pending order in localStorage
+    const params = new URLSearchParams(location.search);
+    const paystackRef = params.get('reference') || params.get('trxref');
+
+    let pending = null;
+    try {
+      const saved = localStorage.getItem('orderright_pending_order');
+      if (saved) pending = JSON.parse(saved);
+    } catch (e) {
+      console.warn('Error reading pending order from localStorage:', e);
+    }
+
+    if (pending) {
+      isFinalizingRef.current = true;
+      setLoading(true);
+
+      const orderPayload = {
+        ...pending,
+        paystackReference: paystackRef || pending.paystackReference || ('pstk_' + Date.now())
+      };
+
+      createOrder(orderPayload)
+        .then((res) => {
+          setOrder(res.order);
+          clearCart();
+          localStorage.removeItem('orderright_pending_order');
+        })
+        .catch((err) => {
+          console.error('Failed to finalize pending order after redirect:', err);
+          // Set local order fallback with actual entered customer details so widget can still submit
+          setOrder({
+            id: 'ORD-' + Math.floor(10000 + Math.random() * 90000),
+            date: new Date().toISOString().split('T')[0],
+            status: 'Confirmed',
+            items: orderPayload.items || [],
+            total: orderPayload.total || 0,
+            currency: 'GH₵',
+            shippingAddress: orderPayload.shippingAddress || {},
+            paymentMethod: orderPayload.paymentMethod || 'Paystack'
+          });
+          clearCart();
+          localStorage.removeItem('orderright_pending_order');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  }, [location.search, order]);
+
+  // Fallback order if visited directly without state or pending order
   const displayOrder = order || {
     id: "ORD-" + Math.floor(10000 + Math.random() * 90000),
     date: new Date().toISOString().split('T')[0],
@@ -158,6 +218,18 @@ export default function OrderConfirmationPage() {
     printWindow.document.write(htmlContent);
     printWindow.document.close();
   };
+
+  if (loading) {
+    return (
+      <main className="pt-28 pb-2xl max-w-container-max mx-auto px-4 min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent mx-auto"></div>
+          <h2 className="font-headline font-bold text-xl text-primary">Finalizing Your Order...</h2>
+          <p className="font-body text-sm text-on-surface-variant">Synchronizing payment and order records...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="pt-28 pb-2xl max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full min-h-screen">
