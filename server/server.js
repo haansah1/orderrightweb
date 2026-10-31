@@ -468,52 +468,6 @@ export async function sendOrderToFormNX(order, uploadedImagePath = null) {
 
   const performSubmission = async () => {
     try {
-      // 1. GET FormNX Page to obtain CSRF Token, dynamic fnx_t security token & Session Cookies
-      const pageRes = await fetch('https://fill.formnx.com/f/orderright-order-forms-38nu94', {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-          'Accept-Language': 'en-US,en;q=0.9',
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
-        }
-      });
-
-      let cookieArr = [];
-      if (typeof pageRes.headers.getSetCookie === 'function') {
-        cookieArr = pageRes.headers.getSetCookie();
-      } else {
-        const raw = pageRes.headers.get('set-cookie') || '';
-        cookieArr = raw.split(/,(?=\s*[a-zA-Z0-9_\-]+=)/);
-      }
-      const cookies = cookieArr.map(c => c.split(';')[0].trim()).filter(Boolean).join('; ');
-      const html = await pageRes.text();
-
-      // Check if Cloudflare blocked the initial page GET
-      if (html.includes('Just a moment...') || html.includes('challenges.cloudflare.com') || html.includes('cf_chl')) {
-        console.warn(`[FormNX Cloudflare Notice] GET request for Order ${orderId} encountered Cloudflare challenge.`);
-        return {
-          success: false,
-          cloudflareChallenge: true,
-          error: 'FormNX automated transmission encountered Cloudflare verification.'
-        };
-      }
-
-      // Extract CSRF token
-      const csrfToken = (html.match(/name=["']csrf-token["']\s+content=["']([^"']+)["']/i) || [])[1] || '';
-
-      // Extract FormNX dynamic anti-bot security token (fnx_t)
-      const fnxToken = (html.match(/name\s*=\s*['"]fnx_t['"];\s*b\.value\s*=\s*["']([^"']+)["']/i) ||
-                        html.match(/name=["']fnx_t["'][^>]*value=["']([^"']+)["']/i) || [])[1] || '';
-
-      // Extract visitor key cookie if available
-      let visitorId = 'visitor_' + Date.now();
-      const visitorCookie = cookieArr.find(c => c.includes('visitor_key='));
-      if (visitorCookie) {
-        const val = visitorCookie.split(';')[0].split('=')[1];
-        if (val) visitorId = decodeURIComponent(val);
-      }
-
       const formId = "28697d8c-8d0a-49a6-8dc7-82e2da3f4898";
       const shipping = order.shippingAddress || {};
       const customerName = shipping.fullName || order.customerName || 'OrderRight Customer';
@@ -614,8 +568,7 @@ export async function sendOrderToFormNX(order, uploadedImagePath = null) {
         "field_6": deliverySummary,
         "field_7": orderDate,
         "form_meta": "",
-        "fnx_t": fnxToken,
-        "visitor_key": visitorId,
+        "visitor_key": "visitor_" + Date.now(),
         "__time_taken": String(Math.floor(15 + Math.random() * 15))
       };
 
@@ -625,16 +578,13 @@ export async function sendOrderToFormNX(order, uploadedImagePath = null) {
 
       const serializedFormData = new URLSearchParams(formInputs).toString();
 
-      // 2. POST to FormNX endpoint with full session context & security tokens
+      // 2. POST to FormNX endpoint directly
       const submitUrl = `https://fill.formnx.com/form-data/${formId}`;
       const postRes = await fetch(submitUrl, {
         method: 'POST',
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-CSRF-TOKEN': csrfToken,
-          'Cookie': cookies,
-          'X-Requested-With': 'XMLHttpRequest',
           'Referer': 'https://fill.formnx.com/f/orderright-order-forms-38nu94',
           'Origin': 'https://fill.formnx.com',
           'Accept': 'application/json, text/javascript, */*; q=0.01'

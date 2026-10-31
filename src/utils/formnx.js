@@ -258,6 +258,75 @@ export function buildFormNXUrl(order, uploadedImagePath = null) {
   return `https://fill.formnx.com/f/orderright-order-forms-38nu94?${params.toString()}`;
 }
 
+/**
+ * Constructs URL-encoded payload for FormNX direct form submit
+ */
+export function serializeFormNXPayload(order, uploadedImagePath = null) {
+  if (!order) return '';
+
+  const shipping = order.shippingAddress || {};
+  const customerName = shipping.fullName || order.customerName || 'OrderRight Customer';
+  const customerEmail = shipping.email || order.customerEmail || 'customer@orderright.com';
+  const customerPhone = shipping.phone || order.phone || '0507363108';
+
+  // 1. Construct detailed Product Breakdown (field_4)
+  const itemsList = (order.items || []).map((item, idx) => {
+    let details = `${idx + 1}. ${item.name} (Quantity: ${item.quantity})`;
+    if (item.size) details += `\n   - Size: ${item.size}`;
+    if (item.weight) details += `\n   - Fabric Weight: ${item.weight}`;
+    if (item.price) details += `\n   - Unit Price: GH₵ ${Number(item.price).toFixed(2)}`;
+    details += `\n   - Item Total: GH₵ ${(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}`;
+
+    if (item.itemType === 'graduation_sash' || item.sashDetails || item.customizationData?.elements) {
+      const sashPositionText = formatSashPositionDetails(item);
+      details += `\n   🎓 SASH EMBROIDERY SPECIFICATIONS:\n${sashPositionText}`;
+    }
+    return details;
+  }).join('\n\n');
+
+  const productsSummary = `ORDER REFERENCE: #${order.id || order._id || ('OR-' + Date.now())}\n` +
+    `========================================\n` +
+    `${itemsList}\n` +
+    `========================================\n` +
+    `SUBTOTAL: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
+    `TOTAL AMOUNT PAID: GH₵ ${Number(order.total || 0).toFixed(2)}\n` +
+    `PAYMENT METHOD: ${order.paymentMethod || 'Paystack (MoMo / Card)'}`;
+
+  // 2. Construct Delivery Details (field_6)
+  let deliverySummary = `DELIVERY MODE: ${shipping.deliveryMode === 'university' ? 'Free Campus Delivery' : 'Speedaf Branch Pickup'}\n` +
+    `DESTINATION: ${shipping.deliveryDestination || 'Standard Delivery'}\n` +
+    `SPECIFIC ADDRESS / HALL / ROOM: ${shipping.streetAddress || 'N/A'}`;
+  
+  if (shipping.notes) {
+    deliverySummary += `\nSPECIAL NOTES: ${shipping.notes}`;
+  }
+
+  // 3. Format DateTime (field_7)
+  const orderDate = order.createdAt 
+    ? new Date(order.createdAt).toISOString().slice(0, 10) 
+    : new Date().toISOString().slice(0, 10);
+
+  const payloadObj = {
+    __form_id: '28697d8c-8d0a-49a6-8dc7-82e2da3f4898',
+    predefined_status: 'complete',
+    name_field_1: customerName,
+    email_field_2: customerEmail,
+    phone_number_field_5: customerPhone,
+    field_4: productsSummary,
+    field_6: deliverySummary,
+    field_7: orderDate,
+    form_meta: '',
+    visitor_key: 'visitor_' + Date.now(),
+    __time_taken: String(Math.floor(15 + Math.random() * 15))
+  };
+
+  if (uploadedImagePath) {
+    payloadObj.field_3 = uploadedImagePath;
+  }
+
+  return new URLSearchParams(payloadObj).toString();
+}
+
 const submittedOrdersSet = new Set();
 
 /**
