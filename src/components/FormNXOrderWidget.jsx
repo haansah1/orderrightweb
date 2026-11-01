@@ -9,6 +9,7 @@ export default function FormNXOrderWidget({ order }) {
   // Submission Status: 'manual_submit' | 'submitted'
   const [submissionStatus, setSubmissionStatus] = useState('manual_submit');
   const [formUrl, setFormUrl] = useState(() => buildFormNXUrl(order, null));
+  const [isReadOnly, setIsReadOnly] = useState(true);
   const shipping = order?.shippingAddress || {};
 
   useEffect(() => {
@@ -48,9 +49,13 @@ export default function FormNXOrderWidget({ order }) {
                 <span className="font-embroidery text-[12px] font-bold text-amber-900 uppercase tracking-wider">
                   Final Step: Confirm & Submit Your Order Form
                 </span>
+                <span className="inline-flex items-center gap-1 bg-amber-100/90 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300/60">
+                  <span className="material-symbols-outlined text-[13px]">lock</span>
+                  <span>Read-Only</span>
+                </span>
               </div>
               <p className="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium">
-                Your customer details, delivery location, and custom sash specifications are prefilled below. Scroll down inside the form and click <strong>"Thanks"</strong> or <strong>"Submit"</strong> to record your response.
+                Your customer details, delivery location, and custom sash specifications are prefilled and locked in read-only mode. Scroll down inside the form and click <strong>"Thanks"</strong> or <strong>"Submit"</strong> to record your response.
               </p>
             </div>
 
@@ -77,9 +82,20 @@ export default function FormNXOrderWidget({ order }) {
             </div>
           </div>
 
-          {/* FormNX Interactive Form (Full Width, Zero Outlines, Expanded Space) */}
+          {/* FormNX Interactive Form (Full Width, Zero Outlines, Read-Only Protected) */}
           {formUrl && (
-            <div className="w-full bg-white rounded-2xl overflow-hidden">
+            <div className="relative w-full bg-white rounded-2xl overflow-hidden">
+              {/* Read-Only Form Fields Shield: Prevents accidental editing of prefilled fields while leaving the submit button accessible */}
+              {isReadOnly && (
+                <div 
+                  className="absolute top-0 left-0 right-0 bottom-[140px] z-10 cursor-default bg-transparent"
+                  title="Form fields are locked in read-only mode to preserve your confirmed order details."
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                />
+              )}
+
               <iframe
                 id="formnx-order-frame"
                 src={formUrl}
@@ -118,28 +134,22 @@ export default function FormNXOrderWidget({ order }) {
                 <span className="material-symbols-outlined text-[28px]">verified</span>
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                    SUBMISSION CONFIRMED
-                  </span>
-                  <span className="text-xs text-emerald-700 font-bold">FormNX Portal Sync Complete</span>
-                </div>
-                <h3 className="font-headline font-bold text-headline-sm text-primary mt-0.5">
-                  Order Registered in FormNX
-                </h3>
+                <span className="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  SUBMISSION CONFIRMED
+                </span>
               </div>
             </div>
 
             <button
               onClick={() => setSubmissionStatus('manual_submit')}
-              className="text-xs text-primary underline underline-offset-4 hover:text-primary/80 font-semibold"
+              className="text-xs text-primary underline underline-offset-4 hover:text-primary/80 font-semibold cursor-pointer"
             >
               Re-open Form
             </button>
           </div>
 
-          <p className="font-body text-body-sm text-on-surface-variant leading-relaxed">
-            Thank you! Your order form response has been submitted and recorded in our official FormNX Portal with all customer details, delivery instructions, and custom sash specifications.
+          <p className="font-body text-body-sm text-on-surface-variant leading-relaxed font-medium">
+            Thank you! Your order form response has been submitted.
           </p>
 
           {/* Quick Summary Card */}
@@ -166,19 +176,11 @@ export default function FormNXOrderWidget({ order }) {
             </div>
           </div>
 
-          {/* Badges */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-            <div className="bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 flex items-center gap-2">
+          {/* Badge */}
+          <div className="pt-1">
+            <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 rounded-xl px-4 py-2.5">
               <span className="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
-              <span className="text-[11px] font-bold text-emerald-900">Sash Specs Registered</span>
-            </div>
-            <div className="bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 flex items-center gap-2">
-              <span className="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
-              <span className="text-[11px] font-bold text-emerald-900">Delivery Notes Saved</span>
-            </div>
-            <div className="bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 flex items-center gap-2">
-              <span className="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
-              <span className="text-[11px] font-bold text-emerald-900">FormNX Response Locked</span>
+              <span className="text-xs font-bold text-emerald-900 uppercase tracking-wider">Submission Confirmed</span>
             </div>
           </div>
 

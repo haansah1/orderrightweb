@@ -241,6 +241,8 @@ export function buildFormNXUrl(order, uploadedImagePath = null) {
 
   const paramsObj = {
     iframe: 'true',
+    readonly: '1',
+    read_only: 'true',
     name_field_1: customerName,
     email_field_2: customerEmail,
     phone_number_field_5: customerPhone,
