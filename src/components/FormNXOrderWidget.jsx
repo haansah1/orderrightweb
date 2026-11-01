@@ -9,7 +9,6 @@ export default function FormNXOrderWidget({ order }) {
   // Submission Status: 'manual_submit' | 'submitted'
   const [submissionStatus, setSubmissionStatus] = useState('manual_submit');
   const [formUrl, setFormUrl] = useState(() => buildFormNXUrl(order, null));
-  const [isReadOnly, setIsReadOnly] = useState(true);
   const shipping = order?.shippingAddress || {};
 
   useEffect(() => {
@@ -34,10 +33,49 @@ export default function FormNXOrderWidget({ order }) {
     }
   }, [order]);
 
+  // FormNX auto-resizing integration via official iframeResizer
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://fill.formnx.com/js/iframeResizer.js';
+    script.async = true;
+    script.onload = () => {
+      if (window.iFrameResize) {
+        window.iFrameResize({
+          log: false,
+          checkOrigin: false,
+          scrolling: false,
+          minHeight: 1450
+        }, '#formnx-order-frame');
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      try {
+        document.body.removeChild(script);
+      } catch (e) {}
+    };
+  }, []);
+
+  // Listen for FormNX submission completion messages
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (
+        event.data?.action === 'submitted' ||
+        event.data?.event === 'formnx_form_submitted' ||
+        (typeof event.data === 'string' && event.data.includes('formnx_form_submitted'))
+      ) {
+        setSubmissionStatus('submitted');
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   return (
     <div className="w-full text-left space-y-4">
       
-      {/* 1. MANUAL SUBMIT INTERFACE (EXPANDED, NO RESTRICTIVE OUTLINES) */}
+      {/* 1. MANUAL SUBMIT INTERFACE (FULL UNRESTRICTED DISPLAY) */}
       {submissionStatus === 'manual_submit' && (
         <div className="w-full space-y-4 animate-fadeIn">
           
@@ -47,7 +85,7 @@ export default function FormNXOrderWidget({ order }) {
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
                 <span className="font-embroidery text-[12px] font-bold text-amber-900 uppercase tracking-wider">
-                  Final Step: Confirm & Submit Your Order Form
+                  Final Step: Submit Your Order Form Below
                 </span>
                 <span className="inline-flex items-center gap-1 bg-amber-100/90 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300/60">
                   <span className="material-symbols-outlined text-[13px]">lock</span>
@@ -55,71 +93,36 @@ export default function FormNXOrderWidget({ order }) {
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium">
-                Your customer details, delivery location, and custom sash specifications are prefilled and locked in read-only mode. Scroll down inside the form and click <strong>"Thanks"</strong> or <strong>"Submit"</strong> to record your response.
+                Your customer details, delivery location, and custom sash specifications are prefilled below. Scroll down to the bottom of the form and click the official <strong>"Thanks"</strong> button to submit your response.
               </p>
             </div>
 
-            <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto">
-              {formUrl && (
-                <a
-                  href={formUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto text-center bg-white hover:bg-zinc-50 text-zinc-800 text-xs font-bold px-3.5 py-2.5 rounded-xl shadow-xs border border-zinc-200 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <span className="material-symbols-outlined text-[16px]">open_in_new</span>
-                  <span>Open Full Screen</span>
-                </a>
-              )}
-
-              <button
-                onClick={() => setSubmissionStatus('submitted')}
-                className="w-full sm:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+            {formUrl && (
+              <a
+                href={formUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 text-center bg-white hover:bg-zinc-50 text-zinc-800 text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs border border-zinc-200 transition-colors inline-flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                <span>I Have Submitted</span>
-              </button>
-            </div>
+                <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                <span>Open in New Tab</span>
+              </a>
+            )}
           </div>
 
-          {/* FormNX Interactive Form (Full Width, Zero Outlines, Read-Only Protected) */}
+          {/* FormNX Full-Length Interactive Form (No Restricted Scrollable Container) */}
           {formUrl && (
-            <div className="relative w-full bg-white rounded-2xl overflow-hidden">
-              {/* Read-Only Form Fields Shield: Prevents accidental editing of prefilled fields while leaving the submit button accessible */}
-              {isReadOnly && (
-                <div 
-                  className="absolute top-0 left-0 right-0 bottom-[140px] z-10 cursor-default bg-transparent"
-                  title="Form fields are locked in read-only mode to preserve your confirmed order details."
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                />
-              )}
-
+            <div className="w-full bg-white rounded-2xl overflow-visible">
               <iframe
                 id="formnx-order-frame"
                 src={formUrl}
                 title="OrderRight Order forms"
-                className="w-full min-h-[880px] border-0 outline-none block"
-                style={{ width: '100%', minHeight: '880px', border: 'none', outline: 'none' }}
+                scrolling="no"
+                className="w-full min-h-[1450px] border-0 outline-none block"
+                style={{ width: '100%', minHeight: '1450px', border: 'none', outline: 'none' }}
               />
             </div>
           )}
-
-          {/* Bottom Confirmation Bar */}
-          <div className="bg-zinc-50 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
-            <span className="flex items-center gap-1.5 font-medium">
-              <span className="material-symbols-outlined text-[18px] text-zinc-500">info</span>
-              Already clicked <strong>"Thanks"</strong> / <strong>"Submit"</strong> inside the form above?
-            </span>
-            <button
-              onClick={() => setSubmissionStatus('submitted')}
-              className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px]">verified</span>
-              <span>Confirm & Lock Submission</span>
-            </button>
-          </div>
 
         </div>
       )}

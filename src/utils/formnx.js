@@ -241,6 +241,7 @@ export function buildFormNXUrl(order, uploadedImagePath = null) {
 
   const paramsObj = {
     iframe: 'true',
+    fnxDynamicHeight: '1',
     readonly: '1',
     read_only: 'true',
     name_field_1: customerName,
